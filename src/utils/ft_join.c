@@ -15,7 +15,7 @@ char	*ft_join(int argc, ...)
     va_start(ap, argc);
     va_copy(aq, ap);
     len = ft_get_len(argc, aq);
-    dst = malloc(sizeof(char) * len + 1);
+    dst = ft_calloc( len + 1, sizeof(char));
     if (dst == NULL)
     {
         va_end(ap);
