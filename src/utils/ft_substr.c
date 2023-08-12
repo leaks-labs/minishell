@@ -8,15 +8,15 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
     char	*substr;
     size_t	strlen;
 
-    if (!s)
+    if (s == NULL)
         return (NULL);
     strlen = ft_strlen((char *)s);
     if (start > strlen)
         return (ft_strdup(""));
     if (strlen - start < len)
         len = strlen - start;
-    substr = malloc(len + 1);
-    if (!substr)
+    substr = ft_calloc(len + 1, sizeof(char));
+    if (substr == NULL)
         return (NULL);
     ft_strlcpy(substr, (s + start), (len + 1));
     return (substr);
