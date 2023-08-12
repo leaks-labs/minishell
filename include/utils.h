@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shinfray <shinfray@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 12:21:47 by shinfray          #+#    #+#             */
-/*   Updated: 2023/08/12 15:32:02 by shinfray         ###   ########.fr       */
+/*   Created: 2023/08/12 15:20:18 by shinfray          #+#    #+#             */
+/*   Updated: 2023/08/12 16:17:42 by shinfray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef UTILS_H
+# define UTILS_H
 
-# include <stdio.h>
 # include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "utils.h"
 
-#ifdef __linux__
-# include <linux/limits.h>
-#else
-# include <limits.h>
-#endif
-
-# define PROMPT "minishell$ "
-
-typedef struct ms
-{
-	char	**env;
-}				t_ms;
-
-char	**ft_envcpy(char **envp);
-char	*ft_getenv(const char *name, char **env);
+void	*ft_calloc(size_t count, size_t size);
+char	*ft_strdup(const char *s1);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+size_t	ft_strlen(const char *s);
 
 #endif

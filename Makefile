@@ -6,7 +6,7 @@
 #    By: shinfray <shinfray@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 14:46:08 by shinfray          #+#    #+#              #
-#    Updated: 2023/08/12 10:11:29 by shinfray         ###   ########.fr        #
+#    Updated: 2023/08/12 16:36:24 by shinfray         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,11 @@ EXT:=	.c
 
 MAIN:=	main
 
-SRCS_FILES:=
+SRCS_FILES:=	env_utils \
+				utils/ft_calloc \
+				utils/ft_strdup \
+				utils/ft_strncmp \
+				utils/ft_strlen
 
 ################################################################################
 #                                 SRC's FORMATING                              #
@@ -109,7 +113,7 @@ COLOR_RESET := \033[0m
 all: ${NAME}
 
 ${NAME}: ${OBJS}
-	${CC} ${LDFLAGS} ${OBJS} ${LDLIBS} -o $@
+	${CC} ${LDFLAGS} ${OBJS} ${LDLIBS} -o $@ -fsanitize=address
 	echo "${COLOR_GREEN}Compilation completed.${COLOR_RESET}"
 
 ${OBJS_DIR}/%.o: ${SRCS_DIR}/%.c
