@@ -245,9 +245,7 @@ int lstat(const char *path, struct stat *buf);
 int fstat(int fd, struct stat *buf);
 ```
 - **Parameters**: `path` is the file path or file descriptor, `buf` is a pointer to a `struct stat` to store file information.
-- **Return Value**: 0 on success, -1
-
-on error.
+- **Return Value**: 0 on success, -1 on error.
 
 ### `unlink`
 
