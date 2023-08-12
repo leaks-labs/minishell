@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shinfray <shinfray@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 12:21:47 by shinfray          #+#    #+#             */
-/*   Updated: 2023/08/12 15:32:02 by shinfray         ###   ########.fr       */
+/*   Created: 2023/08/12 15:26:04 by shinfray          #+#    #+#             */
+/*   Updated: 2023/08/12 16:17:31 by shinfray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "utils.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "utils.h"
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
-#ifdef __linux__
-# include <linux/limits.h>
-#else
-# include <limits.h>
-#endif
-
-# define PROMPT "minishell$ "
-
-typedef struct ms
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	**env;
-}				t_ms;
-
-char	**ft_envcpy(char **envp);
-char	*ft_getenv(const char *name, char **env);
-
-#endif
+	if (n == 0)
+		return (0);
+	while (--n != 0 && *s1 != '\0' && *s2 != '\0' && *s1 == *s2)
+	{
+		++s1;
+		++s2;
+	}
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+}

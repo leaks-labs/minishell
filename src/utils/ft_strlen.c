@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shinfray <shinfray@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 12:21:47 by shinfray          #+#    #+#             */
-/*   Updated: 2023/08/12 15:32:02 by shinfray         ###   ########.fr       */
+/*   Created: 2023/08/12 15:27:38 by shinfray          #+#    #+#             */
+/*   Updated: 2023/08/12 15:31:03 by shinfray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "utils.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "utils.h"
+size_t	ft_strlen(const char *s);
 
-#ifdef __linux__
-# include <linux/limits.h>
-#else
-# include <limits.h>
-#endif
-
-# define PROMPT "minishell$ "
-
-typedef struct ms
+size_t	ft_strlen(const char *s)
 {
-	char	**env;
-}				t_ms;
+	size_t	i;
 
-char	**ft_envcpy(char **envp);
-char	*ft_getenv(const char *name, char **env);
-
-#endif
+	i = 0;
+	while (s[i] != '\0' )
+		++i;
+	return (i);
+}
