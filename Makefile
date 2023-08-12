@@ -22,11 +22,10 @@ NAME:=	minishell
 
 SRCS_DIR:= src
 BUILD_DIR:= build
-INC_DIRS= include lib/libft/include
+INC_DIRS= include
 
-LDLIBS:= -lft -lreadline
-LIBFT:=	lib/libft/libft.a
-LIB_DIRS= lib/libft
+LDLIBS:= -lreadline
+LIB_DIRS=
 
 CC:=	clang
 
@@ -120,16 +119,12 @@ ${OBJS_DIR}/%.o: ${SRCS_DIR}/%.c
 	mkdir -p ${dir ${@:${OBJS_DIR}/%.o=${DEPS_DIR}/%.d}}
 	${CC} ${CPPFLAGS} ${CFLAGS} -c $< -o $@
 
-${LIBFT}:
-	${MAKE} -C ${dir ${LIBFT}}
-
 clean:
-	${MAKE} clean -C ${dir ${LIBFT}}
 	${RM} ${BUILD_DIR}
 	echo "${COLOR_GREEN}Objects cleaned.${COLOR_RESET}"
 
 fclean: clean
-	${RM} ${NAME} ${LIBFT}
+	${RM} ${NAME}
 	echo "${COLOR_GREEN}Executables cleaned.${COLOR_RESET}"
 
 re: fclean all
