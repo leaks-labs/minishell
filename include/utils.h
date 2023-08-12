@@ -14,10 +14,15 @@
 # define UTILS_H
 
 # include <stdlib.h>
+# include <stdarg.h>
 
 void	*ft_calloc(size_t count, size_t size);
+void	ft_free(const char *formats, ...);
+char	*ft_join(int argc, ...);
+char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *s1);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlen(const char *s);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_substr(const char *s, unsigned int start, size_t len);
 
 #endif
