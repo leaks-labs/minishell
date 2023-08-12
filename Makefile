@@ -66,8 +66,6 @@ ADDITIONAL_LDFLAGS=
 ifeq (${shell uname}, Darwin)
         LIB_DIRS+= $$HOMEBREW_PREFIX/opt/readline/lib
         INC_DIRS+= $$HOMEBREW_PREFIX/opt/readline/include
-else
-		ADDITIONAL_CPPFLAGS+= -D LINUX
 endif
 
 ################################################################################
