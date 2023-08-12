@@ -20,7 +20,12 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	(void)envp;
-	s_ms.env = ft_envcpy(envp);
+	s_ms.env = ft_dptrcpy(envp);
+    for (int i = 0; s_ms.env[i]; ++i) {
+        printf("->%s\n", s_ms.env[i]);
+    }
+
+    printf("-->%s\n", ft_getenv("PATH", s_ms.env));
 	text = readline(PROMPT);
 	while (text != NULL)
 	{

@@ -1,7 +1,7 @@
 #include "utils.h"
 
 char	*ft_join(int argc, ...);
-static size_t 	ft_get_len(int argc, va_list aq);
+static size_t 	ft_get_len(int argc, va_list *aq);
 static size_t	ft_strlcat(char *dst, const char *src, size_t n);
 
 char	*ft_join(int argc, ...)
@@ -14,7 +14,7 @@ char	*ft_join(int argc, ...)
 
     va_start(ap, argc);
     va_copy(aq, ap);
-    len = ft_get_len(argc, aq);
+    len = ft_get_len(argc, &aq);
     dst = ft_calloc( len + 1, sizeof(char));
     if (dst == NULL)
     {
@@ -30,7 +30,7 @@ char	*ft_join(int argc, ...)
     return (dst);
 }
 
-static size_t 	ft_get_len(int argc, va_list aq)
+static size_t 	ft_get_len(int argc, va_list *aq)
 {
     int	i;
     size_t 	len;
@@ -38,8 +38,8 @@ static size_t 	ft_get_len(int argc, va_list aq)
     i = -1;
     len = 0;
     while (++i < argc)
-        len += ft_strlen(va_arg(aq, char *));
-    va_end(aq);
+        len += ft_strlen(va_arg(*aq, char *));
+    va_end(*aq);
     return (len);
 }
 

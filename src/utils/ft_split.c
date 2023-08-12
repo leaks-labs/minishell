@@ -12,7 +12,7 @@ char	**ft_split(const char *str, const char sep)
     if (str == NULL)
         return (NULL);
     n_words = ft_count_words(str, sep);
-    tab = ft_calloc(n_words + 1, sizeof(*tab));
+    tab = ft_calloc(n_words + 1, sizeof(char *));
     if (tab == NULL)
         return (NULL);
     tab = ft_write_words(str, sep, tab, n_words);
@@ -55,7 +55,7 @@ static char	**ft_write_words(const char *str, const char sep, char **tab, size_t
         str += len;
         if (**tab == '\0')
         {
-            ft_free("%P", cpytab);
+            ft_freef("%P", cpytab);
             return (NULL);
         }
         ++tab;

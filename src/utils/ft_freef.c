@@ -1,8 +1,8 @@
 #include "utils.h"
 
-void	ft_free(const char *formats, ...);
+void	*ft_freef(const char *formats, ...);
 
-void	ft_free(const char *formats, ...)
+void	*ft_freef(const char *formats, ...)
 {
     va_list	ap;
     size_t 		i;
@@ -28,4 +28,5 @@ void	ft_free(const char *formats, ...)
         ++formats;
     }
     va_end(ap);
+    return (NULL);
 }
