@@ -110,7 +110,7 @@ COLOR_RESET := \033[0m
 
 all: ${NAME}
 
-${NAME}: ${OBJS} ${LIBFT}
+${NAME}: ${OBJS}
 	${CC} ${LDFLAGS} ${OBJS} ${LDLIBS} -o $@
 	echo "${COLOR_GREEN}Compilation completed.${COLOR_RESET}"
 
