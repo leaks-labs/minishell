@@ -16,8 +16,6 @@ char	**ft_split(const char *str, const char sep)
     if (tab == NULL)
         return (NULL);
     tab = ft_write_words(str, sep, tab, n_words);
-    if (tab != NULL)
-        tab[n_words] = 0;
     return (tab);
 }
 
