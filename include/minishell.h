@@ -32,7 +32,7 @@ typedef struct ms
 	char	**env;
 }				t_ms;
 
-char	**ft_envcpy(char **envp);
+
 char	*ft_getenv(const char *name, char **env);
 
 #endif

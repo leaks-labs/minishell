@@ -78,9 +78,15 @@ MAIN:=	main
 
 SRCS_FILES:=	env_utils \
 				utils/ft_calloc \
+				utils/ft_dptr \
+				utils/ft_freef \
+				utils/ft_join \
+				utils/ft_split \
 				utils/ft_strdup \
+				utils/ft_strlen \
 				utils/ft_strncmp \
-				utils/ft_strlen
+				utils/ft_substr
+
 
 ################################################################################
 #                                 SRC's FORMATING                              #
