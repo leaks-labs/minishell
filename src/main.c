@@ -16,13 +16,10 @@
 
 int main() {
 
-    //const char *str = "get_replaced";
-    // Initialize Readline history
     using_history();
 
     char *input = readline("Enter a command: ");
     while (input != NULL && *input != '\0') {
-        // Add the entered command to the history
         add_history(input);
 
         // Print the commands from the history
@@ -32,8 +29,6 @@ int main() {
                 printf("\nHistory[%d]: %s\n\n", i, entry->line);
             }
         }
-
-        // Free the input buffer
         free(input);
 
         // Get the next input
@@ -45,8 +40,6 @@ int main() {
         //fprintf(stdout, "-->%s\n", rl_line_buffer);
 
     }
-
-    // Clean up history and input
     free(input);
     rl_clear_history();
     return 0;
