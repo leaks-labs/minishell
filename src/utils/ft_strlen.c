@@ -6,7 +6,7 @@
 /*   By: shinfray <shinfray@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:27:38 by shinfray          #+#    #+#             */
-/*   Updated: 2023/08/12 15:31:03 by shinfray         ###   ########.fr       */
+/*   Updated: 2023/08/18 15:53:07 by shinfray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ size_t	ft_strlen(const char *s);
 
 size_t	ft_strlen(const char *s)
 {
-	size_t	i;
+	const char	*ptr;
 
-	i = 0;
-	while (s[i] != '\0' )
-		++i;
-	return (i);
+	ptr = s;
+	while (*ptr != '\0' )
+		++ptr;
+	return ((size_t)(ptr - s));
 }
