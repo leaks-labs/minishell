@@ -76,15 +76,20 @@ EXT:=	.c
 
 MAIN:=	main
 
-SRCS_FILES:=	env_utils \
-				utils/ft_calloc \
-				utils/ft_dptr \
-				utils/ft_freef \
-				utils/ft_join \
-				utils/ft_split \
-				utils/ft_strdup \
-				utils/ft_strlen \
-				utils/ft_strncmp \
+SRCS_FILES:=	exec/run						\
+				exec/exec						\
+				init_and_destroy/destroy		\
+				init_and_destroy/struct_init	\
+				parsing/parse					\
+				utils/env_utils					\
+				utils/ft_calloc					\
+				utils/ft_dptr					\
+				utils/ft_freef					\
+				utils/ft_join					\
+				utils/ft_split					\
+				utils/ft_strdup					\
+				utils/ft_strlen					\
+				utils/ft_strncmp				\
 				utils/ft_substr
 
 

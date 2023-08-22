@@ -13,36 +13,18 @@
 #include "minishell.h"
 
 
+int main(int argc, char **argv, char **envp)
+{
+    t_msh *msh;
 
-int main() {
+    (void)argc;
+    (void)argv;
 
-    using_history();
-
-    char *input = readline("Enter a command: ");
-    while (input != NULL && *input != '\0') {
-        add_history(input);
-
-        // Print the commands from the history
-        for (int i = history_length; i >= 0; i--) {
-            HIST_ENTRY *entry = history_get(i);
-            if (entry != NULL) {
-                printf("\nHistory[%d]: %s\n\n", i, entry->line);
-            }
-        }
-        free(input);
-
-        // Get the next input
-        input = readline("Enter a command: ");
-        rl_on_new_line();
-        rl_replace_line("v", 0);
-        rl_redisplay();
-        printf("\n");
-        //fprintf(stdout, "-->%s\n", rl_line_buffer);
-
-    }
-    free(input);
-    rl_clear_history();
-    return 0;
+    msh = ft_struct_init(envp);
+    if (msh == NULL)
+        return (EXIT_FAILURE);
+    ft_run(msh);
+    return (ft_quit(msh));
 }
 
 

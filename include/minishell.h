@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "utils.h"
@@ -26,13 +27,41 @@
 #endif
 
 # define PROMPT "minishell$ "
+//run
+# define RUN_ERROR -1
+# define RUN_SUCCESS 0
+//parse
+# define PARSE_ERROR -1
+# define PARSE_SUCCESS 0
+//exec
+# define EXEC_ERROR -1
+# define EXEC_SUCCESS 0
+# define EXEC_EXIT 1
 
-typedef struct ms
+typedef struct msh
 {
 	char	**env;
-}				t_ms;
+	int		exit_status;
+}				t_msh;
+
+typedef struct cmd
+{
+	char **cmd;
+}				t_cmd;
 
 
+//exec
+int ft_run(t_msh *msh);
+int ft_exec_line(t_msh *msh, t_cmd *cmd);
+
+//init
+int ft_quit(t_msh *msh);
+t_msh *ft_struct_init(char **envp);
+
+//parse
+int ft_parse(t_cmd *cmd, char *line);
+
+//utils
 char	*ft_getenv(const char *name, char **env);
 
 #endif
