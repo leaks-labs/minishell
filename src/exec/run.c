@@ -18,6 +18,7 @@ int ft_run(t_msh *msh)
             if (ft_parse(&cmd, line) == PARSE_ERROR)
             {
                 free(line);
+                rl_clear_history();
                 return (RUN_ERROR);
             }
             if (ft_exec_line(msh, &cmd) != EXEC_SUCCESS)
@@ -26,5 +27,6 @@ int ft_run(t_msh *msh)
         free(line);
     }
     free(line);
+    rl_clear_history();
     return (RUN_SUCCESS);
 }
