@@ -6,5 +6,5 @@ int ft_parse(t_cmd *cmd, char *line)
 {
     (void)cmd;
     (void)line;
-    return (0);
+    return (PARSE_SUCCESS);
 }

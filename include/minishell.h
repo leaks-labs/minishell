@@ -27,16 +27,14 @@
 #endif
 
 # define PROMPT "minishell$ "
-//run
-# define RUN_ERROR -1
-# define RUN_SUCCESS 0
 //parse
 # define PARSE_ERROR -1
 # define PARSE_SUCCESS 0
 //exec
 # define EXEC_ERROR -1
-# define EXEC_SUCCESS 0
-# define EXEC_EXIT 1
+# define EXEC_EXIT 0
+# define EXEC_SUCCESS 2
+
 
 typedef struct msh
 {
@@ -51,7 +49,7 @@ typedef struct cmd
 
 
 //exec
-int 	ft_run(t_msh *msh);
+void 	ft_run(t_msh *msh);
 int 	ft_exec_line(t_msh *msh, t_cmd *cmd);
 
 //init
