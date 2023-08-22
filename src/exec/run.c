@@ -4,7 +4,7 @@ void	ft_run(t_msh *msh);
 
 void	ft_run(t_msh *msh)
 {
-    t_cmd    cmd;
+    t_cmd_list   cmd_list;
     char    *line;
 
     while (true)
@@ -15,8 +15,8 @@ void	ft_run(t_msh *msh)
         if (*line != '\0')
         {
             add_history(line);
-            if (ft_parse(&cmd, line) == PARSE_ERROR \
-                || ft_exec_line(msh, &cmd) != EXEC_SUCCESS)
+            if (ft_parse(&cmd_list, line) == PARSE_ERROR \
+                || ft_exec_line(msh, &cmd_list) != EXEC_SUCCESS)
                 break ;
         }
         free(line);

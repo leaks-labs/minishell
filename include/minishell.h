@@ -44,20 +44,29 @@ typedef struct msh
 
 typedef struct cmd
 {
-	char **cmd;
+	char	**cmd;
 }				t_cmd;
 
+typedef struct cmd_list
+{
+	t_cmd	*cmd_list;
+	size_t	n_cmd;
+	char	*infile;
+	char	*outfile;
+	bool	here_doc;
+	bool	append;
+}				t_cmd_list;
 
 //exec
 void 	ft_run(t_msh *msh);
-int 	ft_exec_line(t_msh *msh, t_cmd *cmd);
+int 	ft_exec_line(t_msh *msh, t_cmd_list *cmd_list);
 
 //init
 int 	ft_quit(t_msh *msh);
 t_msh *ft_struct_init(char **envp);
 
 //parse
-int 	ft_parse(t_cmd *cmd, char *line);
+int 	ft_parse(t_cmd_list *cmd_list, char *line);
 
 //utils
 char	*ft_getenv(const char *name, char **env);
