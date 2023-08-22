@@ -6,12 +6,11 @@
 /*   By: shinfray <shinfray@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 12:21:55 by shinfray          #+#    #+#             */
-/*   Updated: 2023/08/22 13:17:04 by shinfray         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:19:06 by shinfray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 int main(int argc, char **argv, char **envp)
 {
@@ -26,5 +25,3 @@ int main(int argc, char **argv, char **envp)
     ft_run(msh);
     return (ft_quit(msh));
 }
-
-

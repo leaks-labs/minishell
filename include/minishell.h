@@ -6,7 +6,7 @@
 /*   By: shinfray <shinfray@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 12:21:47 by shinfray          #+#    #+#             */
-/*   Updated: 2023/08/12 15:32:02 by shinfray         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:18:50 by shinfray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,15 @@ typedef struct cmd
 
 
 //exec
-int ft_run(t_msh *msh);
-int ft_exec_line(t_msh *msh, t_cmd *cmd);
+int 	ft_run(t_msh *msh);
+int 	ft_exec_line(t_msh *msh, t_cmd *cmd);
 
 //init
-int ft_quit(t_msh *msh);
+int 	ft_quit(t_msh *msh);
 t_msh *ft_struct_init(char **envp);
 
 //parse
-int ft_parse(t_cmd *cmd, char *line);
+int 	ft_parse(t_cmd *cmd, char *line);
 
 //utils
 char	*ft_getenv(const char *name, char **env);
