@@ -12,31 +12,19 @@
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+
+int main(int argc, char **argv, char **envp)
 {
-	t_ms	s_ms;
-	char	*text;
+    t_msh *msh;
 
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	s_ms.env = ft_dptrcpy(envp);
-    for (int i = 0; s_ms.env[i]; ++i) {
-        printf("->%s\n", s_ms.env[i]);
-    }
+    (void)argc;
+    (void)argv;
 
-    printf("-->%s\n", ft_getenv("PATH", s_ms.env));
-	text = readline(PROMPT);
-	while (text != NULL)
-	{
-		if (*text != '\0')
-			add_history(text);
-		if (*text != '\0')
-			printf("%s\n", text);
-		free(text);
-		text = readline(PROMPT);
-	}
-	free(text);
-	rl_clear_history();
-	return (0);
+    msh = ft_struct_init(envp);
+    if (msh == NULL)
+        return (EXIT_FAILURE);
+    ft_run(msh);
+    return (ft_quit(msh));
 }
+
+
