@@ -18,7 +18,6 @@ int main(int argc, char **argv, char **envp)
 
     (void)argc;
     (void)argv;
-
     msh = ft_struct_init(envp);
     if (msh == NULL)
         return (EXIT_FAILURE);
