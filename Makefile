@@ -6,7 +6,7 @@
 #    By: shinfray <shinfray@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 14:46:08 by shinfray          #+#    #+#              #
-#    Updated: 2023/08/12 16:36:24 by shinfray         ###   ########.fr        #
+#    Updated: 2023/08/25 12:07:29 by shinfray         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,6 @@ MAIN:=	main
 
 SRCS_FILES:=	exec/run						\
 				exec/exec						\
-				init_and_destroy/args_init		\
 				init_and_destroy/destroy		\
 				init_and_destroy/struct_init	\
 				parsing/parse					\

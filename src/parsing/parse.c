@@ -1,4 +1,5 @@
-#include "minishell.h"
+#include "parse.h"
+#include "init.h"
 
 int ft_parse(t_cmd_list *cmd_list, char *line);
 
