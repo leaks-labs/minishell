@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 
+char	*ft_getenv(const char *name, char **env);
 void	*ft_calloc(size_t count, size_t size);
 char	**ft_dptrcpy(char **dptr);
 void	*ft_freef(const char *formats, ...);

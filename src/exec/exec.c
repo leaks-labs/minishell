@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "exec.h"
 
 int ft_exec_line(t_msh *msh, t_cmd_list *cmd_list);
 
