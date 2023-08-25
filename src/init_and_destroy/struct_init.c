@@ -1,4 +1,6 @@
-#include "minishell.h"
+#include "init.h"
+#include "exec.h"
+#include "utils.h"
 
 t_msh *ft_struct_init(char **envp);
 

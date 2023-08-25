@@ -1,4 +1,6 @@
-#include "minishell.h"
+#include "init.h"
+#include "exec.h"
+#include "utils.h"
 
 int ft_quit(t_msh *msh)
 {

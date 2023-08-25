@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "exec.h"
 
 void	ft_run(t_msh *msh);
 
