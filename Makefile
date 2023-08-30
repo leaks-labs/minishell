@@ -6,7 +6,7 @@
 #    By: shinfray <shinfray@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 14:46:08 by shinfray          #+#    #+#              #
-#    Updated: 2023/08/12 16:36:24 by shinfray         ###   ########.fr        #
+#    Updated: 2023/08/30 19:08:27 by shinfray         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,8 +45,8 @@ CFLAGS+=	-std=c17 \
 			-Wwrite-strings \
 			-Wmissing-prototypes \
 			-Wmissing-declarations \
-			-Wpedantic \
-			-pedantic-errors
+#			-Wpedantic \
+# 			-pedantic-errors
 #			-Wcast-qual
 #			-Wstrict-prototypes \
 #			-Wpadded \
@@ -78,10 +78,8 @@ MAIN:=	main
 
 SRCS_FILES:=	exec/run						\
 				exec/exec						\
-				init_and_destroy/args_init		\
 				init_and_destroy/destroy		\
 				init_and_destroy/struct_init	\
-				parsing/parse_redirection		\
 				parsing/parse					\
 				utils/env_utils					\
 				utils/ft_calloc					\
