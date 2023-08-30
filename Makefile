@@ -6,7 +6,7 @@
 #    By: shinfray <shinfray@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 14:46:08 by shinfray          #+#    #+#              #
-#    Updated: 2023/08/25 12:07:29 by shinfray         ###   ########.fr        #
+#    Updated: 2023/08/30 19:12:47 by simonhinfray     ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,10 +44,10 @@ CFLAGS+=	-std=c17 \
 			-Wunused-macros \
 			-Wwrite-strings \
 			-Wmissing-prototypes \
-			-Wmissing-declarations
+			-Wmissing-declarations \
 #			-Wpedantic \
-#			-pedantic-errors \
-#			-Wcast-qual \
+# 			-pedantic-errors
+#			-Wcast-qual
 #			-Wstrict-prototypes \
 #			-Wpadded \
 #

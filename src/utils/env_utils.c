@@ -24,5 +24,3 @@ char	*ft_getenv(const char *name, char **env)
 		return (NULL);
 	return (*env + ft_strlen(name) + 1);
 }
-
-

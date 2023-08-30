@@ -11,18 +11,20 @@
 # include "utils.h"
 # include "parse.h"
 
-
-# define EXEC_ERROR -1
-# define EXEC_EXIT 0
-# define EXEC_SUCCESS 2
-
 typedef struct msh
 {
 	char	**env;
 	int		exit_status;
 }				t_msh;
 
+typedef enum exec_return
+{
+	EXEC_ERROR  = -1,
+	EXEC_EXIT = 0,
+	EXEC_SUCCESS = 2
+}			t_exec_return;
+
 void 	ft_run(t_msh *msh);
-int 	ft_exec_line(t_msh *msh, t_cmd_list *cmd_list);
+t_exec_return 	ft_exec_line(t_msh *msh, t_cmd_list *cmd_list);
 
 #endif
