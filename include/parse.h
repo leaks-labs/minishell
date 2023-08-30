@@ -6,33 +6,36 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-# define PARSE_ERROR -1
-# define PARSE_SUCCESS 0
-
 # define PROMPT "minishell$ "
 
 typedef struct msh_args
 {
-    int argc;
-    char **argv;
+    size_t msh_argc;
+    char **msh_argv;
 }               t_msh_args;
 
 typedef struct cmd
 {
 	char	**cmd;
+	char	**infile;
+	char	**here_terminator;
+	char	**outfile;
+	char	**append;
 }				t_cmd;
 
 typedef struct cmd_list
 {
 	t_cmd	*cmd_list;
 	size_t	n_cmd;
-	char	*infile;
-	char	*outfile;
-	bool	here_doc;
-	bool	append;
 }				t_cmd_list;
 
+typedef enum parse_return
+{
+	PARSE_ERROR  = -1,
+	PARSE_SUCCESS =  0
+}			t_parse_return;
 
-int 	ft_parse(t_cmd_list *cmd_list, char *line);
+
+t_parse_return 	ft_parse(t_cmd_list *cmd_list, char *line);
 
 #endif

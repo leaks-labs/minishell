@@ -54,10 +54,7 @@ static char	**ft_write_words(const char *str, const char sep, char **tab, size_t
         *tab = ft_substr(str, 0, len);
         str += len;
         if (**tab == '\0')
-        {
-            ft_freef("%P", cpytab);
-            return (NULL);
-        }
+            return (ft_freef("%P", cpytab));
         ++tab;
     }
     return (cpytab);

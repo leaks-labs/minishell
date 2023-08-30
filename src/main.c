@@ -20,7 +20,7 @@ int main(int argc, char **argv, char **envp)
     (void)argv;
     msh = ft_struct_init(envp);
     if (msh == NULL)
-        return (EXIT_FAILURE);
+        return (NO_LAST_COMMAND);
     ft_run(msh);
     return (ft_quit(msh));
 }

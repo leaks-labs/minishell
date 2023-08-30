@@ -3,10 +3,16 @@
 
 #include "exec.h"
 
-# define INIT_SUCCES 0 //is it used ?
-# define INIT_ERROR -1
+# define NO_LAST_COMMAND 0
 
-int     ft_init_args(t_msh_args *msh_args, char *line);
+typedef enum init_return
+{
+    INIT_ERROR = -1,
+    INIT_SUCCES = 0
+}			t_init_return;
+
+
+t_init_return     ft_init_args(t_msh_args *msh_args, char *line);
 int     ft_quit(t_msh *msh);
 t_msh   *ft_struct_init(char **envp);
 
