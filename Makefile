@@ -44,10 +44,10 @@ CFLAGS+=	-std=c17 \
 			-Wunused-macros \
 			-Wwrite-strings \
 			-Wmissing-prototypes \
-			-Wmissing-declarations
-#			-Wpedantic \
-#			-pedantic-errors \
-#			-Wcast-qual \
+			-Wmissing-declarations \
+			-Wpedantic \
+			-pedantic-errors
+#			-Wcast-qual
 #			-Wstrict-prototypes \
 #			-Wpadded \
 #
@@ -81,6 +81,7 @@ SRCS_FILES:=	exec/run						\
 				init_and_destroy/args_init		\
 				init_and_destroy/destroy		\
 				init_and_destroy/struct_init	\
+				parsing/parse_redirection		\
 				parsing/parse					\
 				utils/env_utils					\
 				utils/ft_calloc					\

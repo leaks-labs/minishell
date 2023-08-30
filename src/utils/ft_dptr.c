@@ -1,7 +1,7 @@
 #include "utils.h"
 
 char	**ft_dptrcpy(char **dptr);
-static size_t	ft_dptrlen(char	**dptr);
+size_t	ft_dptrlen(char	**dptr);
 
 char	**ft_dptrcpy(char **dptr)
 {
@@ -24,7 +24,7 @@ char	**ft_dptrcpy(char **dptr)
     return (dptr_cpy);
 }
 
-static size_t	ft_dptrlen(char	**dptr)
+size_t	ft_dptrlen(char	**dptr)
 {
     size_t	i;
 
