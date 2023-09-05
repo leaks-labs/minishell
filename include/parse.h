@@ -14,14 +14,32 @@ typedef struct msh_args
     char **msh_argv;
 }               t_msh_args;
 
+typedef	enum io_type
+{
+	SIMPLE,
+	DOUBLE
+}			t_io_type;
+
+typedef	struct red_out
+{
+	char		*infile;
+	t_io_type	e_iotype;
+}				t_red_in;
+
+typedef	struct in_out
+{
+	char		*outfile;
+	t_io_type	e_iotype;
+}				t_red_out;
+
 typedef struct cmd
 {
-	char	**cmd;
-	char	**infile;
-	char	**here_terminator;
-	char	**outfile;
-	char	**append;
-}				t_cmd;
+	char		**args;
+	t_red_in	*infile_arr;
+	t_red_out	*outfile_arr;
+	size_t		n_infile;
+	size_t		n_outfile;
+}                t_cmd;
 
 typedef struct cmd_list
 {
