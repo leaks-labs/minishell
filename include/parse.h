@@ -20,25 +20,25 @@ typedef	enum io_type
 	DOUBLE
 }			t_io_type;
 
-typedef	struct red_out
+typedef	struct redirect_in
 {
 	char		*infile;
 	t_io_type	e_iotype;
-}				t_red_in;
+}				t_redirect_in;
 
-typedef	struct in_out
+typedef	struct redirect_out
 {
 	char		*outfile;
 	t_io_type	e_iotype;
-}				t_red_out;
+}				t_redirect_out;
 
 typedef struct cmd
 {
-	char		**args;
-	t_red_in	*infile_arr;
-	t_red_out	*outfile_arr;
-	size_t		n_infile;
-	size_t		n_outfile;
+	char			**args;
+	t_redirect_in	*infile_arr;
+	t_redirect_out	*outfile_arr;
+	size_t			n_infile;
+	size_t			n_outfile;
 }                t_cmd;
 
 typedef struct cmd_list
