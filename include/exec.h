@@ -25,6 +25,6 @@ typedef enum exec_return
 }			t_exec_return;
 
 void 	ft_run(t_msh *msh);
-t_exec_return 	ft_exec_line(t_msh *msh, t_cmd_list *cmd_list);
+t_exec_return 	ft_exec_line(t_msh *msh, t_pipeline *pipeline);
 
 #endif
