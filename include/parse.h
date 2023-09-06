@@ -16,36 +16,30 @@ typedef struct msh_args
 
 typedef	enum io_type
 {
-	SIMPLE,
-	DOUBLE
+	INPUT,
+	HEREDOC,
+	OUTPUT,
+	APPEND
 }			t_io_type;
 
-typedef	struct redirect_in
+typedef	struct redirect
 {
-	char		*infile;
+	char		*file;
 	t_io_type	e_iotype;
-}				t_redirect_in;
-
-typedef	struct redirect_out
-{
-	char		*outfile;
-	t_io_type	e_iotype;
-}				t_redirect_out;
+}				t_redirect;
 
 typedef struct cmd
 {
-	char			**args;
-	t_redirect_in	*infile_arr;
-	t_redirect_out	*outfile_arr;
-	size_t			n_infile;
-	size_t			n_outfile;
+	char		**args;
+	t_redirect	*redirect_arr;
+	ssize_t		n_redirect;
 }                t_cmd;
 
-typedef struct cmd_list
+typedef struct pipeline
 {
 	t_cmd	*cmd_list;
-	size_t	n_cmd;
-}				t_cmd_list;
+	ssize_t	n_cmd;
+}				t_pipeline;
 
 typedef enum parse_return
 {
@@ -54,6 +48,6 @@ typedef enum parse_return
 }			t_parse_return;
 
 
-t_parse_return 	ft_parse(t_cmd_list *cmd_list, char *line);
+t_parse_return 	ft_parse(t_pipeline *pipeline, char *line);
 
 #endif
