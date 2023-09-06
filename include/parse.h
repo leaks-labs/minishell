@@ -6,6 +6,10 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+# ifdef __linux__
+#  include <sys/types.h>
+# endif
+
 # define PROMPT "minishell$ "
 
 typedef struct msh_args
