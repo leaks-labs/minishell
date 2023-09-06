@@ -1,11 +1,11 @@
 #include "parse.h"
 #include "init.h"
 
-t_parse_return ft_parse(t_pipeline *pipeline, char *line);
+t_parse_return	ft_parse(t_pipeline *pipeline, char *line);
 
-t_parse_return ft_parse(t_pipeline *pipeline, char *line)
+t_parse_return	ft_parse(t_pipeline *pipeline, char *line)
 {
-    (void)pipeline;
-    (void)line;
-    return (PARSE_SUCCESS);
+	(void)pipeline;
+	(void)line;
+	return (PARSE_SUCCESS);
 }
