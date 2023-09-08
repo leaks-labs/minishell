@@ -11,8 +11,8 @@ typedef enum init_return
 	INIT_SUCCES = 0
 }			t_init_return;
 
-t_init_return	ft_init_args(t_msh_args *msh_args, char *line);
 int				ft_quit(t_msh *msh);
 t_msh			*ft_struct_init(char **envp);
+void			ft_free_cmd_list(t_pipeline *pipeline);
 
 #endif
