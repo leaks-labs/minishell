@@ -78,7 +78,7 @@ MAIN:=	main
 
 SRCS_FILES:=	exec/run						\
 				exec/exec						\
-				init_and_destroy/destroy		\
+				init_and_destroy/struct_destroy	\
 				init_and_destroy/struct_init	\
 				parsing/parse					\
 				utils/env_utils					\
