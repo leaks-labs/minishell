@@ -20,7 +20,7 @@ void	*ft_freef(const char *formats, ...)
 			{
 				dptr = va_arg(ap, void **);
 				i = 0;
-				while (dptr != NULL dptr[i] != NULL)
+				while (dptr != NULL && dptr[i] != NULL)
 					free(dptr[i++]);
 				free(dptr);
 			}
