@@ -1,16 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: shinfray <shinfray@student.s19.be>         +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/03 14:46:08 by shinfray          #+#    #+#              #
-#    Updated: 2023/08/30 19:12:47 by simonhinfray     ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-
 ################################################################################
 #                                 CONFIG                                       #
 ################################################################################
@@ -76,8 +63,16 @@ EXT:=	.c
 
 MAIN:=	main
 
-SRCS_FILES:=	exec/run						\
+SRCS_FILES:=	exec/adapt_redirections			\
+				exec/child_process				\
 				exec/exec						\
+				exec/get_cmd_path				\
+				exec/heredoc_linked_list_utils	\
+				exec/heredoc					\
+				exec/init_exl					\
+				exec/redirections_utils			\
+				exec/redirections				\
+				exec/run						\
 				init_and_destroy/struct_destroy	\
 				init_and_destroy/struct_init	\
 				parsing/parse					\
@@ -86,12 +81,14 @@ SRCS_FILES:=	exec/run						\
 				utils/ft_dptr					\
 				utils/ft_freef					\
 				utils/ft_join					\
+				utils/ft_putendl_fd				\
+				utils/ft_putstr_fd				\
 				utils/ft_split					\
+				utils/ft_strcmp					\
 				utils/ft_strdup					\
 				utils/ft_strlen					\
 				utils/ft_strncmp				\
 				utils/ft_substr
-
 
 ################################################################################
 #                                 SRC's FORMATING                              #
