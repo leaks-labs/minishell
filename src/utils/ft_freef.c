@@ -1,4 +1,6 @@
 #include "utils.h"
+#include <stdarg.h>
+#include <stdlib.h>
 
 void	*ft_freef(const char *formats, ...);
 

@@ -63,19 +63,19 @@ EXT:=	.c
 
 MAIN:=	main
 
-SRCS_FILES:=	exec/adapt_redirections			\
-				exec/child_process				\
+SRCS_FILES:=	exec/child_process				\
 				exec/exec						\
 				exec/get_cmd_path				\
-				exec/heredoc_linked_list_utils	\
-				exec/heredoc					\
 				exec/init_exl					\
-				exec/redirections_utils			\
-				exec/redirections				\
 				exec/run						\
+				heredoc/heredoc_linked_list		\
+				heredoc/heredoc					\
 				init_and_destroy/struct_destroy	\
 				init_and_destroy/struct_init	\
 				parsing/parse					\
+				redirections/adapt_redirections	\
+				redirections/pipes_create_close	\
+				redirections/redirections		\
 				utils/env_utils					\
 				utils/ft_calloc					\
 				utils/ft_dptr					\

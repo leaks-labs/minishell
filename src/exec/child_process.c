@@ -1,4 +1,10 @@
 #include "exec.h"
+#include "redirections.h"
+#include "utils.h"
+#include <errno.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 void			ft_child_process(t_exl *exl, t_cmd *cmd);
 static uint8_t	ft_get_err_code(char *cmd);

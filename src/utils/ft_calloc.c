@@ -1,4 +1,5 @@
 #include "utils.h"
+#include <stdlib.h>
 
 void		*ft_calloc(size_t count, size_t size);
 static void	*ft_memset(void *b, int c, size_t len);

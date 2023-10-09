@@ -1,4 +1,7 @@
 #include "exec.h"
+#include "utils.h"
+#include <errno.h>
+#include <sys/stat.h>
 
 char		*ft_get_cmd_path(char **path, char *cmd);
 bool	ft_isapath(char *str);

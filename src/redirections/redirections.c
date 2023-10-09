@@ -1,8 +1,11 @@
-#include "exec.h"
+#include "heredoc.h"
+#include "redirections.h"
+#include <unistd.h>
 
-int				ft_set_redirections(t_exl *exl, t_cmd *cmd);
-uint8_t			ft_apply_redirections(t_exl *exl);
-static void		ft_default_redirections(t_exl *exl);
+int			ft_set_redirections(t_exl *exl, t_cmd *cmd);
+uint8_t		ft_apply_redirections(t_exl *exl);
+static void	ft_default_redirections(t_exl *exl);
+static bool	ft_islastcmd(t_exl *exl);
 
 int	ft_set_redirections(t_exl *exl, t_cmd *cmd)
 {
@@ -60,4 +63,9 @@ static void	ft_default_redirections(t_exl *exl)
 	else
 		exl->pipe[1] = STDOUT_FILENO;
 	exl->s_fd_io.fd_to_write = exl->pipe[1];
+}
+
+static bool	ft_islastcmd(t_exl *exl)
+{
+	return (exl->cmd_idx == exl->n_cmd - 1);
 }

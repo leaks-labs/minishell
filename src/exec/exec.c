@@ -1,4 +1,10 @@
 #include "exec.h"
+#include "redirections.h"
+#include "utils.h"
+#include <errno.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
 t_exec_return	ft_exec_line(t_msh *msh, t_pipeline *pipeline);
 static pid_t	ft_exec_cmd(t_exl *exl, t_pipeline *pipeline);
