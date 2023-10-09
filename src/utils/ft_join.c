@@ -1,4 +1,6 @@
 #include "utils.h"
+#include <stdarg.h>
+
 
 char			*ft_join(int argc, ...);
 static size_t	ft_get_len(int argc, va_list *aq);

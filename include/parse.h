@@ -1,22 +1,16 @@
 #ifndef PARSE_H
 # define PARSE_H
 
-# include <stdio.h>
-# include <stdbool.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-# ifdef __linux__
-#  include <sys/types.h>
-# endif
+# include <stddef.h>
+# include <sys/types.h>
 
 # define PROMPT "minishell$ "
 
-typedef struct msh_args
+typedef enum parse_return
 {
-	size_t	msh_argc;
-	char	**msh_argv;
-}				t_msh_args;
+	PARSE_ERROR = -1,
+	PARSE_SUCCESS = 0
+}			t_parse_return;
 
 typedef enum io_type
 {
@@ -25,6 +19,12 @@ typedef enum io_type
 	OUTPUT,
 	APPEND
 }			t_io_type;
+
+typedef struct msh_args
+{
+	size_t	msh_argc;
+	char	**msh_argv;
+}				t_msh_args;
 
 typedef struct redirect
 {
@@ -44,12 +44,6 @@ typedef struct pipeline
 	t_cmd	*cmd_list;
 	ssize_t	n_cmd;
 }				t_pipeline;
-
-typedef enum parse_return
-{
-	PARSE_ERROR = -1,
-	PARSE_SUCCESS = 0
-}			t_parse_return;
 
 t_parse_return	ft_parse(t_pipeline *pipeline, char *line);
 

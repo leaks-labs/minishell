@@ -1,4 +1,6 @@
 #include "init.h"
+#include "utils.h"
+#include <stdlib.h>
 
 int		ft_quit(t_msh *msh);
 void	ft_free_cmd_list(t_pipeline *pipeline);

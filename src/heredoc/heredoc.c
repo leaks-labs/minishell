@@ -1,4 +1,8 @@
-#include "exec.h"
+#include "heredoc.h"
+#include "utils.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <readline/readline.h>
 
 int				ft_heredoc(t_cmd *cmd_list, t_exl *exl);
 static int		ft_update_hd_list(t_hd *hd, char *file);

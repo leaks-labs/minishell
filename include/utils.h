@@ -1,9 +1,7 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-# include <stdlib.h>
-# include <stdarg.h>
-# include <unistd.h>
+# include <stddef.h>
 
 char	*ft_getenv(const char *name, char **env);
 void	*ft_calloc(size_t count, size_t size);

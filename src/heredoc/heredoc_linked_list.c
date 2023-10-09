@@ -1,4 +1,5 @@
-#include "exec.h"
+#include "heredoc.h"
+#include "utils.h"
 
 void		ft_free_hd_list(t_hd *hd);
 t_hd_node	*ft_delete_front_hd_node(t_hd_node *node);

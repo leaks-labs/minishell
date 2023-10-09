@@ -1,4 +1,9 @@
-#include "exec.h"
+#include "heredoc.h"
+#include "redirections.h"
+#include "utils.h"
+#include <fcntl.h>
+#include <stdio.h>
+#include <unistd.h>
 
 int	ft_set_input(t_exl *exl, char *file);
 int	ft_set_heredoc(t_exl *exl, char *file);

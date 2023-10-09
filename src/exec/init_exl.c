@@ -1,16 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_exl.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: shinfray <shinfray@student.s19.be>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/31 14:12:02 by shinfray          #+#    #+#             */
-/*   Updated: 2023/09/15 10:14:37 by shinfray         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "exec.h"
+#include "heredoc.h"
+#include "utils.h"
+#include <stdlib.h>
 
 int				ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline);
 static char		**ft_get_path(char **envp);
