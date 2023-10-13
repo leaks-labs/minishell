@@ -12,9 +12,9 @@ static int		ft_wait(t_exl *exl);
 
 t_exec_return	ft_exec_line(t_msh *msh, t_pipeline *pipeline)
 {
-	t_exl				s_exl;
+	t_exl	s_exl;
 
-	if (ft_init_exl(&s_exl, msh, pipeline) == -1) //what is -1
+	if (ft_init_exl(&s_exl, msh, pipeline) == -1)
 	{
 		msh->exit_status = 1;
 		return (EXEC_ERROR);
@@ -49,8 +49,8 @@ static pid_t	ft_exec_cmd(t_exl *exl, t_pipeline *pipeline)
 
 static int	ft_wait(t_exl *exl)
 {
-	int		wstatus;
-	int		exit_status;
+	int	wstatus;
+	int	exit_status;
 
 	if (exl->pid_last != -1)
 	{

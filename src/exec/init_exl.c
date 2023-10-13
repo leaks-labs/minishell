@@ -3,9 +3,9 @@
 #include "utils.h"
 #include <stdlib.h>
 
-int				ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline);
-static char		**ft_get_path(char **envp);
-static char		**ft_set_slash(char **path);
+int			ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline);
+static char	**ft_get_path(char **envp);
+static char	**ft_set_slash(char **path);
 
 int	ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline)
 {

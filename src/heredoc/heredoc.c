@@ -4,10 +4,10 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 
-int				ft_heredoc(t_cmd *cmd_list, t_exl *exl);
-static int		ft_update_hd_list(t_hd *hd, char *file);
-static char		*ft_get_hd_content(char *del);
-static char		*ft_add_nl(char *line);
+int			ft_heredoc(t_cmd *cmd_list, t_exl *exl);
+static int	ft_update_hd_list(t_hd *hd, char *file);
+static char	*ft_get_hd_content(char *del);
+static char	*ft_add_nl(char *line);
 
 int	ft_heredoc(t_cmd *cmd_list, t_exl *exl)
 {

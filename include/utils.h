@@ -2,6 +2,7 @@
 # define UTILS_H
 
 # include <stddef.h>
+# include <stdint.h>
 
 char	*ft_getenv(const char *name, char **env);
 void	*ft_calloc(size_t count, size_t size);
@@ -17,5 +18,6 @@ char	*ft_strdup(const char *s1);
 size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
+void	ft_umaxtostr(char *str, size_t len, uintmax_t n);
 
 #endif

@@ -22,25 +22,25 @@ typedef struct msh
 	int		exit_status;
 }				t_msh;
 
-typedef	struct fd_io
+typedef struct fd_io
 {
 	int	fd_to_read;
 	int	fd_to_write;
 }				t_fd_io;
 
-typedef	struct hd_node
+typedef struct hd_node
 {
 	char			*hd_content;
 	struct hd_node	*next;
 }				t_hd_node;
 
-typedef	struct hd
+typedef struct hd
 {
 	t_hd_node	*hd_list;
 	t_hd_node	*last_node;
 }				t_hd;
 
-typedef	struct exl
+typedef struct exl
 {
 	char		**env;
 	char		**path;

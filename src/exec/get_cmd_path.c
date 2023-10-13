@@ -4,7 +4,7 @@
 #include <sys/stat.h>
 
 char		*ft_get_cmd_path(char **path, char *cmd);
-bool	ft_isapath(char *str);
+bool		ft_isapath(char *str);
 static char	*ft_check_one_path(char *cmd);
 static char	*ft_search_in_path(char **path, char *cmd);
 
@@ -49,7 +49,7 @@ static char	*ft_search_in_path(char **path, char *cmd)
 	{
 		cmd_path = ft_join(2, *path, cmd);
 		if (cmd_path == NULL)
-				return (NULL);
+			return (NULL);
 		if (stat(cmd_path, &buf) == 0)
 		{
 			if (S_ISDIR(buf.st_mode) == true)
