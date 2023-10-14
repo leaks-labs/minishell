@@ -30,7 +30,7 @@ void	ft_child_process(t_exl *exl, t_cmd *cmd)
 	}
 	ft_close_used_pipes(&exl->s_fd_io);
 	ft_freef("%P", exl->path);
-	// free other struct extern to exl (like pipeline, msh, ...)
+	// free other struct extern to exl (like pipeline, msh, history, line...) ??
 	exit(err_code);
 }
 

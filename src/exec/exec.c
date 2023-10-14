@@ -23,7 +23,7 @@ t_exec_return	ft_exec_line(t_msh *msh, t_pipeline *pipeline)
 		s_exl.pid_last = ft_exec_cmd(&s_exl, pipeline);
 	msh->exit_status = ft_wait(&s_exl);
 	ft_freef("%P", s_exl.path);
-	// free other struct extern to exl (like pipeline, msh, ...) ??
+	// free other struct extern to exl (like pipeline, msh, history, line...) ??
 	//return different code than just EXEC_SUCCESS for builtins
 	return (EXEC_SUCCESS);
 }
