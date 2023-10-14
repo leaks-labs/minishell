@@ -19,6 +19,7 @@ typedef enum exec_return
 typedef struct msh
 {
 	char	**env;
+	int		line_num;
 	int		exit_status;
 }				t_msh;
 
@@ -42,14 +43,15 @@ typedef struct hd
 
 typedef struct exl
 {
-	char		**env;
-	char		**path;
-	int			pipe[2];
-	t_fd_io		s_fd_io;
-	ssize_t		cmd_idx;
-	ssize_t		n_cmd;
-	t_hd		hd;
-	pid_t		pid_last;
+	char	**env;
+	char	**path;
+	int		pipe[2];
+	t_fd_io	s_fd_io;
+	ssize_t	cmd_idx;
+	ssize_t	n_cmd;
+	t_hd	hd;
+	pid_t	pid_last;
+	int		*line_num;
 }				t_exl;
 
 /*	CHILD_PROCESS	*/

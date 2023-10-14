@@ -5,100 +5,82 @@
 #include <readline/readline.h>
 
 int			ft_heredoc(t_cmd *cmd_list, t_exl *exl);
-static int	ft_update_hd_list(t_hd *hd, char *file);
-static char	*ft_get_hd_content(char *del);
-static char	*ft_add_nl(char *line);
+char		*ft_get_hd_content(char *del, int *line_num);
+static int	ft_search_for_hd(t_cmd *cmd, t_hd *hd, int *line_num);
+static bool	ft_end_of_hd(char *current_line, char *del, int line_num);
+static char	*ft_update_hd_content(char *hd_content, char *current_line);
 
 int	ft_heredoc(t_cmd *cmd_list, t_exl *exl)
 {
-	t_redirect	*current_redir;
-	ssize_t		i;
-	ssize_t		j;
+	ssize_t	i;
 
-	exl->hd.hd_list = NULL;
 	i = -1;
 	while (++i < exl->n_cmd)
+		if (ft_search_for_hd(cmd_list + i, &exl->hd, exl->line_num) == -1)
+			return (-1);
+	return (0);
+}
+
+char	*ft_get_hd_content(char *del, int *line_num)
+{
+	const int	first_line = *line_num;	
+	char		*hd_content;
+	char		*current_line;
+
+	// add toogle of expansion following quotes rules in delimiteur
+	hd_content = ft_calloc(1, sizeof(char));
+	if (hd_content == NULL)
+		return (NULL);
+	current_line = readline(HD_PROMPT);
+	while (ft_end_of_hd(current_line, del, first_line) == false)
 	{
-		j = -1;
-		while (++j < (cmd_list + i)->n_redirect)
+		hd_content = ft_update_hd_content(hd_content, current_line);
+		if (hd_content == NULL)
+			break ;
+		(*line_num)++;
+		current_line = readline(HD_PROMPT);
+	}
+	return (hd_content);
+}
+
+static int	ft_search_for_hd(t_cmd *cmd, t_hd *hd, int *line_num)
+{
+	t_redirect	*current_redir;
+	ssize_t		j;
+
+	j = -1;
+	while (++j < cmd->n_redirect)
+	{
+		current_redir = cmd->redirect_arr + j;
+		if (current_redir->e_iotype == HEREDOC \
+			&& ft_update_hd_list(hd, current_redir->file, line_num) == -1)
 		{
-			current_redir = cmd_list[i].redirect_arr + j;
-			if (current_redir->e_iotype == HEREDOC)
-			{
-				if (ft_update_hd_list(&exl->hd, current_redir->file) == -1)
-				{
-					// perror()
-					return (-1);
-				}
-			}
+			// perror()
+			return (-1);
 		}
 	}
 	return (0);
 }
 
-static int	ft_update_hd_list(t_hd *hd, char *file)
+static bool	ft_end_of_hd(char *current_line, char *del, int line_num)
 {
-	t_hd_node	*new_hd_node;
-	char		*hd_content;
-
-	hd_content = ft_get_hd_content(file);
-	if (hd_content == NULL)
-	{
-		ft_free_hd_list(hd);
-		return (-1);
-	}
-	new_hd_node = ft_calloc(1, sizeof(t_hd_node));
-	if (new_hd_node == NULL)
-	{
-		free(hd_content);
-		ft_free_hd_list(hd);
-		return (-1);
-	}
-	new_hd_node->hd_content = hd_content;
-	if (hd->hd_list == NULL)
-		hd->hd_list = new_hd_node;
-	else
-		hd->last_node->next = new_hd_node;
-	hd->last_node = new_hd_node;
-	return (0);
-}
-
-static char	*ft_get_hd_content(char *del)
-{
-	char	*hd_content;
-	char	*former_line;
-	char	*current_line;
-
-	// add toogle of expansion following quotes rules in delimiteur
-	hd_content = NULL;
-	// dont forget to count line and 
-	//add error when stopping hd by other than delimiter
-	current_line = readline(HD_PROMPT);
 	if (current_line == NULL || ft_strcmp(current_line, del) == 0)
-		return (ft_calloc(1, sizeof(char)));
-	while (current_line != NULL && ft_strcmp(current_line, del) != 0)
 	{
-		if (current_line != NULL)
-			current_line = ft_add_nl(current_line);
-		former_line = hd_content;
-		if (hd_content != NULL)
-			hd_content = ft_join(2, former_line, current_line);
+		if (current_line == NULL)
+			printf("msh: warning: here-document at line %d delimited by end-of-file (wanted `%s')\n", line_num, del);
 		else
-			hd_content = ft_strdup(current_line);
-		ft_freef("%p%p", former_line, current_line);
-		if (hd_content == NULL)
-			break ;
-		current_line = readline(HD_PROMPT);
+			free(current_line);
+		return (true);
 	}
-	free(current_line);
-	return (hd_content);
+	return (false);
 }
 
-static char	*ft_add_nl(char *line)
+static char	*ft_update_hd_content(char *hd_content, char *current_line)
 {
-	char	*line_w_nl;
+	char	*former_line;
 
-	line_w_nl = ft_join(2, line, "\n");
-	free(line);
-	return (line_w_nl);
+	former_line = hd_content;
+	hd_content = ft_join(3, former_line, current_line, "\n");
+	ft_freef("%p%p", former_line, current_line);
+	return (hd_content);
 }
