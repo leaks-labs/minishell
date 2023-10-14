@@ -14,6 +14,7 @@ void	ft_child_process(t_exl *exl, t_cmd *cmd)
 	char	*path_cmd;
 	uint8_t	err_code;
 
+	ft_free_hd_list(&exl->hd);
 	err_code = ft_apply_redirections(exl);
 	// perror() ??
 	if (err_code == 0)
@@ -29,7 +30,6 @@ void	ft_child_process(t_exl *exl, t_cmd *cmd)
 	}
 	ft_close_used_pipes(&exl->s_fd_io);
 	ft_freef("%P", exl->path);
-	ft_free_hd_list(&exl->hd);
 	// free other struct extern to exl (like pipeline, msh, ...)
 	exit(err_code);
 }
