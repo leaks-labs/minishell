@@ -2,12 +2,12 @@
 #include "utils.h"
 #include <stdlib.h>
 
-int			ft_update_hd_list(t_hd *hd, char *del, int *line_num);
+int			ft_update_hd_list(t_hd *hd, char *del, unsigned int *line_num);
 void		ft_free_hd_list(t_hd *hd);
 t_hd_node	*ft_delete_front_hd_node(t_hd_node *node);
 static int	ft_append_hd_content(t_hd *hd, char *hd_content);
 
-int	ft_update_hd_list(t_hd *hd, char *del, int *line_num)
+int	ft_update_hd_list(t_hd *hd, char *del, unsigned int *line_num)
 {
 	char	*hd_content;
 

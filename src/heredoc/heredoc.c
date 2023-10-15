@@ -5,9 +5,9 @@
 #include <readline/readline.h>
 
 int			ft_heredoc(t_cmd *cmd_list, t_exl *exl);
-char		*ft_get_hd_content(char *del, int *line_num);
-static int	ft_search_for_hd(t_cmd *cmd, t_hd *hd, int *line_num);
-static bool	ft_end_of_hd(char *current_line, char *del, int line_num);
+char		*ft_get_hd_content(char *del, unsigned int *line_num);
+static int	ft_search_for_hd(t_cmd *cmd, t_hd *hd, unsigned int *line_num);
+static bool	ft_end_of_hd(char *current_line, char *del, unsigned int line_num);
 static char	*ft_update_hd_content(char *hd_content, char *current_line);
 
 int	ft_heredoc(t_cmd *cmd_list, t_exl *exl)
@@ -21,18 +21,18 @@ int	ft_heredoc(t_cmd *cmd_list, t_exl *exl)
 	return (0);
 }
 
-char	*ft_get_hd_content(char *del, int *line_num)
+char	*ft_get_hd_content(char *del, unsigned int *line_num)
 {
-	const int	first_line = *line_num;	
-	char		*hd_content;
-	char		*current_line;
+	const unsigned int	first_line_num = *line_num;	
+	char				*hd_content;
+	char				*current_line;
 
 	// add toogle of expansion following quotes rules in delimiteur
 	hd_content = ft_calloc(1, sizeof(char));
 	if (hd_content == NULL)
 		return (NULL);
 	current_line = readline(HD_PROMPT);
-	while (ft_end_of_hd(current_line, del, first_line) == false)
+	while (ft_end_of_hd(current_line, del, first_line_num) == false)
 	{
 		hd_content = ft_update_hd_content(hd_content, current_line);
 		if (hd_content == NULL)
@@ -43,7 +43,7 @@ char	*ft_get_hd_content(char *del, int *line_num)
 	return (hd_content);
 }
 
-static int	ft_search_for_hd(t_cmd *cmd, t_hd *hd, int *line_num)
+static int	ft_search_for_hd(t_cmd *cmd, t_hd *hd, unsigned int *line_num)
 {
 	t_redirect	*current_redir;
 	ssize_t		j;
@@ -62,7 +62,7 @@ static int	ft_search_for_hd(t_cmd *cmd, t_hd *hd, int *line_num)
 	return (0);
 }
 
-static bool	ft_end_of_hd(char *current_line, char *del, int line_num)
+static bool	ft_end_of_hd(char *current_line, char *del, unsigned int line_num)
 {
 	if (current_line == NULL || ft_strcmp(current_line, del) == 0)
 	{
