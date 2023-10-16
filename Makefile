@@ -74,6 +74,7 @@ SRCS_FILES:=	exec/child_process				\
 				init_and_destroy/struct_init	\
 				parsing/parse					\
 				redirections/adapt_redirections	\
+				redirections/fill_tmp			\
 				redirections/pipes_create_close	\
 				redirections/redirections		\
 				utils/env_utils					\
@@ -88,7 +89,8 @@ SRCS_FILES:=	exec/child_process				\
 				utils/ft_strdup					\
 				utils/ft_strlen					\
 				utils/ft_strncmp				\
-				utils/ft_substr
+				utils/ft_substr					\
+				utils/ft_umaxtostr
 
 ################################################################################
 #                                 SRC's FORMATING                              #

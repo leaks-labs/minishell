@@ -18,38 +18,40 @@ typedef enum exec_return
 
 typedef struct msh
 {
-	char	**env;
-	int		exit_status;
+	char			**env;
+	int				exit_status;
+	unsigned int	line_num;
 }				t_msh;
 
-typedef	struct fd_io
+typedef struct fd_io
 {
 	int	fd_to_read;
 	int	fd_to_write;
 }				t_fd_io;
 
-typedef	struct hd_node
+typedef struct hd_node
 {
 	char			*hd_content;
 	struct hd_node	*next;
 }				t_hd_node;
 
-typedef	struct hd
+typedef struct hd
 {
 	t_hd_node	*hd_list;
 	t_hd_node	*last_node;
 }				t_hd;
 
-typedef	struct exl
+typedef struct exl
 {
-	char		**env;
-	char		**path;
-	int			pipe[2];
-	t_fd_io		s_fd_io;
-	ssize_t		cmd_idx;
-	ssize_t		n_cmd;
-	t_hd		hd;
-	pid_t		pid_last;
+	char			**env;
+	char			**path;
+	int				pipe[2];
+	t_fd_io			s_fd_io;
+	ssize_t			cmd_idx;
+	ssize_t			n_cmd;
+	t_hd			hd;
+	pid_t			pid_last;
+	unsigned int	*line_num;
 }				t_exl;
 
 /*	CHILD_PROCESS	*/

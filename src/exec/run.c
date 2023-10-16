@@ -1,8 +1,8 @@
 #include "exec.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include <stdlib.h>
 
 void	ft_run(t_msh *msh);
 
@@ -13,6 +13,7 @@ void	ft_run(t_msh *msh)
 
 	while (true)
 	{
+		++msh->line_num;
 		line = readline(PROMPT);
 		if (line == NULL)
 			return ;

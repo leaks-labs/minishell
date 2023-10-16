@@ -1,6 +1,6 @@
 #include "utils.h"
 
-char			*ft_getenv(const char *name, char **env);
+char	*ft_getenv(const char *name, char **env);
 
 char	*ft_getenv(const char *name, char **env)
 {
