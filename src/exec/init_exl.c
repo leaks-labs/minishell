@@ -14,7 +14,6 @@ int	ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline)
 	exl->path = ft_get_path(msh->env);
 	exl->cmd_idx = -1;
 	exl->n_cmd = pipeline->n_cmd;
-	exl->hd.hd_list = NULL;
 	return (ft_heredoc(pipeline->cmd_list, exl));
 }
 

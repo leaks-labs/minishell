@@ -68,8 +68,8 @@ SRCS_FILES:=	exec/child_process				\
 				exec/get_cmd_path				\
 				exec/init_exl					\
 				exec/run						\
-				heredoc/heredoc_linked_list		\
 				heredoc/heredoc					\
+				heredoc/retrieve_hd_content		\
 				init_and_destroy/struct_destroy	\
 				init_and_destroy/struct_init	\
 				parsing/parse					\

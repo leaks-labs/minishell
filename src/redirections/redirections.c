@@ -23,12 +23,7 @@ int	ft_set_redirections(t_exl *exl, t_cmd *cmd)
 	while (++i < cmd->n_redirect)
 	{
 		if ((f)[current_redirect->e_iotype](exl, current_redirect->file) == -1)
-		{
-			while (++i < cmd->n_redirect)
-				if ((++current_redirect)->e_iotype == HEREDOC)
-					exl->hd.hd_list = ft_delete_front_hd_node(exl->hd.hd_list);
 			return (-1);
-		}
 		++current_redirect;
 	}
 	return (0);
