@@ -19,8 +19,9 @@ pid_t	ft_child_process(t_exl *exl, t_cmd *cmd)
 	// 	perror("fork error");
 	if (pid != 0)
 		return (pid);
-	err_code = ft_apply_redirections(exl);
-	// perror() ??
+	err_code = 0;
+	if (ft_set_redirections(exl, cmd) != 0 || ft_apply_redirections(exl) != 0)
+		err_code = 1;
 	if (err_code == 0 && cmd->args != NULL)
 		err_code = ft_launch_extern_cmd(exl, cmd->args);
 	ft_close_used_pipes(&exl->s_fd_io);
