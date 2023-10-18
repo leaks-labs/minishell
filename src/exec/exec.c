@@ -36,13 +36,7 @@ static pid_t	ft_exec_cmd(t_exl *exl, t_pipeline *pipeline)
 	current_cmd = pipeline->cmd_list + exl->cmd_idx;
 	pid = -1;
 	if (ft_set_redirections(exl, current_cmd) == 0)
-	{
-		pid = fork();
-		if (pid == 0)
-			ft_child_process(exl, current_cmd);
-		// if (pid == -1)
-		// 	perror("fork error");
-	}
+		pid = ft_child_process(exl, current_cmd);
 	ft_close_used_pipes(&exl->s_fd_io);
 	return (pid);
 }

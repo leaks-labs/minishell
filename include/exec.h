@@ -42,7 +42,7 @@ typedef struct exl
 }				t_exl;
 
 /*	CHILD_PROCESS	*/
-void			ft_child_process(t_exl *exl, t_cmd *cmd);
+pid_t			ft_child_process(t_exl *exl, t_cmd *cmd);
 /*	EXEC	*/
 t_exec_return	ft_exec_line(t_msh *msh, t_pipeline *pipeline);
 /*	GET_CMD_PATH	*/
