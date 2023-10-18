@@ -1,10 +1,7 @@
 #ifndef PARSE_H
 # define PARSE_H
 
-# include <stddef.h>
 # include <sys/types.h>
-
-# define PROMPT "minishell$ "
 
 typedef enum parse_return
 {
