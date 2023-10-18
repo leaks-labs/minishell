@@ -1,5 +1,6 @@
 #include "exec.h"
 #include "redirections.h"
+#include "msh_signals.h"
 #include "utils.h"
 #include <errno.h>
 #include <stdio.h>
@@ -19,6 +20,7 @@ pid_t	ft_child_process(t_exl *exl, t_cmd *cmd)
 	// 	perror("fork error");
 	if (pid != 0)
 		return (pid);
+	ft_set_signals(MSH_SIG_CHILD);
 	err_code = 0;
 	if (ft_set_redirections(exl, cmd) != 0 || ft_apply_redirections(exl) != 0)
 		err_code = 1;

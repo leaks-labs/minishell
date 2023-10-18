@@ -1,4 +1,5 @@
 #include "init.h"
+#include "msh_signals.h"
 #include <stddef.h>
 
 int	main(int argc, char **argv, char **envp)
@@ -7,6 +8,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
+	ft_set_signals(MSH_SIG_PARENT);
 	msh = ft_struct_init(envp);
 	if (msh == NULL)
 		return (NO_LAST_COMMAND);

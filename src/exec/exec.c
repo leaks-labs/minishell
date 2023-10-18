@@ -15,6 +15,15 @@ int	ft_exec_line(t_msh *msh, t_pipeline *pipeline)
 	t_exl	s_exl;
 	int		exit_code;
 
+	#include "utils.h"
+	pipeline->cmd_list = ft_calloc(1, sizeof(t_cmd));
+	pipeline->n_cmd = 1;
+	pipeline->cmd_list->n_redirect = 1;
+	pipeline->cmd_list->args = ft_split("wc", ' ');
+	pipeline->cmd_list->redirect_arr = ft_calloc(1, sizeof(t_redirect));
+	pipeline->cmd_list->redirect_arr->file = ft_strdup("eof");
+	pipeline->cmd_list->redirect_arr->e_iotype = HEREDOC;
+
 	if (ft_init_exl(&s_exl, msh, pipeline) == -1)
 		return (1);
 	exit_code = ft_exec_cmd(&s_exl, pipeline);

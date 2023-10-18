@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 
+#include "msh_signals.h"
+
 char		*ft_get_hd_content(char *del, unsigned int *line_num);
 static bool	ft_end_of_hd(char *current_line, char *del, unsigned int line_num);
 static char	*ft_update_hd_content(char *hd_content, char *current_line);
@@ -18,14 +20,23 @@ char	*ft_get_hd_content(char *del, unsigned int *line_num)
 	hd_content = ft_calloc(1, sizeof(char));
 	if (hd_content == NULL)
 		return (NULL);
+	ft_set_signals(MSH_SIG_HEREDOC);
 	current_line = readline(HD_PROMPT);
-	while (ft_end_of_hd(current_line, del, first_line_num) == false)
+	ft_set_signals(MSH_SIG_PARENT);
+	if (g_interrupt_heredoc == true)
+		hd_content = ft_freef("%p%p", hd_content, current_line);
+	while (g_interrupt_heredoc == false \
+			&& ft_end_of_hd(current_line, del, first_line_num) == false)
 	{
 		hd_content = ft_update_hd_content(hd_content, current_line);
 		if (hd_content == NULL)
 			break ;
 		(*line_num)++;
+		ft_set_signals(MSH_SIG_HEREDOC);
 		current_line = readline(HD_PROMPT);
+		ft_set_signals(MSH_SIG_PARENT);
+		if (g_interrupt_heredoc == true)
+			hd_content = ft_freef("%p%p", hd_content, current_line);
 	}
 	return (hd_content);
 }
