@@ -1,9 +1,14 @@
 #include "redirections.h"
 #include "utils.h"
 #include <fcntl.h>
-#include <sys/pipe.h>
 #include <stdio.h>
 #include <unistd.h>
+
+#ifdef __LINUX__
+# define PIPE_SIZE 65536
+#elif defined __APPLE__
+# include <sys/pipe.h>
+#endif
 
 int	ft_set_input(t_exl *exl, char *file);
 int	ft_set_heredoc(t_exl *exl, char *file);
