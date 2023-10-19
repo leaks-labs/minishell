@@ -18,8 +18,7 @@ CC:=	clang
 
 CFLAGS=	-Wall -Wextra -Werror
 
-CFLAGS+=	-std=c17 \
-			-O3 \
+CFLAGS+=	-O3 \
 			-Wconversion \
 			-Wdouble-promotion \
 			-Wfloat-equal \
