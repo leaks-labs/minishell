@@ -3,7 +3,6 @@
 #include "redirections.h"
 #include <errno.h>
 #include <stdio.h>
-#include <signal.h>
 #include <sys/wait.h>
 
 int			ft_exec_line(t_msh *msh, t_pipeline *pipeline);
