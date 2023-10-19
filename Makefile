@@ -77,7 +77,8 @@ SRCS_FILES:=	exec/child_process				\
 				redirections/fill_tmp			\
 				redirections/pipes_create_close	\
 				redirections/redirections		\
-				signals/signals					\
+				signals/set_signals					\
+				signals/sighandlers				\
 				utils/env_utils					\
 				utils/ft_calloc					\
 				utils/ft_dptr					\

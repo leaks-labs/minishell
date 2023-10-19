@@ -1,22 +1,12 @@
 #include "msh_signals.h"
-#include <sys/ioctl.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <termios.h>
-#include <unistd.h>
-#include <readline/readline.h>
+#include <stddef.h>
 
-void 		rl_replace_line(const char *text, int clear_undo);
-
+void		rl_replace_line(const char *text, int clear_undo);
 void		ft_set_signals(t_msh_signals e_msh_signals);
 static void	ft_set_sighandler_parent(void);
 static void	ft_set_sighandler_heredoc(void);
-static void	ft_sighandler_heredoc(int sig);
 static void	ft_set_sighandler_child(void);
 static void	ft_set_sighandler_reprompt(void);
-static void	ft_sighandler_reprompt(int sig);
-
-sig_atomic_t	g_interrupt_heredoc;
 
 void	ft_set_signals(t_msh_signals e_msh_signals)
 {
@@ -52,14 +42,6 @@ static void	ft_set_sighandler_heredoc(void)
 	sigaction(SIGINT, &sa, NULL);
 	sa.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &sa, NULL);
-	g_interrupt_heredoc = false;
-}
-
-static void	ft_sighandler_heredoc(int sig)
-{
-	(void)sig;
-	g_interrupt_heredoc = true;
-	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 }
 
 static void	ft_set_sighandler_child(void)
@@ -83,13 +65,4 @@ static void	ft_set_sighandler_reprompt(void)
 	sigaction(SIGINT, &sa, NULL);
 	sa.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &sa, NULL);
-}
-
-static void	ft_sighandler_reprompt(int sig)
-{
-	(void)sig;
-	write(1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
 }

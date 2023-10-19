@@ -26,6 +26,7 @@ void	ft_run(t_msh *msh)
 			msh->exit_status = ft_parse(&s_pipeline, line);
 			if (msh->exit_status == PARSE_SUCCESS)
 				msh->exit_status = ft_exec_line(msh, &s_pipeline);
+			printf("%d\n", msh->exit_status);
 		}
 		free(line);
 	}
