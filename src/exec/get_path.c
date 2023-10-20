@@ -1,24 +1,11 @@
 #include "exec.h"
-#include "heredoc.h"
 #include "utils.h"
 #include <stdlib.h>
 
-int			ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline);
-static char	**ft_get_path(char **envp);
+char		**ft_get_path(char **envp);
 static char	**ft_set_slash(char **path);
 
-int	ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline)
-{
-	exl->env = msh->env;
-	exl->line_num = &msh->line_num;
-	exl->path = ft_get_path(msh->env);
-	exl->cmd_idx = -1;
-	exl->n_cmd = pipeline->n_cmd;
-	exl->hd.hd_list = NULL;
-	return (ft_heredoc(pipeline->cmd_list, exl));
-}
-
-static char	**ft_get_path(char **envp)
+char	**ft_get_path(char **envp)
 {
 	char	**path;
 

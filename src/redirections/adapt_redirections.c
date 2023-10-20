@@ -1,10 +1,14 @@
-#include "heredoc.h"
 #include "redirections.h"
 #include "utils.h"
 #include <fcntl.h>
-#include <sys/pipe.h>
 #include <stdio.h>
 #include <unistd.h>
+
+#ifdef __linux__
+# define PIPE_SIZE 65536
+#elif defined __APPLE__
+# include <sys/pipe.h>
+#endif
 
 int	ft_set_input(t_exl *exl, char *file);
 int	ft_set_heredoc(t_exl *exl, char *file);
@@ -27,17 +31,12 @@ int	ft_set_input(t_exl *exl, char *file)
 
 int	ft_set_heredoc(t_exl *exl, char *file)
 {
-	char	*content;
-
-	(void)file;
-	content = exl->hd.hd_list->hd_content;
 	if (exl->s_fd_io.fd_to_read != STDIN_FILENO)
 		close(exl->s_fd_io.fd_to_read);
-	if (ft_strlen(content) < PIPE_SIZE)
-		exl->s_fd_io.fd_to_read = ft_fill_tmp_pipe(content);
+	if (ft_strlen(file) < PIPE_SIZE)
+		exl->s_fd_io.fd_to_read = ft_fill_tmp_pipe(file);
 	else
-		exl->s_fd_io.fd_to_read = ft_fill_tmp_file(content);
-	exl->hd.hd_list = ft_delete_front_hd_node(exl->hd.hd_list);
+		exl->s_fd_io.fd_to_read = ft_fill_tmp_file(file);
 	return (exl->s_fd_io.fd_to_read);
 }
 

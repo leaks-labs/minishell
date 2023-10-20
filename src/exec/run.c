@@ -20,9 +20,9 @@ void	ft_run(t_msh *msh)
 		if (*line != '\0')
 		{
 			add_history(line);
-			if (ft_parse(&s_pipeline, line) == PARSE_ERROR \
-					|| ft_exec_line(msh, &s_pipeline) != EXEC_SUCCESS)
-				break ;
+			msh->exit_status = ft_parse(&s_pipeline, line);
+			if (msh->exit_status == PARSE_SUCCESS)
+				msh->exit_status = ft_exec_line(msh, &s_pipeline);
 		}
 		free(line);
 	}
