@@ -3,23 +3,25 @@
 
 void		rl_replace_line(const char *text, int clear_undo);
 void		ft_set_signals(t_msh_signals e_msh_signals);
-static void	ft_set_sighandler_parent(void);
+static void	ft_set_sighandler_ign(void);
 static void	ft_set_sighandler_heredoc(void);
-static void	ft_set_sighandler_child(void);
+static void	ft_set_sighandler_ext_cmd(void);
 static void	ft_set_sighandler_reprompt(void);
+
+sig_atomic_t	g_signal_value;
 
 void	ft_set_signals(t_msh_signals e_msh_signals)
 {
 	void	(*f[4])(void);
 
-	(f)[MSH_SIG_PARENT] = &ft_set_sighandler_parent;
+	(f)[MSH_SIG_IGN] = &ft_set_sighandler_ign;
 	(f)[MSH_SIG_HEREDOC] = &ft_set_sighandler_heredoc;
-	(f)[MSH_SIG_CHILD] = &ft_set_sighandler_child;
+	(f)[MSH_SIG_EXT_CMD] = &ft_set_sighandler_ext_cmd;
 	(f)[MSH_SIG_REPROMPT] = &ft_set_sighandler_reprompt;
 	(f)[e_msh_signals]();
 }
 
-static void	ft_set_sighandler_parent(void)
+static void	ft_set_sighandler_ign(void)
 {
 	struct sigaction	sa;
 
@@ -44,7 +46,7 @@ static void	ft_set_sighandler_heredoc(void)
 	sigaction(SIGQUIT, &sa, NULL);
 }
 
-static void	ft_set_sighandler_child(void)
+static void	ft_set_sighandler_ext_cmd(void)
 {
 	struct sigaction	sa;
 

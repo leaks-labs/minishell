@@ -14,7 +14,7 @@ void	ft_sighandler_heredoc(int sig)
 	struct termios	orig_termios;
 	struct termios	new_termios;
 
-	g_interrupt_heredoc = sig;
+	g_signal_value = sig;
 	tcgetattr(STDIN_FILENO, &orig_termios);
 	new_termios = orig_termios;
 	new_termios.c_lflag &= (tcflag_t)(~(ICANON | ECHO));

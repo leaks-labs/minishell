@@ -21,7 +21,7 @@ char	*ft_get_hd_content(char *del, unsigned int *line_num)
 	if (hd_content == NULL)
 		return (NULL);
 	current_line = ft_retrieve_one_line();
-	if (g_interrupt_heredoc > 0)
+	if (g_signal_value > 0)
 		return (ft_freef("%p", hd_content));
 	while (ft_end_of_hd(current_line, del, first_line_num) == false)
 	{
@@ -30,7 +30,7 @@ char	*ft_get_hd_content(char *del, unsigned int *line_num)
 			break ;
 		(*line_num)++;
 		current_line = ft_retrieve_one_line();
-		if (g_interrupt_heredoc > 0)
+		if (g_signal_value > 0)
 			return (ft_freef("%p", hd_content));
 	}
 	return (hd_content);
@@ -42,8 +42,8 @@ static char	*ft_retrieve_one_line(void)
 
 	ft_set_signals(MSH_SIG_HEREDOC);
 	current_line = readline(HD_PROMPT);
-	ft_set_signals(MSH_SIG_PARENT);
-	if (g_interrupt_heredoc > 0 && current_line != NULL)
+	ft_set_signals(MSH_SIG_IGN);
+	if (g_signal_value > 0 && current_line != NULL)
 		current_line = ft_freef("%p", current_line);
 	return (current_line);
 }

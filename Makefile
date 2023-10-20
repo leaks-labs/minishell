@@ -18,19 +18,21 @@ CC:=	clang
 
 CFLAGS=	-Wall -Wextra -Werror
 
-CFLAGS+=	-O3 \
-			-Wconversion \
-			-Wdouble-promotion \
-			-Wfloat-equal \
-			-Wformat=2 \
-			-Winit-self \
-			-fno-common \
-			-Wshadow \
-			-Wundef \
-			-Wunused-macros \
-			-Wwrite-strings \
-			-Wmissing-prototypes \
-			-Wmissing-declarations \
+CFLAGS+=	-std=c17				\
+			-O3 					\
+			-Wconversion 			\
+			-Wdouble-promotion		\
+			-Wfloat-equal 			\
+			-Wformat=2 				\
+			-Winit-self 			\
+			-fno-common 			\
+			-Wshadow 				\
+			-Wundef 				\
+			-Wunused-macros 		\
+			-Wwrite-strings 		\
+			-Wmissing-prototypes 	\
+			-Wmissing-declarations	\
+
 #			-Wpedantic \
 # 			-pedantic-errors
 #			-Wcast-qual
@@ -76,7 +78,7 @@ SRCS_FILES:=	exec/child_process				\
 				redirections/fill_tmp			\
 				redirections/pipes_create_close	\
 				redirections/redirections		\
-				signals/set_signals					\
+				signals/set_signals				\
 				signals/sighandlers				\
 				utils/env_utils					\
 				utils/ft_calloc					\
@@ -101,7 +103,7 @@ SRCS:=	${addprefix ${SRCS_DIR}/,${addsuffix ${EXT},${MAIN} ${SRCS_FILES}}}
 
 
 OBJS_DIR:= ${BUILD_DIR}/objs
-OBJS:=	${SRCS:${SRCS_DIR}/%.c=${OBJS_DIR}/%.o}
+OBJS:=	${SRCS:${SRCS_DIR}/%${EXT}=${OBJS_DIR}/%.o}
 
 DEPS_DIR:= ${BUILD_DIR}/deps
 DEPS:=	${OBJS:${OBJS_DIR}/%.o=${DEPS_DIR}/%.d}
@@ -127,7 +129,7 @@ ${NAME}: ${OBJS}
 	${CC} ${LDFLAGS} ${OBJS} ${LDLIBS} -o $@ -fsanitize=address
 	echo "${COLOR_GREEN}Compilation completed.${COLOR_RESET}"
 
-${OBJS_DIR}/%.o: ${SRCS_DIR}/%.c
+${OBJS_DIR}/%.o: ${SRCS_DIR}/%${EXT}
 	mkdir -p ${dir $@}
 	mkdir -p ${dir ${@:${OBJS_DIR}/%.o=${DEPS_DIR}/%.d}}
 	${CC} ${CPPFLAGS} ${CFLAGS} -c $< -o $@

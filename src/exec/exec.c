@@ -1,5 +1,6 @@
 #include "exec.h"
 #include "heredoc.h"
+#include "msh_signals.h"
 #include "redirections.h"
 #include <errno.h>
 #include <stdio.h>
@@ -10,8 +11,6 @@ static int	ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline);
 static int	ft_exec_cmd(t_exl *exl, t_pipeline *pipeline);
 static int	ft_wait(pid_t last_pid);
 
-sig_atomic_t	g_interrupt_heredoc;
-
 int	ft_exec_line(t_msh *msh, t_pipeline *pipeline)
 {
 	t_exl	s_exl;
@@ -19,8 +18,8 @@ int	ft_exec_line(t_msh *msh, t_pipeline *pipeline)
 
 	if (ft_init_exl(&s_exl, msh, pipeline) == -1)
 	{
-		if (g_interrupt_heredoc > 0)
-			return (128 + g_interrupt_heredoc);
+		if (g_signal_value > 0)
+			return (128 + g_signal_value);
 		return (1);
 	}
 	exit_code = ft_exec_cmd(&s_exl, pipeline);
@@ -34,7 +33,7 @@ static int	ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline)
 	exl->line_num = &msh->line_num;
 	exl->cmd_idx = -1;
 	exl->n_cmd = pipeline->n_cmd;
-	g_interrupt_heredoc = 0;
+	g_signal_value = 0;
 	return (ft_heredoc(pipeline->cmd_list, exl));
 }
 

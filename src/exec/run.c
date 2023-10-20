@@ -17,7 +17,7 @@ void	ft_run(t_msh *msh)
 		ft_set_signals(MSH_SIG_REPROMPT);
 		++msh->line_num;
 		line = readline(PROMPT);
-		ft_set_signals(MSH_SIG_PARENT);
+		ft_set_signals(MSH_SIG_IGN);
 		if (line == NULL)
 			return ;
 		if (*line != '\0')

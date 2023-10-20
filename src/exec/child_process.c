@@ -20,8 +20,6 @@ pid_t	ft_child_process(t_exl *exl, t_cmd *cmd)
 	// 	perror("fork error");
 	if (pid != 0)
 		return (pid);
-	// is it in the right place? Better to be just before actual execve launch?
-	ft_set_signals(MSH_SIG_CHILD);
 	err_code = 0;
 	if (ft_set_redirections(exl, cmd) != 0 || ft_apply_redirections(exl) != 0)
 		err_code = 1;
@@ -41,7 +39,12 @@ static int	ft_launch_extern_cmd(t_exl *exl, char **args)
 	cmd_path = ft_get_cmd_path(path, args[0]);
 	free(path);
 	if (cmd_path != NULL)
+	{
+		// is it in the right place? Better to be earlier?
+		ft_set_signals(MSH_SIG_EXT_CMD);
 		execve(cmd_path, args, exl->env);
+		ft_set_signals(MSH_SIG_IGN);
+	}
 	free(cmd_path);
 	return (ft_get_err_code(args[0]));
 }

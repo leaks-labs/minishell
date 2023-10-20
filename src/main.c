@@ -8,7 +8,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	ft_set_signals(MSH_SIG_PARENT);
+	ft_set_signals(MSH_SIG_IGN);
 	msh = ft_struct_init(envp);
 	if (msh == NULL)
 		return (NO_LAST_COMMAND);
