@@ -1,4 +1,5 @@
 #include "exec.h"
+#include "msh_signals.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <readline/readline.h>
@@ -13,8 +14,10 @@ void	ft_run(t_msh *msh)
 
 	while (true)
 	{
+		ft_set_signals(MSH_SIG_REPROMPT);
 		++msh->line_num;
 		line = readline(PROMPT);
+		ft_set_signals(MSH_SIG_PARENT);
 		if (line == NULL)
 			return ;
 		if (*line != '\0')
