@@ -1,4 +1,4 @@
-#include "msh_signals.h"
+#include "msh_signal.h"
 #include <stddef.h>
 
 void		rl_replace_line(const char *text, int clear_undo);

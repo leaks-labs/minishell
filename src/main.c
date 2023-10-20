@@ -1,5 +1,5 @@
 #include "init.h"
-#include "msh_signals.h"
+#include "msh_signal.h"
 #include <stddef.h>
 
 int	main(int argc, char **argv, char **envp)

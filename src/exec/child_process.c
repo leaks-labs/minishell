@@ -1,6 +1,6 @@
 #include "exec.h"
 #include "redirections.h"
-#include "msh_signals.h"
+#include "msh_signal.h"
 #include "utils.h"
 #include <errno.h>
 #include <stdio.h>

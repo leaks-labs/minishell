@@ -1,5 +1,5 @@
 #include "exec.h"
-#include "msh_signals.h"
+#include "msh_signal.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <readline/readline.h>

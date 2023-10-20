@@ -1,4 +1,4 @@
-#include "msh_signals.h"
+#include "msh_signal.h"
 #include <sys/ioctl.h>
 #include <stdbool.h>
 #include <stdio.h>
