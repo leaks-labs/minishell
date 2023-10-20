@@ -14,6 +14,7 @@
 typedef struct msh
 {
 	char			**env;
+	char			**path;
 	int				exit_status;
 	unsigned int	line_num;
 }				t_msh;
@@ -27,6 +28,7 @@ typedef struct fd_io
 typedef struct exl
 {
 	char			**env;
+	char			**path;
 	int				pipe[2];
 	t_fd_io			s_fd_io;
 	ssize_t			cmd_idx;

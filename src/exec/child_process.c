@@ -32,12 +32,9 @@ pid_t	ft_child_process(t_exl *exl, t_cmd *cmd)
 
 static int	ft_launch_extern_cmd(t_exl *exl, char **args)
 {
-	char	**path;
 	char	*cmd_path;
 
-	path = ft_get_path(exl->env);
-	cmd_path = ft_get_cmd_path(path, args[0]);
-	free(path);
+	cmd_path = ft_get_cmd_path(exl->path, args[0]);
 	if (cmd_path != NULL)
 	{
 		// is it in the right place? Better to be earlier?

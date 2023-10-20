@@ -38,6 +38,7 @@ int	ft_exec_line(t_msh *msh, t_pipeline *pipeline)
 static int	ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline)
 {
 	exl->env = msh->env;
+	exl->path = msh->path;
 	exl->line_num = &msh->line_num;
 	exl->cmd_idx = -1;
 	exl->n_cmd = pipeline->n_cmd;
@@ -50,6 +51,8 @@ static int	ft_exec_cmd(t_exl *exl, t_pipeline *pipeline)
 	t_cmd	*current_cmd;
 	pid_t	last_pid;
 
+	if (exl->path == NULL)
+		exl->path = ft_get_path(exl->env);
 	while (++exl->cmd_idx < exl->n_cmd)
 	{
 		last_pid = -1;
