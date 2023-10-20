@@ -10,7 +10,7 @@ int			ft_exec_line(t_msh *msh, t_pipeline *pipeline);
 static int	ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline);
 static int	ft_exec_cmd(t_exl *exl, t_pipeline *pipeline);
 static int	ft_wait(pid_t last_pid);
-#include "utils.h"
+
 int	ft_exec_line(t_msh *msh, t_pipeline *pipeline)
 {
 	t_exl	s_exl;
