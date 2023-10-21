@@ -8,8 +8,6 @@ static void	ft_set_sighandler_heredoc(void);
 static void	ft_set_sighandler_ext_cmd(void);
 static void	ft_set_sighandler_reprompt(void);
 
-sig_atomic_t	g_signal_value;
-
 void	ft_set_signals(t_msh_signals e_msh_signals)
 {
 	void	(*f[4])(void);

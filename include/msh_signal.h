@@ -1,5 +1,5 @@
-#ifndef MSH_SIGNALS_H
-# define MSH_SIGNALS_H
+#ifndef MSH_SIGNAL_H
+# define MSH_SIGNAL_H
 
 # include <signal.h>
 
