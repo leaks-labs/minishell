@@ -42,7 +42,6 @@ static int	ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline)
 	exl->line_num = &msh->line_num;
 	exl->cmd_idx = -1;
 	exl->n_cmd = pipeline->n_cmd;
-	g_signal_value = 0;
 	return (ft_heredoc(pipeline->cmd_list, exl));
 }
 

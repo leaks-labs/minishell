@@ -26,7 +26,8 @@ void	ft_sighandler_heredoc(int sig)
 void	ft_sighandler_reprompt(int sig)
 {
 	(void)sig;
-	write(1, "\n", 1);
+	if (g_signal_value != EOF)
+		write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();

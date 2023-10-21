@@ -53,7 +53,10 @@ static bool	ft_end_of_hd(char *current_line, char *del, unsigned int line_num)
 	if (current_line == NULL || ft_strcmp(current_line, del) == 0)
 	{
 		if (current_line == NULL)
+		{
 			printf("msh: warning: here-document at line %d delimited by end-of-file (wanted `%s')\n", line_num, del);
+			g_signal_value = EOF;
+		}
 		else
 			free(current_line);
 		return (true);

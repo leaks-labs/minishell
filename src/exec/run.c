@@ -7,11 +7,14 @@
 
 void	ft_run(t_msh *msh);
 
+sig_atomic_t	g_signal_value;
+
 void	ft_run(t_msh *msh)
 {
 	t_pipeline	s_pipeline;
 	char		*line;
 
+	g_signal_value = 0;
 	while (true)
 	{
 		ft_set_signals(MSH_SIG_REPROMPT);
@@ -20,6 +23,7 @@ void	ft_run(t_msh *msh)
 		ft_set_signals(MSH_SIG_IGN);
 		if (line == NULL)
 			return ;
+		g_signal_value = 0;
 		if (*line != '\0')
 		{
 			add_history(line);
