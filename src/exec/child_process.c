@@ -48,7 +48,7 @@ static int	ft_launch_extern_cmd(t_exl *exl, char **args)
 
 static int	ft_get_err_code(char *cmd)
 {
-	if (errno == ENOENT)
+	if (errno == ENOENT || errno == ENAMETOOLONG)
 	{
 		ft_putstr_fd(MSH_ERROR_PROMPT, STDERR_FILENO);
 		if (ft_isapath(cmd) == true)
@@ -68,4 +68,5 @@ static int	ft_get_err_code(char *cmd)
 	}
 	else
 		return (EXIT_FAILURE);
+	// need to print error (perror()) for other error types?
 }
