@@ -3,6 +3,7 @@
 
 # include "parse.h"
 # include <stdbool.h>
+# include <stdint.h>
 
 # define COMMAND_NOT_EXECUTABLE 126
 # define COMMAND_NOT_FOUND 127
