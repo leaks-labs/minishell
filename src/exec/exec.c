@@ -6,12 +6,12 @@
 #include <stdio.h>
 #include <sys/wait.h>
 
-int			ft_exec_line(t_msh *msh, t_pipeline *pipeline);
+uint8_t		ft_exec_line(t_msh *msh, t_pipeline *pipeline);
 static int	ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline);
 static int	ft_exec_cmd(t_exl *exl, t_pipeline *pipeline);
 static int	ft_wait(pid_t last_pid);
 
-int	ft_exec_line(t_msh *msh, t_pipeline *pipeline)
+uint8_t	ft_exec_line(t_msh *msh, t_pipeline *pipeline)
 {
 	t_exl	s_exl;
 	int		exit_code;
@@ -27,12 +27,12 @@ int	ft_exec_line(t_msh *msh, t_pipeline *pipeline)
 	if (ft_init_exl(&s_exl, msh, pipeline) == -1)
 	{
 		if (g_signal_value > 0)
-			return (128 + g_signal_value);
+			return ((uint8_t)(128 + g_signal_value));
 		return (1);
 	}
 	exit_code = ft_exec_cmd(&s_exl, pipeline);
 	// free other struct extern to exl (like pipeline) ??
-	return (exit_code);
+	return ((uint8_t)exit_code);
 }
 
 static int	ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline)
