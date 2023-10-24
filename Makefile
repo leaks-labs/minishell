@@ -92,7 +92,14 @@ SRCS_FILES:=	exec/child_process				\
 				utils/ft_strlen					\
 				utils/ft_strncmp				\
 				utils/ft_substr					\
-				utils/ft_umaxtostr
+				utils/ft_umaxtostr				\
+				utils/ft_lst/ft_lstadd_back		\
+				utils/ft_lst/ft_lstadd_front	\
+				utils/ft_lst/ft_lstclear		\
+				utils/ft_lst/ft_lstdelone		\
+				utils/ft_lst/ft_lstlast			\
+				utils/ft_lst/ft_lstnew			\
+				utils/ft_lst/ft_lstsize
 
 ################################################################################
 #                                 SRC's FORMATING                              #
