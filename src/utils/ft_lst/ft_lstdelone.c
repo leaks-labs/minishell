@@ -1,4 +1,4 @@
-#include "ft_list.h"
+#include "list.h"
 #include <stddef.h>
 #include <stdlib.h>
 

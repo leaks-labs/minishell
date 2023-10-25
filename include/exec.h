@@ -2,6 +2,7 @@
 # define EXEC_H
 
 # include "parse.h"
+# include "list.h"
 # include <stdbool.h>
 
 # define COMMAND_NOT_EXECUTABLE 126
@@ -11,9 +12,23 @@
 # define HD_PROMPT "> "
 # define MSH_ERROR_PROMPT "minishell: "
 
+typedef struct var
+{
+	char	*name;
+	char	*value;
+	bool	exported;
+}				t_var;
+
+typedef struct list
+{
+	t_list_node	*list_node;
+	t_list_node	*last_node;
+	size_t		n_exported;
+}				t_list;
+
 typedef struct msh
 {
-	char			**env;
+	t_list			env;
 	char			**path;
 	int				exit_status;
 	unsigned int	line_num;
@@ -27,7 +42,7 @@ typedef struct fd_io
 
 typedef struct exl
 {
-	char			**env;
+	t_list			*env;
 	char			**path;
 	int				pipe[2];
 	t_fd_io			s_fd_io;
@@ -45,7 +60,7 @@ int		ft_exec_line(t_msh *msh, t_pipeline *pipeline);
 char	*ft_get_cmd_path(char **path, char *cmd);
 bool	ft_isapath(char *str);
 /*	GET_PATH	*/
-char	**ft_get_path(char **envp);
+char	**ft_get_path(t_list *env);
 /*	RUN	*/
 void	ft_run(t_msh *msh);
 

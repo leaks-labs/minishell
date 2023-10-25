@@ -1,4 +1,5 @@
 #include "init.h"
+#include "list.h"
 #include "utils.h"
 #include <stdlib.h>
 
@@ -10,7 +11,8 @@ int	ft_quit(t_msh *msh)
 	int	exit_cpy;
 
 	exit_cpy = msh->exit_status;
-	ft_freef("%P%P%p", msh->env, msh->path, msh);
+	ft_lstclear(&msh->env.list_node, &ft_free_var);
+	ft_freef("%P%p", msh->path, msh);
 	return (exit_cpy);
 }
 

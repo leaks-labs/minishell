@@ -9,6 +9,8 @@
 
 pid_t		ft_child_process(t_exl *exl, t_cmd *cmd);
 static int	ft_launch_extern_cmd(t_exl *exl, char **args);
+static char	**ft_lst_to_env(t_list *env);
+static char	*ft_one_var_to_str(t_var *var);
 static int	ft_get_err_code(char *cmd);
 
 pid_t	ft_child_process(t_exl *exl, t_cmd *cmd)
@@ -33,17 +35,50 @@ pid_t	ft_child_process(t_exl *exl, t_cmd *cmd)
 static int	ft_launch_extern_cmd(t_exl *exl, char **args)
 {
 	char	*cmd_path;
+	char	**export_env;
 
 	cmd_path = ft_get_cmd_path(exl->path, args[0]);
 	if (cmd_path != NULL)
 	{
 		// is it in the right place? Better to be earlier?
+		export_env = ft_lst_to_env(exl->env);
 		ft_set_signals(MSH_SIG_EXT_CMD);
-		execve(cmd_path, args, exl->env);
+		execve(cmd_path, args, export_env);
 		ft_set_signals(MSH_SIG_IGN);
+		free(export_env);
 	}
 	free(cmd_path);
 	return (ft_get_err_code(args[0]));
+}
+
+static char	**ft_lst_to_env(t_list *env)
+{
+	char		**export_env;
+	t_list_node	*node;
+	size_t		i;
+
+	export_env = ft_calloc(env->n_exported + 1, sizeof(char *));
+	if (export_env == NULL)
+		return (NULL);
+	node = env->list_node;
+	i = 0;
+	while (node != NULL)
+	{
+		if (((t_var *)node->content)->exported == true)
+		{
+			export_env[i] = ft_one_var_to_str((t_var *)node->content);
+			if (export_env[i] == NULL)
+				return (ft_freef("%P", export_env));
+			++i;
+		}
+		node = node->next;
+	}
+	return (export_env);
+}
+
+static char	*ft_one_var_to_str(t_var *var)
+{
+	return (ft_join(3, var->name, "=", var->value));
 }
 
 static int	ft_get_err_code(char *cmd)

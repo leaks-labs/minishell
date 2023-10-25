@@ -70,6 +70,7 @@ SRCS_FILES:=	exec/child_process				\
 				exec/run						\
 				heredoc/heredoc					\
 				heredoc/retrieve_hd_content		\
+				init_and_destroy/env_init		\
 				init_and_destroy/struct_destroy	\
 				init_and_destroy/struct_init	\
 				parsing/parse					\
@@ -84,6 +85,7 @@ SRCS_FILES:=	exec/child_process				\
 				utils/ft_dptr					\
 				utils/ft_freef					\
 				utils/ft_join					\
+				utils/ft_memcpy					\
 				utils/ft_putendl_fd				\
 				utils/ft_putstr_fd				\
 				utils/ft_split					\
@@ -91,6 +93,7 @@ SRCS_FILES:=	exec/child_process				\
 				utils/ft_strdup					\
 				utils/ft_strlen					\
 				utils/ft_strncmp				\
+				utils/ft_strndup				\
 				utils/ft_substr					\
 				utils/ft_umaxtostr				\
 				utils/ft_lst/ft_lstadd_back		\

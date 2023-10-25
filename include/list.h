@@ -1,5 +1,5 @@
-#ifndef FT_LST_H
-# define FT_LST_H
+#ifndef LIST_H
+# define LIST_H
 
 # include <stddef.h>
 

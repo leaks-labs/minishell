@@ -1,4 +1,4 @@
-#include "ft_list.h"
+#include "list.h"
 #include "utils.h"
 
 t_list_node	*ft_lstnew(void *content);
