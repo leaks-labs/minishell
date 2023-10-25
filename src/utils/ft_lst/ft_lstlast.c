@@ -1,11 +1,11 @@
-#include "ft_lst.h"
+#include "ft_list.h"
 #include <stddef.h>
 
-t_list	*ft_lstlast(t_list *lst);
+t_list_node	*ft_lstlast(t_list_node *list_node);
 
-t_list	*ft_lstlast(t_list *lst)
+t_list_node	*ft_lstlast(t_list_node *list_node)
 {
-	while (lst != NULL && lst->next != NULL)
-		lst = lst->next;
-	return (lst);
+	while (list_node != NULL && list_node->next != NULL)
+		list_node = list_node->next;
+	return (list_node);
 }

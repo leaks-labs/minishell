@@ -1,18 +1,18 @@
-#include "ft_lst.h"
+#include "ft_list.h"
 #include <stddef.h>
 
-void	ft_lstclear(t_list **lst, del_func *del_func);
+void	ft_lstclear(t_list_node **list_node, del_func *del_func);
 
-void	ft_lstclear(t_list **lst, del_func *del_func)
+void	ft_lstclear(t_list_node **list_node, del_func *del_func)
 {
 	void	*temp;
 
-	if (lst == NULL)
+	if (list_node == NULL)
 		return ;
-	while (*lst != NULL)
+	while (*list_node != NULL)
 	{
-		temp = *lst;
-		*lst = (*lst)->next;
+		temp = *list_node;
+		*list_node = (*list_node)->next;
 		ft_lstdelone(temp, (del_func));
 	}
 }

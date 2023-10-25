@@ -1,16 +1,16 @@
-#include "ft_lst.h"
+#include "ft_list.h"
 #include <stddef.h>
 
-size_t	ft_lstsize(t_list *lst);
+size_t	ft_lstsize(t_list_node *list_node);
 
-size_t	ft_lstsize(t_list *lst)
+size_t	ft_lstsize(t_list_node *list_node)
 {
 	size_t	i;
 
 	i = 0;
-	while (lst != NULL)
+	while (list_node != NULL)
 	{
-		lst = lst->next;
+		list_node = list_node->next;
 		++i;
 	}
 	return (i);

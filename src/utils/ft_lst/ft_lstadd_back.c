@@ -1,14 +1,14 @@
-#include "ft_lst.h"
+#include "ft_list.h"
 #include <stddef.h>
 
-void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstadd_back(t_list_node **list_node, t_list_node *new_node);
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_list_node **list_node, t_list_node *new_node)
 {
-	if (lst == NULL)
+	if (list_node == NULL)
 		return ;
-	if (*lst == NULL)
-		*lst = new;
+	if (*list_node == NULL)
+		*list_node = new_node;
 	else
-		ft_lstlast(*lst)->next = new;
+		ft_lstlast(*list_node)->next = new_node;
 }
