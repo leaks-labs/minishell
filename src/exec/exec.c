@@ -18,8 +18,8 @@ int	ft_exec_line(t_msh *msh, t_pipeline *pipeline)
 
 	// pipeline->cmd_list = ft_calloc(1, sizeof(t_cmd));
 	// pipeline->n_cmd = 1;
-	// pipeline->cmd_list->n_redirect = 1;
-	// pipeline->cmd_list->args = ft_split("cat", ' ');
+	// pipeline->cmd_list->n_redirect = 0;
+	// pipeline->cmd_list->args = ft_split("env", ' ');
 	// pipeline->cmd_list->redirect_arr = ft_calloc(1, sizeof(t_redirect));
 	// pipeline->cmd_list->redirect_arr->file = ft_strdup("EOF");
 	// pipeline->cmd_list->redirect_arr->e_iotype = HEREDOC;
@@ -37,7 +37,7 @@ int	ft_exec_line(t_msh *msh, t_pipeline *pipeline)
 
 static int	ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline)
 {
-	exl->env = msh->env;
+	exl->env = &msh->env;
 	exl->path = msh->path;
 	exl->line_num = &msh->line_num;
 	exl->cmd_idx = -1;

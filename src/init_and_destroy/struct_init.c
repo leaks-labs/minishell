@@ -1,7 +1,7 @@
 #include "init.h"
 #include "utils.h"
 
-t_msh	*ft_struct_init(char **envp);
+t_msh			*ft_struct_init(char **envp);
 
 t_msh	*ft_struct_init(char **envp)
 {
@@ -10,8 +10,7 @@ t_msh	*ft_struct_init(char **envp)
 	msh = ft_calloc(1, sizeof(t_msh));
 	if (msh == NULL)
 		return (NULL);
-	msh->env = ft_dptrcpy(envp);
-	if (msh->env == NULL)
+	if (ft_env_to_list(&msh->env, envp) == -1)
 		return (ft_freef("%p", msh));
 	return (msh);
 }

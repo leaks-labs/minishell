@@ -1,14 +1,16 @@
+#include "exec.h"
 #include "utils.h"
 
-char	*ft_getenv(const char *name, char **env);
+char	*ft_getenv(const char *name, t_list *env);
 
-char	*ft_getenv(const char *name, char **env)
+char	*ft_getenv(const char *name, t_list *env)
 {
-	while (env != NULL && *env != NULL \
-			&& (ft_strncmp(*env, name, ft_strlen(name)) != 0 \
-			|| (*env)[ft_strlen(name)] != '='))
-		++env;
-	if (env == NULL || *env == NULL)
-		return (NULL);
-	return (*env + ft_strlen(name) + 1);
+	t_list_node	*node;
+
+	node = env->list_node;
+	while (node != NULL && ft_strcmp(name, ((t_var *)node->content)->name) != 0)
+		node = node->next;
+	if (node != NULL)
+		return (((t_var *)node->content)->value);
+	return (NULL);
 }

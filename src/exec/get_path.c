@@ -2,14 +2,14 @@
 #include "utils.h"
 #include <stdlib.h>
 
-char		**ft_get_path(char **envp);
+char		**ft_get_path(t_list *env);
 static char	**ft_set_slash(char **path);
 
-char	**ft_get_path(char **envp)
+char	**ft_get_path(t_list *env)
 {
 	char	**path;
 
-	path = ft_split(ft_getenv("PATH", envp), ':');
+	path = ft_split(ft_getenv("PATH", env), ':');
 	if (path == NULL)
 		return (NULL);
 	return (ft_set_slash(path));
