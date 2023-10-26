@@ -1,6 +1,7 @@
 #include "exec.h"
-#include "redirections.h"
+#include "builtin.h"
 #include "msh_signal.h"
+#include "redirections.h"
 #include "utils.h"
 #include <errno.h>
 #include <stdio.h>
@@ -15,8 +16,9 @@ static int	ft_get_err_code(char *cmd);
 
 pid_t	ft_child_process(t_exl *exl, t_cmd *cmd)
 {
-	const pid_t	pid = fork();
-	int			err_code;
+	const pid_t		pid = fork();
+	t_built_func	built_func;
+	int				err_code;
 
 	// if (pid == -1)
 	// 	perror("fork error");
@@ -26,7 +28,15 @@ pid_t	ft_child_process(t_exl *exl, t_cmd *cmd)
 	if (ft_set_redirections(exl, cmd) != 0 || ft_apply_redirections(exl) != 0)
 		err_code = 1;
 	if (err_code == 0 && cmd->args != NULL)
-		err_code = ft_launch_extern_cmd(exl, cmd->args);
+	{
+		built_func = ft_get_builtin(cmd->args[0]);
+		if (built_func != NULL)
+			err_code = built_func(exl->env, cmd->args + 1);
+		else
+			err_code = ft_launch_extern_cmd(exl, cmd->args);
+	}
+	// else if (err_code == 0 && cmd->args != NULL)
+	// 	err_code = ft_launch_extern_cmd(exl, cmd->args);
 	ft_close_used_pipes(&exl->s_fd_io);
 	// free other struct extern to exl (like pipeline, msh, history, line...) ??
 	exit(err_code);
