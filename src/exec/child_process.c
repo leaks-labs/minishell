@@ -83,7 +83,7 @@ static char	*ft_one_var_to_str(t_var *var)
 
 static int	ft_get_err_code(char *cmd)
 {
-	if (errno == ENOENT)
+	if (errno == ENOENT || errno == ENAMETOOLONG)
 	{
 		ft_putstr_fd(MSH_ERROR_PROMPT, STDERR_FILENO);
 		if (ft_isapath(cmd) == true)
@@ -103,4 +103,5 @@ static int	ft_get_err_code(char *cmd)
 	}
 	else
 		return (EXIT_FAILURE);
+	// need to print error (perror()) for other error types?
 }

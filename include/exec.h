@@ -4,6 +4,7 @@
 # include "parse.h"
 # include "list.h"
 # include <stdbool.h>
+# include <stdint.h>
 
 # define COMMAND_NOT_EXECUTABLE 126
 # define COMMAND_NOT_FOUND 127
@@ -30,7 +31,7 @@ typedef struct msh
 {
 	t_list			env;
 	char			**path;
-	int				exit_status;
+	uint8_t			exit_status;
 	unsigned int	line_num;
 }				t_msh;
 
@@ -55,7 +56,7 @@ typedef struct exl
 /*	CHILD_PROCESS	*/
 pid_t	ft_child_process(t_exl *exl, t_cmd *cmd);
 /*	EXEC	*/
-int		ft_exec_line(t_msh *msh, t_pipeline *pipeline);
+uint8_t	ft_exec_line(t_msh *msh, t_pipeline *pipeline);
 /*	GET_CMD_PATH	*/
 char	*ft_get_cmd_path(char **path, char *cmd);
 bool	ft_isapath(char *str);
