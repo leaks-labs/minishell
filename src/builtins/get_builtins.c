@@ -5,7 +5,8 @@ t_built_func	ft_get_builtin(char *cmd);
 
 t_built_func	ft_get_builtin(char *cmd)
 {
-	const t_built_entry	builtins_dic[N_BUILTINS + 1] = {{"env", &ft_env}};
+	const t_built_entry	builtins_dic[N_BUILTINS + 1] = {{"echo", &ft_echo}, \
+														{"env", &ft_env}};
 	const t_built_entry	*tmp_entry;
 
 	tmp_entry = builtins_dic;

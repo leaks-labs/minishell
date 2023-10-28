@@ -63,7 +63,8 @@ EXT:=	.c
 
 MAIN:=	main
 
-SRCS_FILES:=	builtins/env					\
+SRCS_FILES:=	builtins/echo					\
+				builtins/env					\
 				builtins/get_builtins			\
 				exec/child_process				\
 				exec/exec						\
