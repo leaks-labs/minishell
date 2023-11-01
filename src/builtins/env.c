@@ -1,4 +1,5 @@
 #include "builtin.h"
+#include "exec.h"
 #include <stdio.h>
 
 int	ft_env(t_list *env, char ** args);

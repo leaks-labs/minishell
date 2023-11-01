@@ -1,8 +1,7 @@
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
-# include "exec.h"
-
+typedef struct list	t_list;
 typedef int	(*t_built_func)(t_list *, char **);
 
 typedef enum builtins_list

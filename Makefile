@@ -67,6 +67,7 @@ SRCS_FILES:=	builtins/echo					\
 				builtins/env					\
 				builtins/get_builtins			\
 				exec/child_process				\
+				exec/exec_in_current_env		\
 				exec/exec						\
 				exec/get_cmd_path				\
 				exec/get_path					\

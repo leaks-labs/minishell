@@ -18,11 +18,11 @@ uint8_t	ft_exec_line(t_msh *msh, t_pipeline *pipeline)
 
 	// pipeline->cmd_list = ft_calloc(1, sizeof(t_cmd));
 	// pipeline->n_cmd = 1;
-	// pipeline->cmd_list->n_redirect = 0;
-	// pipeline->cmd_list->args = ft_split("echo -n coucou", ' ');
+	// pipeline->cmd_list->n_redirect = 1;
+	// pipeline->cmd_list->args = ft_split("env", ' ');
 	// pipeline->cmd_list->redirect_arr = ft_calloc(1, sizeof(t_redirect));
-	// pipeline->cmd_list->redirect_arr->file = ft_strdup("EOF");
-	// pipeline->cmd_list->redirect_arr->e_iotype = HEREDOC;
+	// pipeline->cmd_list->redirect_arr->file = ft_strdup("testfile");
+	// pipeline->cmd_list->redirect_arr->e_iotype = OUTPUT;
 
 	if (ft_init_exl(&s_exl, msh, pipeline) == -1)
 	{
@@ -47,9 +47,17 @@ static int	ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline)
 
 static int	ft_exec_cmd(t_exl *exl, t_pipeline *pipeline)
 {
-	t_cmd	*current_cmd;
-	pid_t	last_pid;
+	t_cmd			*current_cmd;
+	pid_t			last_pid;
+	t_built_func	built_func;
 
+	if (pipeline->n_cmd == 1)
+	{
+		++exl->cmd_idx;
+		built_func = ft_get_builtin(*pipeline->cmd_list->args);
+		if (pipeline->cmd_list->args == NULL || built_func != NULL)
+			return (ft_exec_cur_env(built_func, exl, pipeline->cmd_list));
+	}
 	if (exl->path == NULL)
 		exl->path = ft_get_path(exl->env);
 	while (++exl->cmd_idx < exl->n_cmd)

@@ -1,6 +1,7 @@
 #ifndef EXEC_H
 # define EXEC_H
 
+# include "builtin.h"
 # include "parse.h"
 # include "list.h"
 # include <stdbool.h>
@@ -55,6 +56,8 @@ typedef struct exl
 
 /*	CHILD_PROCESS	*/
 pid_t	ft_child_process(t_exl *exl, t_cmd *cmd);
+/*	EXEC_IN_CURRENT_ENV	*/
+int		ft_exec_cur_env(t_built_func built_func, t_exl *exl, t_cmd *cmd);
 /*	EXEC	*/
 uint8_t	ft_exec_line(t_msh *msh, t_pipeline *pipeline);
 /*	GET_CMD_PATH	*/
