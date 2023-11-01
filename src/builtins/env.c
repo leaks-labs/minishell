@@ -2,7 +2,7 @@
 #include "exec.h"
 #include <stdio.h>
 
-int	ft_env(t_list *env, char ** args);
+int	ft_env(t_list *env, char **args);
 
 int	ft_env(t_list *env, char **args)
 {

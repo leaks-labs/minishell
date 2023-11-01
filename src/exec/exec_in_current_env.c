@@ -18,7 +18,7 @@ int	ft_exec_cur_env(t_built_func built_func, t_exl *exl, t_cmd *cmd)
 		|| ft_apply_redirections(exl) != 0)
 		err_code = 1;
 	if (err_code == 0 && built_func != NULL)
-			err_code = built_func(exl->env, cmd->args + 1);
+		err_code = built_func(exl->env, cmd->args + 1);
 	// how to protect dup2 in this situatin??
 	dup2(s_origin_stdio_fd.fd_to_read, STDIN_FILENO);
 	dup2(s_origin_stdio_fd.fd_to_write, STDOUT_FILENO);
