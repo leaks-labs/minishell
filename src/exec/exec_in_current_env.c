@@ -10,6 +10,7 @@ int	ft_exec_cur_env(t_built_func built_func, t_exl *exl, t_cmd *cmd)
 	t_fd_io	s_origin_stdio_fd;
 	int		err_code;
 
+	++exl->cmd_idx;
 	if (ft_save_stdio_fileno(&s_origin_stdio_fd) == -1)
 		return (1);
 	err_code = 0;

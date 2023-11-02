@@ -9,6 +9,7 @@
 uint8_t		ft_exec_line(t_msh *msh, t_pipeline *pipeline);
 static int	ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline);
 static int	ft_exec_cmd(t_exl *exl, t_pipeline *pipeline);
+static int	ft_exec_subshell(t_exl *exl, t_pipeline *pipeline);
 static int	ft_wait(pid_t last_pid);
 
 uint8_t	ft_exec_line(t_msh *msh, t_pipeline *pipeline)
@@ -47,17 +48,22 @@ static int	ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline)
 
 static int	ft_exec_cmd(t_exl *exl, t_pipeline *pipeline)
 {
-	t_cmd			*current_cmd;
-	pid_t			last_pid;
 	t_built_func	built_func;
 
 	if (pipeline->n_cmd == 1)
 	{
-		++exl->cmd_idx;
 		built_func = ft_get_builtin(*pipeline->cmd_list->args);
 		if (pipeline->cmd_list->args == NULL || built_func != NULL)
 			return (ft_exec_cur_env(built_func, exl, pipeline->cmd_list));
 	}
+	return (ft_exec_subshell(exl, pipeline));
+}
+
+static int	ft_exec_subshell(t_exl *exl, t_pipeline *pipeline)
+{
+	t_cmd	*current_cmd;
+	pid_t	last_pid;
+
 	if (exl->path == NULL)
 		exl->path = ft_get_path(exl->env);
 	while (++exl->cmd_idx < exl->n_cmd)
