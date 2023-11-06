@@ -9,6 +9,8 @@ t_built_func	ft_get_builtin(char *cmd)
 														{"env", &ft_env}};
 	const t_built_entry	*tmp_entry;
 
+	if (cmd == NULL)
+		return (NULL);
 	tmp_entry = builtins_dic;
 	while (tmp_entry->name != NULL && ft_strcmp(cmd, tmp_entry->name) != 0)
 		++tmp_entry;
