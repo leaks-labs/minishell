@@ -26,6 +26,7 @@ static int	ft_print_export(t_list *env)
 	t_list_node	*node;
 	t_var		*var;
 
+	// add alphabetical printing
 	node = env->list_node;
 	while (node != NULL)
 	{
