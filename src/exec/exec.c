@@ -1,10 +1,6 @@
 #include "exec.h"
 #include "heredoc.h"
 #include "msh_signal.h"
-// #include "path.h"
-// #include "redirections.h"
-// #include <errno.h>
-// #include <stdio.h>
 
 uint8_t		ft_exec_line(t_msh *msh, t_pipeline *pipeline);
 static int	ft_init_exl(t_exl *exl, t_msh *msh, t_pipeline *pipeline);
