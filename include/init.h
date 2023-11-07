@@ -5,8 +5,6 @@
 
 # define NO_LAST_COMMAND 0
 
-/*	ENV_INIT	*/
-int		ft_env_to_list(t_list *list, char **envp);
 /*	STRUCT_DESTROY	*/
 int		ft_quit(t_msh *msh);
 void	ft_free_cmd_list(t_pipeline *pipeline);

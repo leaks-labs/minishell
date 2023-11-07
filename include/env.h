@@ -12,6 +12,9 @@ bool	ft_isvalidname(const char *name);
 bool	ft_isassignation(const char *str);
 t_var	*ft_get_var(t_list *env, char *name);
 size_t	ft_get_name_len(const char *var);
+/*	CONVERT_ENV	*/
+int		ft_env_to_list(t_list *list, char **envp);
+char	**ft_lst_to_env(t_list *env);
 /*	MOD_VAR	*/
 int		ft_update_var(t_list *env, t_var *var, char *arg, int flags);
 int		ft_add_var(t_list *env, char *arg, int flags);

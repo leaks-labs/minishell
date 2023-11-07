@@ -1,4 +1,5 @@
 #include "exec.h"
+#include "env.h"
 #include "msh_signal.h"
 #include "path.h"
 #include "redirections.h"
@@ -12,8 +13,6 @@
 int				ft_exec_in_subshell(t_exl *exl, t_pipeline *pipeline);
 static pid_t	ft_child_process(t_exl *exl, t_cmd *cmd);
 static int		ft_launch_extern_cmd(t_exl *exl, char **args);
-static char		**ft_lst_to_env(t_list *env);
-static char		*ft_one_var_to_str(t_var *var);
 static int		ft_get_err_code(char *cmd);
 static int		ft_wait(pid_t last_pid);
 
@@ -80,38 +79,6 @@ static int	ft_launch_extern_cmd(t_exl *exl, char **args)
 	}
 	free(cmd_path);
 	return (ft_get_err_code(args[0]));
-}
-
-static char	**ft_lst_to_env(t_list *env)
-{
-	char		**export_env;
-	t_list_node	*node;
-	t_var		*var;
-	size_t		i;
-
-	export_env = ft_calloc(env->n_exported + 1, sizeof(char *));
-	if (export_env == NULL)
-		return (NULL);
-	node = env->list_node;
-	i = 0;
-	while (node != NULL)
-	{
-		var = (t_var *)node->content;
-		if (var->exported == true && var->value != NULL)
-		{
-			export_env[i] = ft_one_var_to_str((t_var *)node->content);
-			if (export_env[i] == NULL)
-				return (ft_freef("%P", export_env));
-			++i;
-		}
-		node = node->next;
-	}
-	return (export_env);
-}
-
-static char	*ft_one_var_to_str(t_var *var)
-{
-	return (ft_join(3, var->name, "=", var->value));
 }
 
 static int	ft_get_err_code(char *cmd)

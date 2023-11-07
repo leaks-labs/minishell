@@ -68,6 +68,7 @@ SRCS_FILES:=	builtins/echo					\
 				builtins/export					\
 				builtins/get_builtins			\
 				env/check_var					\
+				env/convert_env					\
 				env/mod_var						\
 				exec/exec_in_shell				\
 				exec/exec_in_subshell			\
@@ -75,7 +76,6 @@ SRCS_FILES:=	builtins/echo					\
 				exec/run						\
 				heredoc/heredoc					\
 				heredoc/retrieve_hd_content		\
-				init_and_destroy/env_init		\
 				init_and_destroy/struct_destroy	\
 				init_and_destroy/struct_init	\
 				parsing/parse					\
