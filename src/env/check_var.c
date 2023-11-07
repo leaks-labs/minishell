@@ -8,13 +8,12 @@ size_t	ft_get_name_len(const char *var);
 
 bool	ft_isvalidname(const char *name)
 {
-	if (*name == '_' || ft_isalpha(*name) == true)
-	{
+	if (*name != '_' && ft_isalpha(*name) == false)
+		return (false);
+	++name;
+	while (*name != '\0' && (*name == '_' || ft_isalnum(*name) == true))
 		++name;
-		while (*name != '\0' || *name == '_' || ft_isalnum(*name) == true)
-			++name;
-	}
-	return (*name == '\0');
+	return (*name == '\0' || *name == '=');
 }
 
 bool	ft_isassignation(const char *str)
@@ -36,7 +35,8 @@ t_var	*ft_get_var(t_list *env, char *name)
 	while (node != NULL)
 	{
 		var = (t_var *)node->content;
-		if (ft_strncmp(var->name, name, name_l) && var->name[name_l] == '\0')
+		if (ft_strncmp(var->name, name, name_l) == 0 \
+			&& var->name[name_l] == '\0')
 			return (var);
 		node = node->next;
 	}

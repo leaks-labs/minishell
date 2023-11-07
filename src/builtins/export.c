@@ -58,8 +58,11 @@ static int	ft_export_args_iter(t_list *env, char **args)
 		if (ft_isassignation(*args) == true)
 			flags |= ENV_ASSIGN;
 		var = ft_get_var(env, *args);
-		if (var != NULL && ft_update_var(env, var, *args, flags) == -1)
-			err_code = 1;
+		if (var != NULL)
+		{
+			if (ft_update_var(env, var, *args, flags) == -1)
+				err_code = 1;
+		}
 		else if (ft_add_var(env, *args, flags) == -1)
 			err_code = 1;
 		++args;
