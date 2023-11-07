@@ -65,7 +65,10 @@ MAIN:=	main
 
 SRCS_FILES:=	builtins/echo					\
 				builtins/env					\
+				builtins/export					\
 				builtins/get_builtins			\
+				env/check_var					\
+				env/mod_var						\
 				exec/child_process				\
 				exec/exec_in_current_env		\
 				exec/exec						\
@@ -84,10 +87,13 @@ SRCS_FILES:=	builtins/echo					\
 				redirections/redirections		\
 				signals/set_signals				\
 				signals/sighandlers				\
-				utils/env_utils					\
 				utils/ft_calloc					\
 				utils/ft_dptr					\
 				utils/ft_freef					\
+				utils/ft_getenv					\
+				utils/ft_isalnum				\
+				utils/ft_isalpha				\
+				utils/ft_isdigit				\
 				utils/ft_join					\
 				utils/ft_memcpy					\
 				utils/ft_putendl_fd				\

@@ -8,7 +8,8 @@ typedef enum builtins_list
 {
 	ECHO,
 	ENV,
-	N_BUILTINS = ENV
+	EXPORT,
+	N_BUILTINS
 }			t_builtins_list;
 
 typedef struct builtins_entry
@@ -18,8 +19,8 @@ typedef struct builtins_entry
 }				t_built_entry;
 
 t_built_func	ft_get_builtin(char *cmd);
-
 int				ft_echo(t_list *env, char **args);
 int				ft_env(t_list *env, char **args);
+int				ft_export(t_list *env, char **args);
 
 #endif

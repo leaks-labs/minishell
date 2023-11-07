@@ -65,6 +65,7 @@ static char	**ft_lst_to_env(t_list *env)
 {
 	char		**export_env;
 	t_list_node	*node;
+	t_var		*var;
 	size_t		i;
 
 	export_env = ft_calloc(env->n_exported + 1, sizeof(char *));
@@ -74,7 +75,8 @@ static char	**ft_lst_to_env(t_list *env)
 	i = 0;
 	while (node != NULL)
 	{
-		if (((t_var *)node->content)->exported == true)
+		var = (t_var *)node->content;
+		if (var->exported == true && var->value != NULL)
 		{
 			export_env[i] = ft_one_var_to_str((t_var *)node->content);
 			if (export_env[i] == NULL)

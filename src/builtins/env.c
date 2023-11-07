@@ -11,10 +11,10 @@ int	ft_env(t_list *env, char **args)
 
 	(void)args;
 	node = env->list_node;
-	while (env != NULL && node != NULL)
+	while (node != NULL)
 	{
 		var = (t_var *)node->content;
-		if (var->exported == true)
+		if (var->exported == true && var->value != NULL)
 			printf("%s=%s\n", var->name, var->value);
 		node = node->next;
 	}
