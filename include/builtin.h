@@ -2,7 +2,7 @@
 # define BUILTIN_H
 
 typedef struct list	t_list;
-typedef int	(*t_built_func)(t_list *, char **);
+typedef int			(*t_built_func)(t_list *, char **);
 
 typedef enum builtins_list
 {
