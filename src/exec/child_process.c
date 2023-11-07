@@ -1,6 +1,7 @@
 #include "exec.h"
 #include "builtin.h"
 #include "msh_signal.h"
+#include "path.h"
 #include "redirections.h"
 #include "utils.h"
 #include <errno.h>

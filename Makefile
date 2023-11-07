@@ -72,8 +72,6 @@ SRCS_FILES:=	builtins/echo					\
 				exec/child_process				\
 				exec/exec_in_current_env		\
 				exec/exec						\
-				exec/get_cmd_path				\
-				exec/get_path					\
 				exec/run						\
 				heredoc/heredoc					\
 				heredoc/retrieve_hd_content		\
@@ -81,6 +79,8 @@ SRCS_FILES:=	builtins/echo					\
 				init_and_destroy/struct_destroy	\
 				init_and_destroy/struct_init	\
 				parsing/parse					\
+				path/get_cmd_path				\
+				path/get_path					\
 				redirections/adapt_redirections	\
 				redirections/fill_tmp			\
 				redirections/pipes_create_close	\

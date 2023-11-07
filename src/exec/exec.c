@@ -1,6 +1,7 @@
 #include "exec.h"
 #include "heredoc.h"
 #include "msh_signal.h"
+#include "path.h"
 #include "redirections.h"
 #include <errno.h>
 #include <stdio.h>

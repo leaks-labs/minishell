@@ -60,11 +60,6 @@ pid_t	ft_child_process(t_exl *exl, t_cmd *cmd);
 int		ft_exec_cur_env(t_built_func built_func, t_exl *exl, t_cmd *cmd);
 /*	EXEC	*/
 uint8_t	ft_exec_line(t_msh *msh, t_pipeline *pipeline);
-/*	GET_CMD_PATH	*/
-char	*ft_get_cmd_path(char **path, char *cmd);
-bool	ft_isapath(char *str);
-/*	GET_PATH	*/
-char	**ft_get_path(t_list *env);
 /*	RUN	*/
 void	ft_run(t_msh *msh);
 
