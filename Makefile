@@ -69,8 +69,8 @@ SRCS_FILES:=	builtins/echo					\
 				builtins/get_builtins			\
 				env/check_var					\
 				env/mod_var						\
-				exec/child_process				\
-				exec/exec_in_current_env		\
+				exec/exec_in_shell				\
+				exec/exec_in_subshell			\
 				exec/exec						\
 				exec/run						\
 				heredoc/heredoc					\

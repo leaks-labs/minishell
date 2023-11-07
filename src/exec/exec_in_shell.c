@@ -2,10 +2,10 @@
 #include "redirections.h"
 #include <unistd.h>
 
-int			ft_exec_cur_env(t_built_func built_func, t_exl *exl, t_cmd *cmd);
+int			ft_exec_in_shell(t_built_func built_func, t_exl *exl, t_cmd *cmd);
 static int	ft_save_stdio_fileno(t_fd_io *fd_io);
 
-int	ft_exec_cur_env(t_built_func built_func, t_exl *exl, t_cmd *cmd)
+int	ft_exec_in_shell(t_built_func built_func, t_exl *exl, t_cmd *cmd)
 {
 	t_fd_io	s_origin_stdio_fd;
 	int		err_code;
