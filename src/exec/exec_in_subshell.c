@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 int				ft_exec_in_subshell(t_exl *exl, t_pipeline *pipeline);
 static pid_t	ft_child_process(t_exl *exl, t_cmd *cmd);
