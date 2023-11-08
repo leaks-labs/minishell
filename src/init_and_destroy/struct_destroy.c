@@ -12,7 +12,7 @@ int	ft_quit(t_msh *msh)
 	int	exit_cpy;
 
 	exit_cpy = msh->exit_status;
-	ft_lstclear(&msh->env.list_node, &ft_free_var);
+	ft_lstclear(&msh->env.list_node, &ft_free_content);
 	ft_freef("%P%p", msh->path, msh);
 	return (exit_cpy);
 }

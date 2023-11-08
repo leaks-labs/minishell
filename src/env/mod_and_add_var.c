@@ -4,7 +4,6 @@
 
 int				ft_update_var(t_list *env, t_var *var, char *arg, int flags);
 int				ft_add_var(t_list *env, char *arg, int flags);
-void			ft_free_var(void *content);
 static int		ft_assign_value(t_var *var, char *arg);
 static t_var	*ft_create_var(char *str, int flags);
 
@@ -29,10 +28,10 @@ int	ft_add_var(t_list *env, char *arg, int flags)
 	node = ft_lstnew(new_var);
 	if (node == NULL || new_var == NULL)
 	{
-		ft_free_var(new_var);
+		ft_free_content(new_var);
 		return (-1);
 	}
-	ft_set_index(env, new_var);
+	ft_update_env_index(env, new_var, ADD);
 	if (env->last_node == NULL)
 		ft_lstadd_back(&env->list_node, node);
 	else
@@ -41,16 +40,6 @@ int	ft_add_var(t_list *env, char *arg, int flags)
 	env->n_exported += ((flags & ENV_EXP) == ENV_EXP);
 	++env->n_var;
 	return (0);
-}
-
-void	ft_free_var(void *content)
-{
-	t_var	*var;
-
-	if (content == NULL)
-		return ;
-	var = (t_var *)content;
-	ft_freef("%p%p%p", var->name, var->value, var);
 }
 
 static int	ft_assign_value(t_var *var, char *arg)
