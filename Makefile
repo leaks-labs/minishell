@@ -65,29 +65,35 @@ MAIN:=	main
 
 SRCS_FILES:=	builtins/echo					\
 				builtins/env					\
+				builtins/export					\
 				builtins/get_builtins			\
-				exec/child_process				\
-				exec/exec_in_current_env		\
+				env/check_var					\
+				env/convert_env					\
+				env/mod_var						\
+				exec/exec_in_shell				\
+				exec/exec_in_subshell			\
 				exec/exec						\
-				exec/get_cmd_path				\
-				exec/get_path					\
 				exec/run						\
 				heredoc/heredoc					\
 				heredoc/retrieve_hd_content		\
-				init_and_destroy/env_init		\
 				init_and_destroy/struct_destroy	\
 				init_and_destroy/struct_init	\
 				parsing/parse					\
+				path/get_cmd_path				\
+				path/get_path					\
 				redirections/adapt_redirections	\
 				redirections/fill_tmp			\
 				redirections/pipes_create_close	\
 				redirections/redirections		\
 				signals/set_signals				\
 				signals/sighandlers				\
-				utils/env_utils					\
 				utils/ft_calloc					\
 				utils/ft_dptr					\
 				utils/ft_freef					\
+				utils/ft_getenv					\
+				utils/ft_isalnum				\
+				utils/ft_isalpha				\
+				utils/ft_isdigit				\
 				utils/ft_join					\
 				utils/ft_memcpy					\
 				utils/ft_putendl_fd				\

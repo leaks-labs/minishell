@@ -1,4 +1,5 @@
 #include "init.h"
+#include "env.h"
 #include "list.h"
 #include "utils.h"
 #include <stdlib.h>

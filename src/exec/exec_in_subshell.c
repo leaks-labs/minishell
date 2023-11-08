@@ -1,20 +1,40 @@
 #include "exec.h"
-#include "builtin.h"
+#include "env.h"
 #include "msh_signal.h"
+#include "path.h"
 #include "redirections.h"
 #include "utils.h"
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
-pid_t		ft_child_process(t_exl *exl, t_cmd *cmd);
-static int	ft_launch_extern_cmd(t_exl *exl, char **args);
-static char	**ft_lst_to_env(t_list *env);
-static char	*ft_one_var_to_str(t_var *var);
-static int	ft_get_err_code(char *cmd);
+int				ft_exec_in_subshell(t_exl *exl, t_pipeline *pipeline);
+static pid_t	ft_child_process(t_exl *exl, t_cmd *cmd);
+static int		ft_launch_extern_cmd(t_exl *exl, char **args);
+static int		ft_get_err_code(char *cmd);
+static int		ft_wait(pid_t last_pid);
 
-pid_t	ft_child_process(t_exl *exl, t_cmd *cmd)
+int	ft_exec_in_subshell(t_exl *exl, t_pipeline *pipeline)
+{
+	t_cmd	*current_cmd;
+	pid_t	last_pid;
+
+	if (exl->path == NULL)
+		exl->path = ft_get_path(exl->env);
+	while (++exl->cmd_idx < exl->n_cmd)
+	{
+		last_pid = -1;
+		current_cmd = pipeline->cmd_list + exl->cmd_idx;
+		if (ft_default_redirections(exl) == 0)
+			last_pid = ft_child_process(exl, current_cmd);
+		ft_close_used_pipes(&exl->s_fd_io);
+	}
+	return (ft_wait(last_pid));
+}
+
+static pid_t	ft_child_process(t_exl *exl, t_cmd *cmd)
 {
 	const pid_t		pid = fork();
 	t_built_func	built_func;
@@ -61,36 +81,6 @@ static int	ft_launch_extern_cmd(t_exl *exl, char **args)
 	return (ft_get_err_code(args[0]));
 }
 
-static char	**ft_lst_to_env(t_list *env)
-{
-	char		**export_env;
-	t_list_node	*node;
-	size_t		i;
-
-	export_env = ft_calloc(env->n_exported + 1, sizeof(char *));
-	if (export_env == NULL)
-		return (NULL);
-	node = env->list_node;
-	i = 0;
-	while (node != NULL)
-	{
-		if (((t_var *)node->content)->exported == true)
-		{
-			export_env[i] = ft_one_var_to_str((t_var *)node->content);
-			if (export_env[i] == NULL)
-				return (ft_freef("%P", export_env));
-			++i;
-		}
-		node = node->next;
-	}
-	return (export_env);
-}
-
-static char	*ft_one_var_to_str(t_var *var)
-{
-	return (ft_join(3, var->name, "=", var->value));
-}
-
 static int	ft_get_err_code(char *cmd)
 {
 	if (errno == ENOENT || errno == ENAMETOOLONG)
@@ -114,4 +104,31 @@ static int	ft_get_err_code(char *cmd)
 	else
 		return (EXIT_FAILURE);
 	// need to print error (perror()) for other error types?
+}
+
+static int	ft_wait(pid_t last_pid)
+{
+	int	wstatus;
+	int	exit_status;
+
+	if (last_pid != -1)
+	{
+		waitpid(last_pid, &wstatus, 0);
+		if (WIFSIGNALED(wstatus))
+		{
+			exit_status = 128 + WTERMSIG(wstatus);
+			if (exit_status == 128 + SIGQUIT)
+				printf("Quit: %d", SIGQUIT);
+			printf("\n");
+		}
+		else if (WIFEXITED(wstatus))
+			exit_status = WEXITSTATUS(wstatus);
+		else
+			exit_status = 1;
+	}
+	else
+		exit_status = 1;
+	while (wait(NULL) != -1 || errno != ECHILD)
+		;
+	return (exit_status);
 }

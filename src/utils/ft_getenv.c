@@ -1,5 +1,5 @@
-#include "exec.h"
 #include "utils.h"
+#include "exec.h"
 
 char	*ft_getenv(const char *name, t_list *env);
 
