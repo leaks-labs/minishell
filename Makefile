@@ -100,6 +100,7 @@ SRCS_FILES:=	builtins/echo					\
 				utils/ft_putendl_fd				\
 				utils/ft_putstr_fd				\
 				utils/ft_split					\
+				utils/ft_strchr					\
 				utils/ft_strcmp					\
 				utils/ft_strdup					\
 				utils/ft_strlen					\

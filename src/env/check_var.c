@@ -18,9 +18,7 @@ bool	ft_isvalidname(const char *name)
 
 bool	ft_isassignation(const char *str)
 {
-	while (*str != '=' && *str != '\0')
-		++str;
-	return (*str == '=');
+	return (ft_strchr(str, '=') != NULL);
 }
 
 t_var	*ft_get_var(t_list *env, char *name)
@@ -48,7 +46,7 @@ size_t	ft_get_name_len(const char *var)
 	const char	*tmp;
 
 	tmp = var;
-	while (*tmp != '=')
+	while (*tmp != '\0' && *tmp != '=')
 		++tmp;
 	return ((size_t)(tmp - var));
 }
