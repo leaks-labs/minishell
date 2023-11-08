@@ -19,5 +19,8 @@ char	**ft_lst_to_env(t_list *env);
 int		ft_update_var(t_list *env, t_var *var, char *arg, int flags);
 int		ft_add_var(t_list *env, char *arg, int flags);
 void	ft_free_var(void *content);
+/*	SORT_ENV	*/
+void	ft_set_index(t_list *env, t_var *new_var);
+t_var	*ft_get_var_per_index(t_list *env, size_t i);
 
 #endif
