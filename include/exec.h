@@ -16,9 +16,10 @@
 
 typedef struct var
 {
-	char	*name;
-	char	*value;
-	bool	exported;
+	char		*name;
+	char		*value;
+	bool		exported;
+	size_t		index;
 }				t_var;
 
 typedef struct list
@@ -26,6 +27,7 @@ typedef struct list
 	t_list_node	*list_node;
 	t_list_node	*last_node;
 	size_t		n_exported;
+	size_t		n_var;
 }				t_list;
 
 typedef struct msh

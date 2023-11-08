@@ -32,12 +32,14 @@ int	ft_add_var(t_list *env, char *arg, int flags)
 		ft_free_var(new_var);
 		return (-1);
 	}
+	ft_set_index(env, new_var);
 	if (env->last_node == NULL)
 		ft_lstadd_back(&env->list_node, node);
 	else
 		ft_lstadd_back(&env->last_node, node);
 	env->last_node = node;
 	env->n_exported += ((flags & ENV_EXP) == ENV_EXP);
+	++env->n_var;
 	return (0);
 }
 

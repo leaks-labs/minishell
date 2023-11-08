@@ -23,20 +23,20 @@ int	ft_export(t_list *env, char **args)
 
 static int	ft_print_export(t_list *env)
 {
-	t_list_node	*node;
 	t_var		*var;
+	size_t		index;
 
-	// add alphabetical printing
-	node = env->list_node;
-	while (node != NULL)
+	index = 0;
+	while (index < env->n_var)
 	{
-		var = (t_var *)node->content;
-		if (var->exported == true)
-			printf("declare -x %s", var->name);
-		if (var->value != NULL)
-			printf("=\"%s\"", var->value);
-		printf("\n");
-		node = node->next;
+		var = ft_get_var_per_index(env, index++);
+		if (var != NULL && var->exported == true)
+		{
+			if (var->value != NULL)
+				printf("declare -x %s=\"%s\"\n", var->name, var->value);
+			else
+				printf("declare -x %s\n", var->name);
+		}
 	}
 	return (0);
 }

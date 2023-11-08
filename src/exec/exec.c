@@ -13,8 +13,8 @@ uint8_t	ft_exec_line(t_msh *msh, t_pipeline *pipeline)
 
 	// pipeline->cmd_list = ft_calloc(1, sizeof(t_cmd));
 	// pipeline->n_cmd = 1;
-	// pipeline->cmd_list->n_redirect = 1;
-	// pipeline->cmd_list->args = ft_split("ls", ' ');
+	// pipeline->cmd_list->n_redirect = 0;
+	// pipeline->cmd_list->args = ft_split("export", ' ');
 	// pipeline->cmd_list->redirect_arr = ft_calloc(1, sizeof(t_redirect));
 	// pipeline->cmd_list->redirect_arr->file = ft_strdup("testfile");
 	// pipeline->cmd_list->redirect_arr->e_iotype = OUTPUT;

@@ -70,6 +70,7 @@ SRCS_FILES:=	builtins/echo					\
 				env/check_var					\
 				env/convert_env					\
 				env/mod_var						\
+				env/sort_env					\
 				exec/exec_in_shell				\
 				exec/exec_in_subshell			\
 				exec/exec						\
