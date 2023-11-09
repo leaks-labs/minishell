@@ -6,7 +6,7 @@ void	ft_lstdelone(t_list_node *list_node, del_func *del_func);
 
 void	ft_lstdelone(t_list_node *list_node, del_func *del_func)
 {
-	if (list_node != NULL)
+	if (list_node == NULL)
 		return ;
 	if ((del_func) != NULL)
 		(*del_func)(list_node->content);

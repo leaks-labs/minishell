@@ -9,6 +9,7 @@ typedef enum builtins_list
 	ECHO,
 	ENV,
 	EXPORT,
+	UNSET,
 	N_BUILTINS
 }			t_builtins_list;
 
@@ -18,13 +19,16 @@ typedef struct builtins_entry
 	t_built_func	func;
 }				t_built_entry;
 
+/*	GET_BUILTINS	*/
+t_built_func	ft_get_builtin(char *cmd);
+
 /*	ECHO	*/
 int				ft_echo(t_list *env, char **args);
 /*	ENV	*/
 int				ft_env(t_list *env, char **args);
 /*	EXPORT	*/
 int				ft_export(t_list *env, char **args);
-/*	GET_BUILTINS	*/
-t_built_func	ft_get_builtin(char *cmd);
+/*	UNSET	*/
+int				ft_unset(t_list *env, char **args);
 
 #endif

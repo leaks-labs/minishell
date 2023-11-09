@@ -67,9 +67,11 @@ SRCS_FILES:=	builtins/echo					\
 				builtins/env					\
 				builtins/export					\
 				builtins/get_builtins			\
+				builtins/unset					\
 				env/check_var					\
 				env/convert_env					\
-				env/mod_var						\
+				env/mod_and_add_var				\
+				env/remove_var					\
 				env/sort_env					\
 				exec/exec_in_shell				\
 				exec/exec_in_subshell			\
