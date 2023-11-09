@@ -29,6 +29,7 @@ int	ft_add_var(t_list *env, char *arg, int flags)
 	if (node == NULL || new_var == NULL)
 	{
 		ft_free_content(new_var);
+		free(node);
 		return (-1);
 	}
 	ft_update_env_index(env, new_var, ADD);
