@@ -27,6 +27,7 @@ int	ft_exec_in_subshell(t_exl *exl, t_pipeline *pipeline)
 	{
 		last_pid = -1;
 		current_cmd = pipeline->cmd_list + exl->cmd_idx;
+		// ft_default_redirections(exl) ????
 		if (ft_default_redirections(exl) == 0)
 			last_pid = ft_child_process(exl, current_cmd);
 		ft_close_used_pipes(&exl->s_fd_io);
@@ -55,9 +56,9 @@ static pid_t	ft_child_process(t_exl *exl, t_cmd *cmd)
 		else
 			err_code = ft_launch_extern_cmd(exl, cmd->args);
 	}
-	// else if (err_code == 0 && cmd->args != NULL)
-	// 	err_code = ft_launch_extern_cmd(exl, cmd->args);
-	ft_close_used_pipes(&exl->s_fd_io);
+	close(exl->s_fd_io.fd_to_read);
+	close(exl->s_fd_io.fd_to_write);
+	// or ft_close_used_pipes(&exl->s_fd_io)?;
 	// free other struct extern to exl (like pipeline, msh, history, line...) ??
 	exit(err_code);
 }
