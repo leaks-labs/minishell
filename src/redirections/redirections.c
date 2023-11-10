@@ -48,16 +48,14 @@ int	ft_apply_redirections(t_exl *exl)
 {
 	int	res[2];
 
+	res[0] = dup2(exl->s_fd_io.fd_to_read, STDIN_FILENO);
 	if (exl->s_fd_io.fd_to_read != STDIN_FILENO)
-	{
-		res[0] = dup2(exl->s_fd_io.fd_to_read, STDIN_FILENO);
 		close(exl->s_fd_io.fd_to_read);
-	}
+	exl->s_fd_io.fd_to_read = STDIN_FILENO;
+	res[1] = dup2(exl->s_fd_io.fd_to_write, STDOUT_FILENO);
 	if (exl->s_fd_io.fd_to_write != STDOUT_FILENO)
-	{
-		res[1] = dup2(exl->s_fd_io.fd_to_write, STDOUT_FILENO);
 		close(exl->s_fd_io.fd_to_write);
-	}
+	exl->s_fd_io.fd_to_write = STDOUT_FILENO;
 	if (ft_islastcmd(exl) == false)
 		close(exl->pipe[0]);
 	if (res[0] == -1 || (ft_islastcmd(exl) == false && res[1] == -1))

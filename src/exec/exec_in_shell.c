@@ -14,6 +14,7 @@ int	ft_exec_in_shell(t_built_func built_func, t_exl *exl, t_cmd *cmd)
 	if (ft_save_stdio_fileno(&s_origin_stdio_fd) == -1)
 		return (1);
 	err_code = 0;
+	// ft_default_redirections(exl) ????
 	if (ft_default_redirections(exl) != 0 \
 		|| ft_set_redirections(exl, cmd) != 0 \
 		|| ft_apply_redirections(exl) != 0)
@@ -23,7 +24,7 @@ int	ft_exec_in_shell(t_built_func built_func, t_exl *exl, t_cmd *cmd)
 	// how to protect dup2 in this situatin??
 	dup2(s_origin_stdio_fd.fd_to_read, STDIN_FILENO);
 	dup2(s_origin_stdio_fd.fd_to_write, STDOUT_FILENO);
-	ft_close_used_pipes(&exl->s_fd_io);
+	// ft_close_used_pipes(&exl->s_fd_io);
 	ft_close_used_pipes(&s_origin_stdio_fd);
 	// return 1 if dup2 fails??
 	return (err_code);
