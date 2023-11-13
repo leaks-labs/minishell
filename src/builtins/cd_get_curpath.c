@@ -28,7 +28,7 @@ char	*ft_get_curpath(const char **args, t_msh *msh, bool *print_m)
 			return (NULL);
 	}
 	if (ft_absolute_path_is_valid(curpath, *args) == false)
-		return (ft_freef(curpath));
+		return (ft_freef("%p", curpath));
 	ft_canonicalize(curpath);
 	return (curpath);
 }
