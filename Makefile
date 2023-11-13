@@ -63,19 +63,25 @@ EXT:=	.c
 
 MAIN:=	main
 
-SRCS_FILES:=	builtins/echo					\
+SRCS_FILES:=	builtins/cd_get_curpath			\
+				builtins/cd						\
+				builtins/echo					\
 				builtins/env					\
 				builtins/export					\
 				builtins/get_builtins			\
+				builtins/pwd					\
 				builtins/unset					\
+				directory_path/check_dir_path	\
+				directory_path/mod_dir_path		\
+				env/add_var						\
 				env/check_var					\
 				env/convert_env					\
-				env/mod_and_add_var				\
+				env/mod_var						\
 				env/remove_var					\
 				env/sort_env					\
-				exec/exec_in_shell				\
-				exec/exec_in_subshell			\
 				exec/exec						\
+				exec/in_shell					\
+				exec/in_subshell				\
 				exec/run						\
 				heredoc/heredoc					\
 				heredoc/retrieve_hd_content		\
@@ -108,6 +114,7 @@ SRCS_FILES:=	builtins/echo					\
 				utils/ft_strlen					\
 				utils/ft_strncmp				\
 				utils/ft_strndup				\
+				utils/ft_strnstr				\
 				utils/ft_substr					\
 				utils/ft_umaxtostr				\
 				utils/ft_lst/ft_lstadd_back		\

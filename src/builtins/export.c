@@ -4,20 +4,19 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int			ft_export(t_list *env, char **args);
+int			ft_export(t_msh *msh, char **args);
 static int	ft_print_export(t_list *env);
 static int	ft_export_args_iter(t_list *env, char **args);
-static int	ft_mod_env(t_list *env, char *arg, int flags);
 static void	ft_print_error_export(char *arg);
 
-int	ft_export(t_list *env, char **args)
+int	ft_export(t_msh *msh, char **args)
 {
 	int		err_code;
 
 	if (*args == NULL)
-		err_code = ft_print_export(env);
+		err_code = ft_print_export(&msh->env);
 	else
-		err_code = ft_export_args_iter(env, args);
+		err_code = ft_export_args_iter(&msh->env, args);
 	return (err_code);
 }
 
@@ -50,7 +49,7 @@ static int	ft_export_args_iter(t_list *env, char **args)
 	{
 		if (ft_isvalidname(*args) == true)
 		{
-			if (ft_mod_env(env, *args, ENV_EXP) == -1)
+			if (ft_mod_env1(env, *args, ENV_EXP) == -1)
 				err_code = 1;
 		}
 		else
@@ -61,19 +60,6 @@ static int	ft_export_args_iter(t_list *env, char **args)
 		++args;
 	}
 	return (err_code);
-}
-
-static int	ft_mod_env(t_list *env, char *arg, int flags)
-{
-	t_var	*var;
-
-	if (ft_isassignation(arg) == true)
-		flags |= ENV_ASSIGN;
-	var = ft_get_var(env, arg);
-	if (var != NULL)
-		return (ft_update_var(env, var, arg, flags) == -1);
-	else
-		return (ft_add_var(env, arg, flags) == -1);
 }
 
 static void	ft_print_error_export(char *arg)

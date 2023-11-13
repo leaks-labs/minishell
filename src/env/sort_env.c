@@ -6,7 +6,7 @@ t_var	*ft_get_var_per_index(t_list *env, size_t i);
 
 void	ft_update_env_index(t_list *env, t_var *var, t_idx_act e_idx_act)
 {
-	t_list_node *node;
+	t_list_node	*node;
 	t_var		*env_var;
 
 	if (env->list_node == NULL)

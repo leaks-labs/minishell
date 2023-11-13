@@ -7,13 +7,13 @@
 # include "exec.h"
 
 /*	ADAPT_REDIRECTIONS	*/
-int		ft_set_input(t_exl *exl, char *file);
-int		ft_set_heredoc(t_exl *exl, char *file);
-int		ft_set_output(t_exl *exl, char *file);
-int		ft_set_append(t_exl *exl, char *file);
+int		ft_set_input(t_exl *exl, const char *file);
+int		ft_set_heredoc(t_exl *exl, const char *file);
+int		ft_set_output(t_exl *exl, const char *file);
+int		ft_set_append(t_exl *exl, const char *file);
 /*	FILL_TMP	*/
-int		ft_fill_tmp_pipe(char *content);
-int		ft_fill_tmp_file(char *content);
+int		ft_fill_tmp_pipe(const char *content);
+int		ft_fill_tmp_file(const char *content);
 /*	PIPES_CREATE_CLOSE	*/
 int		ft_createpipe(int *pp);
 void	ft_close_used_pipes(t_fd_io *fd_io);

@@ -1,8 +1,14 @@
 #include "init.h"
+#include "directory_path.h"
 #include "env.h"
 #include "utils.h"
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
-t_msh	*ft_struct_init(char **envp);
+t_msh		*ft_struct_init(char **envp);
+static char	*ft_get_first_cwd(t_list *env);
+static bool	ft_issameinode(char *p1, char *p2);
 
 t_msh	*ft_struct_init(char **envp)
 {
@@ -13,5 +19,39 @@ t_msh	*ft_struct_init(char **envp)
 		return (NULL);
 	if (ft_env_to_list(&msh->env, envp) == -1)
 		return (ft_freef("%p", msh));
+	msh->cwd = ft_get_first_cwd(&msh->env);
 	return (msh);
+}
+
+static char	*ft_get_first_cwd(t_list *env)
+{
+	char		*path;
+	char		*pwd_from_env;
+
+	path = getcwd(NULL, 0);
+	//perror?
+	if (path == NULL)
+		return (NULL);
+	pwd_from_env = ft_getenv("PWD", env);
+	if (pwd_from_env != NULL)
+		pwd_from_env = ft_strdup(pwd_from_env);
+	if (pwd_from_env == NULL)
+		return (path);
+	if (*pwd_from_env != '/' || ft_issameinode(path, pwd_from_env) == false)
+	{
+		free(pwd_from_env);
+		return (path);
+	}
+	free(path);
+	ft_canonicalize(pwd_from_env);
+	return (pwd_from_env);
+}
+
+static bool	ft_issameinode(char *p1, char *p2)
+{
+	struct stat	buf_p1;
+	struct stat	buf_p2;
+
+	return (stat(p1, &buf_p1) == 0 && stat(p2, &buf_p2) == 0 \
+			&& buf_p1.st_ino == buf_p2.st_ino);
 }

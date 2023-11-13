@@ -10,13 +10,13 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-int				ft_exec_in_subshell(t_exl *exl, t_pipeline *pipeline);
-static pid_t	ft_child_process(t_exl *exl, t_cmd *cmd);
+int				ft_in_subshell(t_msh *msh, t_exl *exl, t_pipeline *pl);
+static pid_t	ft_child_process(t_msh *msh, t_exl *exl, t_cmd *cmd);
 static int		ft_launch_extern_cmd(t_exl *exl, char **args);
-static int		ft_get_err_code(char *cmd);
+static int		ft_get_err_code(const char *cmd);
 static int		ft_wait(pid_t last_pid);
 
-int	ft_exec_in_subshell(t_exl *exl, t_pipeline *pipeline)
+int	ft_in_subshell(t_msh *msh, t_exl *exl, t_pipeline *pl)
 {
 	t_cmd	*current_cmd;
 	pid_t	last_pid;
@@ -26,20 +26,20 @@ int	ft_exec_in_subshell(t_exl *exl, t_pipeline *pipeline)
 	while (++exl->cmd_idx < exl->n_cmd)
 	{
 		last_pid = -1;
-		current_cmd = pipeline->cmd_list + exl->cmd_idx;
+		current_cmd = pl->cmd_list + exl->cmd_idx;
 		// ft_default_redirections(exl) ????
 		if (ft_default_redirections(exl) == 0)
-			last_pid = ft_child_process(exl, current_cmd);
+			last_pid = ft_child_process(msh, exl, current_cmd);
 		ft_close_used_pipes(&exl->s_fd_io);
 	}
 	return (ft_wait(last_pid));
 }
 
-static pid_t	ft_child_process(t_exl *exl, t_cmd *cmd)
+static pid_t	ft_child_process(t_msh *msh, t_exl *exl, t_cmd *cmd)
 {
-	const pid_t		pid = fork();
-	t_built_func	built_func;
-	int				err_code;
+	const pid_t	pid = fork();
+	t_built_f	built_f;
+	int			err_code;
 
 	// if (pid == -1)
 	// 	perror("fork error");
@@ -50,9 +50,9 @@ static pid_t	ft_child_process(t_exl *exl, t_cmd *cmd)
 		err_code = 1;
 	if (err_code == 0 && cmd->args != NULL)
 	{
-		built_func = ft_get_builtin(cmd->args[0]);
-		if (built_func != NULL)
-			err_code = built_func(exl->env, cmd->args + 1);
+		built_f = ft_get_builtin(cmd->args[0]);
+		if (built_f != NULL)
+			err_code = built_f(msh, cmd->args + 1);
 		else
 			err_code = ft_launch_extern_cmd(exl, cmd->args);
 	}
@@ -82,7 +82,7 @@ static int	ft_launch_extern_cmd(t_exl *exl, char **args)
 	return (ft_get_err_code(args[0]));
 }
 
-static int	ft_get_err_code(char *cmd)
+static int	ft_get_err_code(const char *cmd)
 {
 	if (errno == ENOENT || errno == ENAMETOOLONG)
 	{

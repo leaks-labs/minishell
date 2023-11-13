@@ -3,7 +3,7 @@
 
 bool	ft_isvalidname(const char *name);
 bool	ft_isassignation(const char *str);
-t_var	*ft_get_var(t_list *env, char *name);
+t_var	*ft_get_var(t_list *env, const char *name);
 size_t	ft_get_name_len(const char *var);
 
 bool	ft_isvalidname(const char *name)
@@ -21,7 +21,7 @@ bool	ft_isassignation(const char *str)
 	return (ft_strchr(str, '=') != NULL);
 }
 
-t_var	*ft_get_var(t_list *env, char *name)
+t_var	*ft_get_var(t_list *env, const char *name)
 {
 	const size_t	name_l = ft_get_name_len(name);
 	t_list_node		*node;

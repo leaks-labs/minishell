@@ -14,14 +14,6 @@
 # define HD_PROMPT "> "
 # define MSH_ERROR_PROMPT "minishell: "
 
-typedef struct var
-{
-	char		*name;
-	char		*value;
-	bool		exported;
-	size_t		index;
-}				t_var;
-
 typedef struct list
 {
 	t_list_node	*list_node;
@@ -34,6 +26,7 @@ typedef struct msh
 {
 	t_list			env;
 	char			**path;
+	char			*cwd;
 	uint8_t			exit_status;
 	unsigned int	line_num;
 }				t_msh;
@@ -56,12 +49,12 @@ typedef struct exl
 	unsigned int	*line_num;
 }				t_exl;
 
-/*	EXEC_IN_SHELL	*/
-int		ft_exec_in_shell(t_built_func built_func, t_exl *exl, t_cmd *cmd);
-/*	EXEC_IN_SUBSHELL	*/
-int		ft_exec_in_subshell(t_exl *exl, t_pipeline *pipeline);
 /*	EXEC	*/
-uint8_t	ft_exec_line(t_msh *msh, t_pipeline *pipeline);
+uint8_t	ft_exec_line(t_msh *msh, t_pipeline *pl);
+/*	IN_SHELL	*/
+int		ft_in_shell(t_msh *msh, t_exl *exl, t_cmd *cmd, t_built_f built_f);
+/*	IN_SUBSHELL	*/
+int		ft_in_subshell(t_msh *msh, t_exl *exl, t_pipeline *pl);
 /*	RUN	*/
 void	ft_run(t_msh *msh);
 
