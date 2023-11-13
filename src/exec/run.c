@@ -7,7 +7,7 @@
 
 void	ft_run(t_msh *msh);
 
-sig_atomic_t	g_signal_value;
+volatile sig_atomic_t	g_signal_value;
 
 void	ft_run(t_msh *msh)
 {
