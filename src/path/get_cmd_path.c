@@ -4,7 +4,7 @@
 #include <sys/stat.h>
 
 char		*ft_get_cmd_path(char **path, char *cmd);
-bool		ft_isapath(char *str);
+bool		ft_isapath(const char *str);
 static char	*ft_check_one_path(char *cmd);
 static char	*ft_search_in_path(char **path, char *cmd);
 
@@ -16,7 +16,7 @@ char	*ft_get_cmd_path(char **path, char *cmd)
 		return (ft_search_in_path(path, cmd));
 }
 
-bool	ft_isapath(char *str)
+bool	ft_isapath(const char *str)
 {
 	while (*str != '\0' && *str != '/')
 		++str;

@@ -4,11 +4,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int			ft_fill_tmp_pipe(char *content);
-int			ft_fill_tmp_file(char *content);
+int			ft_fill_tmp_pipe(const char *content);
+int			ft_fill_tmp_file(const char *content);
 static char	*ft_get_tmp_filename(void);
 
-int	ft_fill_tmp_pipe(char *content)
+int	ft_fill_tmp_pipe(const char *content)
 {
 	int	pipe[2];
 
@@ -20,7 +20,7 @@ int	ft_fill_tmp_pipe(char *content)
 	return (pipe[0]);
 }
 
-int	ft_fill_tmp_file(char *content)
+int	ft_fill_tmp_file(const char *content)
 {
 	char	*filename;
 	int		fd_origin;

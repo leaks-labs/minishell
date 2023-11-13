@@ -1,25 +1,11 @@
 #include "env.h"
 #include "utils.h"
-#include "stdlib.h"
+#include <stdlib.h>
 
-int				ft_update_var(t_list *env, t_var *var, char *arg, int flags);
-int				ft_add_var(t_list *env, char *arg, int flags);
-static int		ft_assign_value(t_var *var, char *arg);
-static t_var	*ft_create_var(char *str, int flags);
+int				ft_add_var(t_list *env, const char *arg, int flags);
+static t_var	*ft_create_var(const char *str, int flags);
 
-int	ft_update_var(t_list *env, t_var *var, char *arg, int flags)
-{
-	if ((flags & ENV_ASSIGN) == ENV_ASSIGN && ft_assign_value(var, arg) == -1)
-		return (-1);
-	if ((flags & ENV_EXP) == ENV_EXP)
-	{
-		env->n_exported += (var->exported == 0);
-		var->exported = true;
-	}
-	return (0);
-}
-
-int	ft_add_var(t_list *env, char *arg, int flags)
+int	ft_add_var(t_list *env, const char *arg, int flags)
 {
 	t_list_node	*node;
 	t_var		*new_var;
@@ -43,22 +29,7 @@ int	ft_add_var(t_list *env, char *arg, int flags)
 	return (0);
 }
 
-static int	ft_assign_value(t_var *var, char *arg)
-{
-	char	*value;
-
-	value = ft_strdup(arg + ft_get_name_len(arg) + 1);
-	if (value == NULL)
-	{
-		// perror?
-		return (-1);
-	}
-	free(var->value);
-	var->value = value;
-	return (0);
-}
-
-static t_var	*ft_create_var(char *str, int flags)
+static t_var	*ft_create_var(const char *str, int flags)
 {
 	t_var		*new_var;
 	size_t		name_len;

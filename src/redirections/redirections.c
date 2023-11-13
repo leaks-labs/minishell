@@ -25,7 +25,7 @@ int	ft_default_redirections(t_exl *exl)
 
 int	ft_set_redirections(t_exl *exl, t_cmd *cmd)
 {
-	int			(*f[4])(t_exl *, char *);
+	int			(*f[4])(t_exl *, const char *);
 	t_redirect	*current_redirect;
 	ssize_t		i;
 

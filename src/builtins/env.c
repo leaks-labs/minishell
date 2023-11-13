@@ -1,16 +1,16 @@
 #include "builtin.h"
-#include "exec.h"
+#include "env.h"
 #include <stdio.h>
 
-int	ft_env(t_list *env, char **args);
+int	ft_env(t_msh *msh, char **args);
 
-int	ft_env(t_list *env, char **args)
+int	ft_env(t_msh *msh, char **args)
 {
 	t_list_node	*node;
 	t_var		*var;
 
 	(void)args;
-	node = env->list_node;
+	node = msh->env.list_node;
 	while (node != NULL)
 	{
 		var = (t_var *)node->content;

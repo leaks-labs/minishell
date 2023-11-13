@@ -10,12 +10,12 @@
 # include <sys/pipe.h>
 #endif
 
-int	ft_set_input(t_exl *exl, char *file);
-int	ft_set_heredoc(t_exl *exl, char *file);
-int	ft_set_output(t_exl *exl, char *file);
-int	ft_set_append(t_exl *exl, char *file);
+int	ft_set_input(t_exl *exl, const char *file);
+int	ft_set_heredoc(t_exl *exl, const char *file);
+int	ft_set_output(t_exl *exl, const char *file);
+int	ft_set_append(t_exl *exl, const char *file);
 
-int	ft_set_input(t_exl *exl, char *file)
+int	ft_set_input(t_exl *exl, const char *file)
 {
 	(void)exl;
 	if (exl->s_fd_io.fd_to_read != STDIN_FILENO)
@@ -29,7 +29,7 @@ int	ft_set_input(t_exl *exl, char *file)
 	return (exl->s_fd_io.fd_to_read);
 }
 
-int	ft_set_heredoc(t_exl *exl, char *file)
+int	ft_set_heredoc(t_exl *exl, const char *file)
 {
 	if (exl->s_fd_io.fd_to_read != STDIN_FILENO)
 		close(exl->s_fd_io.fd_to_read);
@@ -40,7 +40,7 @@ int	ft_set_heredoc(t_exl *exl, char *file)
 	return (exl->s_fd_io.fd_to_read);
 }
 
-int	ft_set_output(t_exl *exl, char *file)
+int	ft_set_output(t_exl *exl, const char *file)
 {
 	(void)exl;
 	if (exl->s_fd_io.fd_to_write != STDOUT_FILENO)
@@ -55,7 +55,7 @@ int	ft_set_output(t_exl *exl, char *file)
 	return (exl->s_fd_io.fd_to_write);
 }
 
-int	ft_set_append(t_exl *exl, char *file)
+int	ft_set_append(t_exl *exl, const char *file)
 {
 	(void)exl;
 	if (exl->s_fd_io.fd_to_write != STDOUT_FILENO)

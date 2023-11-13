@@ -3,7 +3,7 @@
 
 # include <signal.h>
 
-extern sig_atomic_t	g_signal_value;
+extern volatile sig_atomic_t	g_signal_value;
 
 typedef enum msh_signals
 {

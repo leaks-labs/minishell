@@ -1,11 +1,11 @@
 #include "env.h"
 #include "utils.h"
 
-void		ft_remove_var(t_list *env, char *name);
+void		ft_remove_var(t_list *env, const char *name);
 void		ft_free_content(void *content);
 static void	ft_rewire(t_list *env, t_list_node *prev_node, t_list_node *node);
 
-void	ft_remove_var(t_list *env, char *name)
+void	ft_remove_var(t_list *env, const char *name)
 {
 	t_list_node	*node;
 	t_list_node	*prev_node;
@@ -45,7 +45,7 @@ static void	ft_rewire(t_list *env, t_list_node *prev_node, t_list_node *node)
 	if (prev_node == NULL)
 		env->list_node = node->next;
 	else
-		prev_node->next = node->next;	
+		prev_node->next = node->next;
 	if (env->last_node == node)
 		env->last_node = prev_node;
 	if (var->exported == true)
