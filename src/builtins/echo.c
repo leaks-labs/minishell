@@ -2,13 +2,14 @@
 #include "utils.h"
 #include <stdio.h>
 
-int	ft_echo(t_msh *msh, char **args);
+int	ft_echo(t_msh *msh, t_pl *pl, char **args);
 
-int	ft_echo(t_msh *msh, char **args)
+int	ft_echo(t_msh *msh, t_pl *pl, char **args)
 {
 	bool	no_nl;
 
 	(void)msh;
+	(void)pl;
 	if (*args != NULL)
 	{
 		no_nl = (ft_strcmp(*args, "-n") == 0);

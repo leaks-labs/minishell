@@ -7,7 +7,7 @@
 
 /*	STRUCT_DESTROY	*/
 int		ft_quit(t_msh *msh);
-void	ft_free_cmd_list(t_pipeline *pipeline);
+void	ft_free_cmd_list(t_pl *pipeline);
 /*	STRUCT_INIT	*/
 t_msh	*ft_struct_init(char **envp);
 

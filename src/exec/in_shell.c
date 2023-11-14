@@ -2,14 +2,16 @@
 #include "redirections.h"
 #include <unistd.h>
 
-int			ft_in_shell(t_msh *msh, t_exl *exl, t_cmd *cmd, t_built_f built_f);
+int			ft_in_shell(t_in_shell_pmt *pmt, t_cmd *cmd, t_built_f built_f);
 static int	ft_save_stdio_fileno(t_fd_io *fd_io);
 
-int	ft_in_shell(t_msh *msh, t_exl *exl, t_cmd *cmd, t_built_f built_f)
+int	ft_in_shell(t_in_shell_pmt *pmt, t_cmd *cmd, t_built_f built_f)
 {
+	t_exl	*exl;
 	t_fd_io	s_origin_stdio_fd;
 	int		err_code;
 
+	exl = pmt->exl;
 	++exl->cmd_idx;
 	if (ft_save_stdio_fileno(&s_origin_stdio_fd) == -1)
 		return (1);
@@ -20,7 +22,7 @@ int	ft_in_shell(t_msh *msh, t_exl *exl, t_cmd *cmd, t_built_f built_f)
 		|| ft_apply_redirections(exl) != 0)
 		err_code = 1;
 	if (err_code == 0 && built_f != NULL)
-		err_code = built_f(msh, cmd->args + 1);
+		err_code = built_f(pmt->msh, pmt->pl, cmd->args + 1);
 	// how to protect dup2 in this situatin??
 	dup2(s_origin_stdio_fd.fd_to_read, STDIN_FILENO);
 	dup2(s_origin_stdio_fd.fd_to_write, STDOUT_FILENO);

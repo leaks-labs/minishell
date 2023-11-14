@@ -4,7 +4,6 @@
 # include "builtin.h"
 # include "parse.h"
 # include "list.h"
-# include <stdbool.h>
 # include <stdint.h>
 
 # define COMMAND_NOT_EXECUTABLE 126
@@ -49,12 +48,19 @@ typedef struct exl
 	unsigned int	*line_num;
 }				t_exl;
 
+typedef struct in_shell_pmt
+{
+	t_msh	*msh;
+	t_pl	*pl;
+	t_exl	*exl;
+}				t_in_shell_pmt;
+
 /*	EXEC	*/
-uint8_t	ft_exec_line(t_msh *msh, t_pipeline *pl);
+uint8_t	ft_exec_line(t_msh *msh, t_pl *pl);
 /*	IN_SHELL	*/
-int		ft_in_shell(t_msh *msh, t_exl *exl, t_cmd *cmd, t_built_f built_f);
+int		ft_in_shell(t_in_shell_pmt *pmt, t_cmd *cmd, t_built_f built_f);
 /*	IN_SUBSHELL	*/
-int		ft_in_subshell(t_msh *msh, t_exl *exl, t_pipeline *pl);
+int		ft_in_subshell(t_msh *msh, t_exl *exl, t_pl *pl);
 /*	RUN	*/
 void	ft_run(t_msh *msh);
 

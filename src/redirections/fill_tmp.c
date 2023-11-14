@@ -53,6 +53,6 @@ static char	*ft_get_tmp_filename(void)
 	static uintmax_t	ext;
 	char				ext_buf[MAX_LEN_NUM];
 
-	ft_umaxtostr(ext_buf, MAX_LEN_NUM, ext++);
+	ft_uimaxtostr(ext_buf, MAX_LEN_NUM, ext++);
 	return (ft_join(2, TMP_FILE_BASE_NAME, ext_buf));
 }

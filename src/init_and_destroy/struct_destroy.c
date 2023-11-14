@@ -2,10 +2,13 @@
 #include "env.h"
 #include "list.h"
 #include "utils.h"
+#include <stdio.h>
 #include <stdlib.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
 int		ft_quit(t_msh *msh);
-void	ft_free_cmd_list(t_pipeline *pipeline);
+void	ft_free_cmd_list(t_pl *pipeline);
 
 int	ft_quit(t_msh *msh)
 {
@@ -14,10 +17,11 @@ int	ft_quit(t_msh *msh)
 	exit_cpy = msh->exit_status;
 	ft_lstclear(&msh->env.list_node, &ft_free_content);
 	ft_freef("%P%p%p", msh->path, msh->cwd, msh);
+	rl_clear_history();
 	return (exit_cpy);
 }
 
-void	ft_free_cmd_list(t_pipeline *pipeline)
+void	ft_free_cmd_list(t_pl *pipeline)
 {
 	t_cmd	*cmd;
 	ssize_t	i;
@@ -34,4 +38,6 @@ void	ft_free_cmd_list(t_pipeline *pipeline)
 		free(cmd[i].redirect_arr);
 	}
 	free(cmd);
+	pipeline->cmd_list = NULL;
+	pipeline->n_cmd = 0;
 }

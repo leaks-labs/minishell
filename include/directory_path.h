@@ -1,7 +1,7 @@
 #ifndef DIRECTORY_PATH_H
 # define DIRECTORY_PATH_H
 
-# include "stdbool.h"
+# include <stdbool.h>
 
 /*	CHECK_DIR_PATH	*/
 bool	ft_absolute_path_is_valid(const char *curpath, const char *initial_arg);

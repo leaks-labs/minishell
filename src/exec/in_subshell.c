@@ -1,5 +1,6 @@
 #include "exec.h"
 #include "env.h"
+#include "init.h"
 #include "msh_signal.h"
 #include "path.h"
 #include "redirections.h"
@@ -7,16 +8,16 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <sys/wait.h>
+#include <unistd.h>
 
-int				ft_in_subshell(t_msh *msh, t_exl *exl, t_pipeline *pl);
-static pid_t	ft_child_process(t_msh *msh, t_exl *exl, t_cmd *cmd);
+int				ft_in_subshell(t_msh *msh, t_exl *exl, t_pl *pl);
+static pid_t	ft_child_proc(t_msh *msh, t_exl *exl, t_pl *pl, t_cmd *cmd);
 static int		ft_launch_extern_cmd(t_exl *exl, char **args);
 static int		ft_get_err_code(const char *cmd);
 static int		ft_wait(pid_t last_pid);
 
-int	ft_in_subshell(t_msh *msh, t_exl *exl, t_pipeline *pl)
+int	ft_in_subshell(t_msh *msh, t_exl *exl, t_pl *pl)
 {
 	t_cmd	*current_cmd;
 	pid_t	last_pid;
@@ -29,13 +30,13 @@ int	ft_in_subshell(t_msh *msh, t_exl *exl, t_pipeline *pl)
 		current_cmd = pl->cmd_list + exl->cmd_idx;
 		// ft_default_redirections(exl) ????
 		if (ft_default_redirections(exl) == 0)
-			last_pid = ft_child_process(msh, exl, current_cmd);
+			last_pid = ft_child_proc(msh, exl, pl, current_cmd);
 		ft_close_used_pipes(&exl->s_fd_io);
 	}
 	return (ft_wait(last_pid));
 }
 
-static pid_t	ft_child_process(t_msh *msh, t_exl *exl, t_cmd *cmd)
+static pid_t	ft_child_proc(t_msh *msh, t_exl *exl, t_pl *pl, t_cmd *cmd)
 {
 	const pid_t	pid = fork();
 	t_built_f	built_f;
@@ -52,15 +53,16 @@ static pid_t	ft_child_process(t_msh *msh, t_exl *exl, t_cmd *cmd)
 	{
 		built_f = ft_get_builtin(cmd->args[0]);
 		if (built_f != NULL)
-			err_code = built_f(msh, cmd->args + 1);
+			err_code = built_f(msh, pl, cmd->args + 1);
 		else
 			err_code = ft_launch_extern_cmd(exl, cmd->args);
 	}
 	close(exl->s_fd_io.fd_to_read);
 	close(exl->s_fd_io.fd_to_write);
 	// or ft_close_used_pipes(&exl->s_fd_io)?;
-	// free other struct extern to exl (like pipeline, msh, history, line...) ??
-	exit(err_code);
+	ft_free_cmd_list(pl);
+	msh->exit_status = (uint8_t)err_code;
+	exit(ft_quit(msh));
 }
 
 static int	ft_launch_extern_cmd(t_exl *exl, char **args)
