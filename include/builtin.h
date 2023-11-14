@@ -10,6 +10,7 @@ typedef int			(*t_built_f)(t_msh *, t_pl *, char **);
 
 typedef enum builtins_list
 {
+	CD,
 	ECHO,
 	ENV,
 	EXIT,
