@@ -40,8 +40,8 @@ typedef struct pipeline
 {
 	t_cmd	*cmd_list;
 	ssize_t	n_cmd;
-}				t_pipeline;
+}				t_pl;
 
-t_parse_return	ft_parse(t_pipeline *pipeline, char *line);
+t_parse_return	ft_parse(t_pl *pipeline, char *line);
 
 #endif

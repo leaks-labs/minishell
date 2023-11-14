@@ -5,7 +5,6 @@
 # define ENV_ASSIGN 2
 
 # include "exec.h"
-# include <stdbool.h>
 
 typedef enum idx_act
 {

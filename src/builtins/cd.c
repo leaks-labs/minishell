@@ -5,14 +5,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int			ft_cd(t_msh *msh, char **args);
+int			ft_cd(t_msh *msh, t_pl *pl, char **args);
 static void	ft_update_pwd_vars(t_list *env, char *curpath);
 
-int	ft_cd(t_msh *msh, char **args)
+int	ft_cd(t_msh *msh, t_pl *pl, char **args)
 {
 	char	*curpath;
 	bool	print_m;
 
+	(void)pl;
 	print_m = false;
 	curpath = ft_get_curpath((const char **)args, msh, &print_m);
 	if (curpath == NULL)

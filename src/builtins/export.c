@@ -4,15 +4,16 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int			ft_export(t_msh *msh, char **args);
+int			ft_export(t_msh *msh, t_pl *pl, char **args);
 static int	ft_print_export(t_list *env);
 static int	ft_export_args_iter(t_list *env, char **args);
 static void	ft_print_error_export(char *arg);
 
-int	ft_export(t_msh *msh, char **args)
+int	ft_export(t_msh *msh, t_pl *pl, char **args)
 {
 	int		err_code;
 
+	(void)pl;
 	if (*args == NULL)
 		err_code = ft_print_export(&msh->env);
 	else

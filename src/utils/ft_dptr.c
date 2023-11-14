@@ -1,9 +1,9 @@
 #include "utils.h"
 
-char	**ft_dptrcpy(char **dptr);
-size_t	ft_dptrlen(char	**dptr);
+char	**ft_dptrcpy(const char **dptr);
+size_t	ft_dptrlen(const char **dptr);
 
-char	**ft_dptrcpy(char **dptr)
+char	**ft_dptrcpy(const char **dptr)
 {
 	char	**dptr_cpy;
 	size_t	i;
@@ -24,7 +24,7 @@ char	**ft_dptrcpy(char **dptr)
 	return (dptr_cpy);
 }
 
-size_t	ft_dptrlen(char	**dptr)
+size_t	ft_dptrlen(const char **dptr)
 {
 	size_t	i;
 

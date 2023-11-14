@@ -67,6 +67,7 @@ SRCS_FILES:=	builtins/cd_get_curpath			\
 				builtins/cd						\
 				builtins/echo					\
 				builtins/env					\
+				builtins/exit					\
 				builtins/export					\
 				builtins/get_builtins			\
 				builtins/pwd					\
@@ -103,6 +104,7 @@ SRCS_FILES:=	builtins/cd_get_curpath			\
 				utils/ft_isalnum				\
 				utils/ft_isalpha				\
 				utils/ft_isdigit				\
+				utils/ft_isspace				\
 				utils/ft_join					\
 				utils/ft_memcpy					\
 				utils/ft_putendl_fd				\
@@ -115,8 +117,9 @@ SRCS_FILES:=	builtins/cd_get_curpath			\
 				utils/ft_strncmp				\
 				utils/ft_strndup				\
 				utils/ft_strnstr				\
+				utils/ft_strtoimax				\
 				utils/ft_substr					\
-				utils/ft_umaxtostr				\
+				utils/ft_uimaxtostr				\
 				utils/ft_lst/ft_lstadd_back		\
 				utils/ft_lst/ft_lstadd_front	\
 				utils/ft_lst/ft_lstclear		\

@@ -1,11 +1,11 @@
 #include "utils.h"
 #include <stdint.h>
 
-void			ft_umaxtostr(char *str, size_t len, uintmax_t n);
+void			ft_uimaxtostr(char *str, size_t len, uintmax_t n);
 static size_t	ft_count_digit(uintmax_t n);
 static void		ft_fill(char *buf, size_t len, uintmax_t n, size_t i);
 
-void	ft_umaxtostr(char *buf, size_t len, uintmax_t n)
+void	ft_uimaxtostr(char *buf, size_t len, uintmax_t n)
 {
 	size_t	numb_digit;
 

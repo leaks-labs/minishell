@@ -2,13 +2,14 @@
 #include "env.h"
 #include <stdio.h>
 
-int	ft_env(t_msh *msh, char **args);
+int	ft_env(t_msh *msh, t_pl *pl, char **args);
 
-int	ft_env(t_msh *msh, char **args)
+int	ft_env(t_msh *msh, t_pl *pl, char **args)
 {
 	t_list_node	*node;
 	t_var		*var;
 
+	(void)pl;
 	(void)args;
 	node = msh->env.list_node;
 	while (node != NULL)
