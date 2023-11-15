@@ -16,11 +16,11 @@ uint8_t	ft_exec_line(t_msh *msh, t_pl *pl)
 
 	// pl->cmd_list = ft_calloc(1, sizeof(t_cmd));
 	// pl->n_cmd = 1;
-	// pl->cmd_list->n_redirect = 0;
-	// pl->cmd_list->args = ft_split("exit -9223372036854775809", ' ');
+	// pl->cmd_list->n_redirect = 1;
+	// pl->cmd_list->args = NULL;//ft_split("", ' ');
 	// pl->cmd_list->redirect_arr = ft_calloc(1, sizeof(t_redirect));
-	// pl->cmd_list->redirect_arr->file = ft_strdup("testfile");
-	// pl->cmd_list->redirect_arr->e_iotype = OUTPUT;
+	// pl->cmd_list->redirect_arr->file = ft_strdup("\" \"");
+	// pl->cmd_list->redirect_arr->e_iotype = HEREDOC;
 
 	if (ft_init_exl(&s_exl, msh, pl) == -1)
 	{
@@ -48,12 +48,14 @@ static int	ft_exec_cmd(t_msh *msh, t_exl *exl, t_pl *pl)
 	t_built_f		built_f;
 	t_in_shell_pmt	pmt;
 
+	built_f = NULL;
 	pmt.msh = msh;
 	pmt.pl = pl;
 	pmt.exl = exl;
 	if (pl->n_cmd == 1)
 	{
-		built_f = ft_get_builtin(*pl->cmd_list->args);
+		if (pl->cmd_list->args != NULL)
+			built_f = ft_get_builtin(*pl->cmd_list->args);
 		if (pl->cmd_list->args == NULL || built_f != NULL)
 			return (ft_in_shell(&pmt, pl->cmd_list, built_f));
 	}
