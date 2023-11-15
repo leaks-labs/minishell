@@ -21,7 +21,7 @@ uint8_t	ft_exec_line(t_msh *msh, t_pl *pl)
 	// pl->cmd_list = ft_calloc(1, sizeof(t_cmd));
 	// pl->n_cmd = 1;
 	// pl->cmd_list->n_redirect = 0;
-	// pl->cmd_list->args = ft_split("bash", ' ');
+	// pl->cmd_list->args = ft_split("ls", ' ');
 	// pl->cmd_list->redirect_arr = ft_calloc(1, sizeof(t_redirect));
 	// pl->cmd_list->redirect_arr->file = ft_strdup("\" \"");
 	// pl->cmd_list->redirect_arr->e_iotype = HEREDOC;
