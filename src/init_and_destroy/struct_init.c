@@ -2,6 +2,7 @@
 #include "directory_path.h"
 #include "env.h"
 #include "utils.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -9,6 +10,7 @@
 t_msh		*ft_struct_init(char **envp);
 static char	*ft_get_first_cwd(t_list *env);
 static bool	ft_issameinode(char *p1, char *p2);
+static void	ft_set_shlvl(t_list *env);
 
 t_msh	*ft_struct_init(char **envp)
 {
@@ -20,6 +22,7 @@ t_msh	*ft_struct_init(char **envp)
 	if (ft_env_to_list(&msh->env, envp) == -1)
 		return (ft_freef("%p", msh));
 	msh->cwd = ft_get_first_cwd(&msh->env);
+	ft_set_shlvl(&msh->env);
 	return (msh);
 }
 
@@ -54,4 +57,33 @@ static bool	ft_issameinode(char *p1, char *p2)
 
 	return (stat(p1, &buf_p1) == 0 && stat(p2, &buf_p2) == 0 \
 			&& buf_p1.st_ino == buf_p2.st_ino);
+}
+
+static void	ft_set_shlvl(t_list *env)
+{
+	t_var		*shlvl;
+	int32_t		lvl;
+	bool		error;
+	char		new_lvl[5];
+
+	shlvl = ft_get_var(env, "SHLVL");
+	lvl = 1;
+	error = false;
+	if (shlvl != NULL && shlvl->value != NULL)
+	{
+		lvl = (int32_t)(ft_strtoimax(shlvl->value, &error) + 1);
+		if (error == true)
+			lvl = 1;
+		else if (lvl >= 1000)
+		{
+			printf("minishell: warning: shell level (%d) too high, ", lvl);
+			printf("resetting to 1\n");
+			lvl = 1;
+		}
+		else if (lvl < 0)
+			lvl = 0;
+	}
+	ft_uimaxtostr(new_lvl, 4, (uintmax_t)lvl);
+	ft_mod_env2(env, "SHLVL", new_lvl, ENV_EXP);
+	// what to do if ft_mod_env2 fails ?
 }
