@@ -73,7 +73,8 @@ static int	ft_launch_extern_cmd(t_exl *exl, char **args)
 	cmd_path = ft_get_cmd_path(exl->path, args[0]);
 	if (cmd_path != NULL)
 	{
-		// is it in the right place? Better to be earlier?
+		ft_mod_env2(exl->env, "_", cmd_path, ENV_EXP);
+		// catch ft_modenv2 errors ?
 		export_env = ft_lst_to_env(exl->env);
 		ft_set_signals(MSH_SIG_EXT_CMD);
 		execve(cmd_path, args, export_env);
