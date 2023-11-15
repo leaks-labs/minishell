@@ -3,6 +3,7 @@
 
 # define ENV_EXP 1
 # define ENV_ASSIGN 2
+# define ENV_NOEXP 4
 
 # include "exec.h"
 
