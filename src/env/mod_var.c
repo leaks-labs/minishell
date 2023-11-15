@@ -14,7 +14,9 @@ int	ft_mod_env2(t_list *env, const char *name, const char *val, int f)
 
 	if (name == NULL)
 		return (0);
-	if (val == NULL)
+	if (val == NULL && (f & ENV_ASSIGN) == ENV_ASSIGN)
+		assignation = ft_join(2, name, "=");
+	else if (val == NULL)
 		assignation = ft_strdup(name);
 	else
 		assignation = ft_join(3, name, "=", val);
@@ -45,8 +47,13 @@ static int	ft_update_var(t_list *env, t_var *var, const char *arg, int f)
 		return (-1);
 	if ((f & ENV_EXP) == ENV_EXP)
 	{
-		env->n_exported += (var->exported == 0);
+		env->n_exported += (var->exported == false);
 		var->exported = true;
+	}
+	else if ((f & ENV_NOEXP) == ENV_NOEXP)
+	{
+		env->n_exported -= (var->exported == true);
+		var->exported = false;
 	}
 	return (0);
 }
