@@ -2,7 +2,7 @@
 # define REDIRECTIONS_H
 
 # define TMP_FILE_BASE_NAME "/tmp/msh-thd-"
-# define MAX_LEN_NUM 21
+# define MAX_LEN_NUM 20
 
 # include "exec.h"
 

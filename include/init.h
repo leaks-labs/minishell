@@ -4,6 +4,8 @@
 # include "exec.h"
 
 # define NO_LAST_COMMAND 0
+# define MAX_SHLVL 999
+# define MAX_SHLVL_NUM_LEN 3
 
 /*	STRUCT_DESTROY	*/
 int		ft_quit(t_msh *msh);

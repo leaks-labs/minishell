@@ -64,7 +64,7 @@ static void	ft_set_shlvl(t_list *env)
 	t_var		*shlvl;
 	int32_t		lvl;
 	bool		error;
-	char		new_lvl[5];
+	char		new_lvl[MAX_SHLVL_NUM_LEN + 1];
 
 	shlvl = ft_get_var(env, "SHLVL");
 	lvl = 1;
@@ -74,7 +74,7 @@ static void	ft_set_shlvl(t_list *env)
 		lvl = (int32_t)(ft_strtoimax(shlvl->value, &error) + 1);
 		if (error == true)
 			lvl = 1;
-		else if (lvl >= 1000)
+		else if (lvl > MAX_SHLVL)
 		{
 			printf("minishell: warning: shell level (%d) too high, ", lvl);
 			printf("resetting to 1\n");
@@ -83,7 +83,7 @@ static void	ft_set_shlvl(t_list *env)
 		else if (lvl < 0)
 			lvl = 0;
 	}
-	ft_uimaxtostr(new_lvl, 4, (uintmax_t)lvl);
+	ft_uimaxtostr(new_lvl, MAX_SHLVL_NUM_LEN + 1, (uintmax_t)lvl);
 	ft_mod_env2(env, "SHLVL", new_lvl, ENV_EXP);
 	// what to do if ft_mod_env2 fails ?
 }
