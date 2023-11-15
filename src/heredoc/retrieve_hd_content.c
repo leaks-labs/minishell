@@ -54,7 +54,8 @@ static bool	ft_end_of_hd(char *current_line, char *del, unsigned int line_num)
 	{
 		if (current_line == NULL)
 		{
-			printf("msh: warning: here-document at line %d delimited by end-of-file (wanted `%s')\n", line_num, del);
+			printf("msh: warning: here-document at line %d ", line_num);
+			printf("delimited by end-of-file (wanted `%s')\n", del);
 			g_signal_value = EOF;
 		}
 		else
