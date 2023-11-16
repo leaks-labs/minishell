@@ -30,7 +30,7 @@ CFLAGS+=	-O3 					\
 			-Wunused-macros 		\
 			-Wwrite-strings 		\
 			-Wmissing-prototypes 	\
-			-Wmissing-declarations	\
+			-Wmissing-declarations
 
 #			-Wpedantic \
 # 			-pedantic-errors
@@ -48,7 +48,7 @@ CFLAGS+=	-O3 					\
 #			-Walloc-zero
 
 ADDITIONAL_CPPFLAGS=
-ADDITIONAL_LDFLAGS=
+ADDITIONAL_LDFLAGS= -fsanitize=address
 
 ifeq (${shell uname}, Darwin)
         LIB_DIRS+= $$HOMEBREW_PREFIX/opt/readline/lib
@@ -160,7 +160,7 @@ COLOR_RESET := \033[0m
 all: ${NAME}
 
 ${NAME}: ${OBJS}
-	${CC} ${LDFLAGS} ${OBJS} ${LDLIBS} -o $@ -fsanitize=address
+	${CC} ${LDFLAGS} ${OBJS} ${LDLIBS} -o $@
 	echo "${COLOR_GREEN}Compilation completed.${COLOR_RESET}"
 
 ${OBJS_DIR}/%.o: ${SRCS_DIR}/%${EXT}
