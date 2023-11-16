@@ -27,11 +27,12 @@ int	ft_in_subshell(t_msh *msh, t_exl *exl, t_pl *pl)
 	while (exl->cmd_idx < exl->n_cmd)
 	{
 		last_pid = -1;
-		current_cmd = pl->cmd_list + exl->cmd_idx++;
+		current_cmd = pl->cmd_list + exl->cmd_idx;
 		// ft_default_redirections(exl) ????
 		if (ft_default_redirections(exl) == 0)
 			last_pid = ft_child_proc(msh, exl, pl, current_cmd);
 		ft_close_used_pipes(&exl->s_fd_io);
+		++exl->cmd_idx;
 	}
 	return (ft_wait(last_pid));
 }
