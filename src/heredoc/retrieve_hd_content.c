@@ -6,18 +6,18 @@
 #include <readline/readline.h>
 
 char		*ft_get_hd_content(char *del, unsigned int *line_num);
-static char	*ft_retrieve_one_line(bool to_expand);
+static char	*ft_retrieve_one_line(const bool to_expand);
 static bool	ft_end_of_hd(char *current_line, char *del, unsigned int line_num);
 static char	*ft_update_hd_content(char *hd_content, char *current_line);
 
 char	*ft_get_hd_content(char *del, unsigned int *line_num)
 {
+	const bool			to_expand = (ft_strchr(del, '\"') == NULL \
+									&& ft_strchr(del, '\'') == NULL);
 	const unsigned int	first_line_num = *line_num;	
 	char				*hd_content;
 	char				*current_line;
-	bool				to_expand;
 
-	to_expand = (ft_strchr(del, '\"') == NULL && ft_strchr(del, '\'') == NULL);
 	if (to_expand == false)
 		ft_rm_quotes(del);
 	hd_content = ft_calloc(1, sizeof(char));
@@ -39,7 +39,7 @@ char	*ft_get_hd_content(char *del, unsigned int *line_num)
 	return (hd_content);
 }
 
-static char	*ft_retrieve_one_line(bool to_expand)
+static char	*ft_retrieve_one_line(const bool to_expand)
 {
 	char	*current_line;
 
