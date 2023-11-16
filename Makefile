@@ -18,19 +18,31 @@ CC:=	clang
 
 CFLAGS=	-Wall -Wextra -Werror
 
-CFLAGS+=	-O3 					\
-			-Wconversion 			\
-			-Wdouble-promotion		\
-			-Wfloat-equal 			\
-			-Wformat=2 				\
-			-Winit-self 			\
-			-fno-common 			\
-			-Wshadow 				\
-			-Wundef 				\
-			-Wunused-macros 		\
-			-Wwrite-strings 		\
-			-Wmissing-prototypes 	\
-			-Wmissing-declarations
+CFLAGS+=
+
+ADDITIONAL_CPPFLAGS=
+ADDITIONAL_LDFLAGS=
+
+ifeq (${shell uname}, Darwin)
+        LIB_DIRS+= $$HOMEBREW_PREFIX/opt/readline/lib
+        INC_DIRS+= $$HOMEBREW_PREFIX/opt/readline/include
+endif
+
+DEBUG:=	-fsanitize=address
+
+DEVEL:=	-O3						\
+		-Wconversion 			\
+		-Wdouble-promotion		\
+		-Wfloat-equal 			\
+		-Wformat=2 				\
+		-Winit-self 			\
+		-fno-common 			\
+		-Wshadow 				\
+		-Wundef 				\
+		-Wunused-macros 		\
+		-Wwrite-strings 		\
+		-Wmissing-prototypes 	\
+		-Wmissing-declarations
 
 #			-Wpedantic \
 # 			-pedantic-errors
@@ -46,14 +58,6 @@ CFLAGS+=	-O3 					\
 #			-Wduplicated-cond \
 #			-Wduplicated-branches \
 #			-Walloc-zero
-
-ADDITIONAL_CPPFLAGS=
-ADDITIONAL_LDFLAGS= -fsanitize=address
-
-ifeq (${shell uname}, Darwin)
-        LIB_DIRS+= $$HOMEBREW_PREFIX/opt/readline/lib
-        INC_DIRS+= $$HOMEBREW_PREFIX/opt/readline/include
-endif
 
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
@@ -133,8 +137,13 @@ SRCS_FILES:=	builtins/cd_get_curpath			\
 #                                 SRC's FORMATING                              #
 ################################################################################
 
-SRCS:=	${addprefix ${SRCS_DIR}/,${addsuffix ${EXT},${MAIN} ${SRCS_FILES}}}
+LAST_ARG= ${lastword ${MAKECMDGOALS}}
 
+ifeq ($(filter $(LAST_ARG),devel debug),$(LAST_ARG))
+LAST_ARG= all
+endif
+
+SRCS:=	${addprefix ${SRCS_DIR}/,${addsuffix ${EXT},${MAIN} ${SRCS_FILES}}}
 
 OBJS_DIR:= ${BUILD_DIR}/objs
 OBJS:=	${SRCS:${SRCS_DIR}/%${EXT}=${OBJS_DIR}/%.o}
@@ -167,6 +176,12 @@ ${OBJS_DIR}/%.o: ${SRCS_DIR}/%${EXT}
 	mkdir -p ${dir $@}
 	mkdir -p ${dir ${@:${OBJS_DIR}/%.o=${DEPS_DIR}/%.d}}
 	${CC} ${CPPFLAGS} ${CFLAGS} -c $< -o $@
+
+debug: ADDITIONAL_LDFLAGS+= ${DEBUG}
+debug: ${LAST_ARG}
+
+devel: CFLAGS+= ${DEVEL}
+devel: ${LAST_ARG}
 
 clean:
 	${RM} ${BUILD_DIR}
