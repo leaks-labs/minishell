@@ -24,18 +24,19 @@ int	ft_quit(t_msh *msh)
 void	ft_free_cmd_list(t_pl *pipeline)
 {
 	t_cmd	*cmd;
-	ssize_t	i;
-	ssize_t	j;
+	size_t	i;
+	size_t	j;
 
 	cmd = pipeline->cmd_list;
-	i = -1;
-	while (++i < pipeline->n_cmd)
+	i = 0;
+	while (i < pipeline->n_cmd)
 	{
 		ft_freef("%P", cmd[i].args);
-		j = -1;
-		while (++j < cmd[i].n_redirect)
-			free(cmd[i].redirect_arr[j].file);
+		j = 0;
+		while (j < cmd[i].n_redirect)
+			free(cmd[i].redirect_arr[j++].file);
 		free(cmd[i].redirect_arr);
+		++i;
 	}
 	free(cmd);
 	pipeline->cmd_list = NULL;

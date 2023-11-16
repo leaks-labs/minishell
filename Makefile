@@ -109,6 +109,7 @@ SRCS_FILES:=	builtins/cd_get_curpath			\
 				utils/ft_memcpy					\
 				utils/ft_putendl_fd				\
 				utils/ft_putstr_fd				\
+				utils/ft_rm_quotes				\
 				utils/ft_split					\
 				utils/ft_strchr					\
 				utils/ft_strcmp					\

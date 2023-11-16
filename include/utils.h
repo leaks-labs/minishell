@@ -16,6 +16,7 @@ char		*ft_join(int argc, ...);
 void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		ft_putendl_fd(const char *s, int fd);
 void		ft_putstr_fd(const char *s, int fd);
+void		ft_rm_quotes(char *del);
 char		**ft_split(char const *s, char c);
 char		*ft_strchr(const char *s, int c);
 int			ft_strcmp(const char *s1, const char *s2);

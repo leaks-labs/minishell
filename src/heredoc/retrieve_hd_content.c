@@ -6,7 +6,6 @@
 #include <readline/readline.h>
 
 char		*ft_get_hd_content(char *del, unsigned int *line_num);
-static void	ft_rm_quotes(char *del);
 static char	*ft_retrieve_one_line(bool to_expand);
 static bool	ft_end_of_hd(char *current_line, char *del, unsigned int line_num);
 static char	*ft_update_hd_content(char *hd_content, char *current_line);
@@ -38,28 +37,6 @@ char	*ft_get_hd_content(char *del, unsigned int *line_num)
 			return (ft_freef("%p", hd_content));
 	}
 	return (hd_content);
-}
-
-static void	ft_rm_quotes(char *del)
-{
-	char	to_trim;
-	size_t	i;
-	size_t	j;
-
-	to_trim = '\0';
-	i = 0;
-	j = i;
-	while (del[i] != '\0')
-	{
-		if (to_trim == '\0' && (del[i] == '\"' || del[i] == '\''))
-			to_trim = del[i];
-		else if (to_trim != '\0' && del[i] == to_trim)
-			to_trim = '\0';
-		else
-			del[j++] = del[i];
-		++i;
-	}
-	del[j] = '\0';
 }
 
 static char	*ft_retrieve_one_line(bool to_expand)

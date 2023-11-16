@@ -81,7 +81,7 @@ static char	*ft_iterate_cdpath(t_list *env, char *curpath)
 {
 	char	**cdpath;
 	char	*tmp;
-	ssize_t	i;
+	size_t	i;
 
 	if (ft_begin_with_dots(curpath) == false)
 	{
@@ -89,10 +89,10 @@ static char	*ft_iterate_cdpath(t_list *env, char *curpath)
 		// print error?
 		if (cdpath == NULL)
 			return (curpath);
-		i = -1;
-		while (cdpath[++i] != NULL)
+		i = 0;
+		while (cdpath[i] != NULL)
 		{
-			tmp = ft_form_cdpath(cdpath[i], curpath);
+			tmp = ft_form_cdpath(cdpath[i++], curpath);
 			if (tmp != NULL && ft_isadir(tmp) == true)
 			{
 				free(curpath);

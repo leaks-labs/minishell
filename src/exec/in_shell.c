@@ -12,7 +12,6 @@ int	ft_in_shell(t_in_shell_pmt *pmt, t_cmd *cmd, t_built_f built_f)
 	int		err_code;
 
 	exl = pmt->exl;
-	++exl->cmd_idx;
 	if (ft_save_stdio_fileno(&s_origin_stdio_fd) == -1)
 		return (1);
 	err_code = 0;
