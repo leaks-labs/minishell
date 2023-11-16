@@ -7,11 +7,11 @@ static int	ft_update_redirect(t_redirect *redir, unsigned int *line_num);
 
 int	ft_heredoc(t_cmd *cmd_list, t_exl *exl)
 {
-	ssize_t	i;
+	size_t	i;
 
-	i = -1;
-	while (++i < exl->n_cmd)
-		if (ft_search_for_hd(cmd_list + i, exl->line_num) == -1)
+	i = 0;
+	while (i < exl->n_cmd)
+		if (ft_search_for_hd(cmd_list + i++, exl->line_num) == -1)
 			return (-1);
 	return (0);
 }
@@ -19,12 +19,12 @@ int	ft_heredoc(t_cmd *cmd_list, t_exl *exl)
 static int	ft_search_for_hd(t_cmd *cmd, unsigned int *line_num)
 {
 	t_redirect	*current_redir;
-	ssize_t		j;
+	size_t		i;
 
-	j = -1;
-	while (++j < cmd->n_redirect)
+	i = 0;
+	while (i < cmd->n_redirect)
 	{
-		current_redir = cmd->redirect_arr + j;
+		current_redir = cmd->redirect_arr + i++;
 		if (current_redir->e_iotype == HEREDOC \
 			&& ft_update_redirect(current_redir, line_num) == -1)
 		{

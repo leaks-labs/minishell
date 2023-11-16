@@ -17,12 +17,6 @@ typedef enum io_type
 	APPEND
 }			t_io_type;
 
-typedef struct msh_args
-{
-	size_t	msh_argc;
-	char	**msh_argv;
-}				t_msh_args;
-
 typedef struct redirect
 {
 	char		*file;
@@ -33,13 +27,13 @@ typedef struct cmd
 {
 	char		**args;
 	t_redirect	*redirect_arr;
-	ssize_t		n_redirect;
+	size_t		n_redirect;
 }				t_cmd;
 
 typedef struct pipeline
 {
 	t_cmd	*cmd_list;
-	ssize_t	n_cmd;
+	size_t	n_cmd;
 }				t_pl;
 
 t_parse_return	ft_parse(t_pl *pipeline, char *line);

@@ -27,15 +27,15 @@ int	ft_set_redirections(t_exl *exl, t_cmd *cmd)
 {
 	int			(*f[4])(t_exl *, const char *);
 	t_redirect	*current_redirect;
-	ssize_t		i;
+	size_t		i;
 
 	(f)[INPUT] = &ft_set_input;
 	(f)[HEREDOC] = &ft_set_heredoc;
 	(f)[OUTPUT] = &ft_set_output;
 	(f)[APPEND] = &ft_set_append;
-	i = -1;
+	i = 0;
 	current_redirect = cmd->redirect_arr;
-	while (++i < cmd->n_redirect)
+	while (i++ < cmd->n_redirect)
 	{
 		if ((f)[current_redirect->e_iotype](exl, current_redirect->file) == -1)
 			return (-1);

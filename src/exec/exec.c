@@ -18,13 +18,21 @@ uint8_t	ft_exec_line(t_msh *msh, t_pl *pl)
 	t_exl	s_exl;
 	int		exit_code;
 
-	// pl->cmd_list = ft_calloc(1, sizeof(t_cmd));
-	// pl->n_cmd = 1;
-	// pl->cmd_list->n_redirect = 0;
-	// pl->cmd_list->args = ft_split("ls", ' ');
+	// pl->cmd_list = ft_calloc(3, sizeof(t_cmd));
+	// pl->n_cmd = 3;
+	// pl->cmd_list->n_redirect = 1;
+	// pl->cmd_list->args = ft_split("cat", ' ');
 	// pl->cmd_list->redirect_arr = ft_calloc(1, sizeof(t_redirect));
-	// pl->cmd_list->redirect_arr->file = ft_strdup("\" \"");
+	// pl->cmd_list->redirect_arr->file = ft_strdup("EOF");
 	// pl->cmd_list->redirect_arr->e_iotype = HEREDOC;
+	// pl->cmd_list[1].n_redirect = 0;
+	// pl->cmd_list[1].args = ft_split("uniq", ' ');
+	// pl->cmd_list[1].redirect_arr = NULL;
+	// pl->cmd_list[2].n_redirect = 1;
+	// pl->cmd_list[2].args = ft_split("sort", ' ');
+	// pl->cmd_list[2].redirect_arr = ft_calloc(1, sizeof(t_redirect));
+	// pl->cmd_list[2].redirect_arr->file = ft_strdup("testfile");
+	// pl->cmd_list[2].redirect_arr->e_iotype = OUTPUT;
 
 	if (ft_init_exl(&s_exl, msh, pl) == -1)
 	{
@@ -43,7 +51,7 @@ static int	ft_init_exl(t_exl *exl, t_msh *msh, t_pl *pl)
 	exl->env = &msh->env;
 	exl->path = msh->path;
 	exl->line_num = &msh->line_num;
-	exl->cmd_idx = -1;
+	exl->cmd_idx = 0;
 	exl->n_cmd = pl->n_cmd;
 	return (ft_heredoc(pl->cmd_list, exl));
 }

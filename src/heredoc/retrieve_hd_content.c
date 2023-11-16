@@ -6,19 +6,18 @@
 #include <readline/readline.h>
 
 char		*ft_get_hd_content(char *del, unsigned int *line_num);
-static void	ft_rm_quotes(char *del);
-static char	*ft_retrieve_one_line(bool to_expand);
+static char	*ft_retrieve_one_line(const bool to_expand);
 static bool	ft_end_of_hd(char *current_line, char *del, unsigned int line_num);
 static char	*ft_update_hd_content(char *hd_content, char *current_line);
 
 char	*ft_get_hd_content(char *del, unsigned int *line_num)
 {
+	const bool			to_expand = (ft_strchr(del, '\"') == NULL \
+									&& ft_strchr(del, '\'') == NULL);
 	const unsigned int	first_line_num = *line_num;	
 	char				*hd_content;
 	char				*current_line;
-	bool				to_expand;
 
-	to_expand = (ft_strchr(del, '\"') == NULL && ft_strchr(del, '\'') == NULL);
 	if (to_expand == false)
 		ft_rm_quotes(del);
 	hd_content = ft_calloc(1, sizeof(char));
@@ -40,29 +39,7 @@ char	*ft_get_hd_content(char *del, unsigned int *line_num)
 	return (hd_content);
 }
 
-static void	ft_rm_quotes(char *del)
-{
-	char	to_trim;
-	size_t	i;
-	size_t	j;
-
-	to_trim = '\0';
-	i = 0;
-	j = i;
-	while (del[i] != '\0')
-	{
-		if (to_trim == '\0' && (del[i] == '\"' || del[i] == '\''))
-			to_trim = del[i];
-		else if (to_trim != '\0' && del[i] == to_trim)
-			to_trim = '\0';
-		else
-			del[j++] = del[i];
-		++i;
-	}
-	del[j] = '\0';
-}
-
-static char	*ft_retrieve_one_line(bool to_expand)
+static char	*ft_retrieve_one_line(const bool to_expand)
 {
 	char	*current_line;
 
@@ -72,6 +49,7 @@ static char	*ft_retrieve_one_line(bool to_expand)
 	ft_set_signals(MSH_SIG_IGN);
 	if (g_signal_value > 0 && current_line != NULL)
 		current_line = ft_freef("%p", current_line);
+	// add expander
 	return (current_line);
 }
 
