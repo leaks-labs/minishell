@@ -49,6 +49,7 @@ static char	*ft_retrieve_one_line(bool to_expand)
 	ft_set_signals(MSH_SIG_IGN);
 	if (g_signal_value > 0 && current_line != NULL)
 		current_line = ft_freef("%p", current_line);
+	// add expander
 	return (current_line);
 }
 
