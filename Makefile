@@ -88,6 +88,7 @@ SRCS_FILES:=	builtins/cd_get_curpath			\
 				exec/in_shell					\
 				exec/in_subshell				\
 				exec/run						\
+				exec/wait						\
 				heredoc/heredoc					\
 				heredoc/retrieve_hd_content		\
 				init_and_destroy/struct_destroy	\
