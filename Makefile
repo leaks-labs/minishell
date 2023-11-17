@@ -28,21 +28,22 @@ ifeq (${shell uname}, Darwin)
         INC_DIRS+= $$HOMEBREW_PREFIX/opt/readline/include
 endif
 
-DEBUG:=	-fsanitize=address
+DEVEL_ADDITIONAL_LDFLAGS:=	-fsanitize=address
 
-DEVEL:=	-O3						\
-		-Wconversion 			\
-		-Wdouble-promotion		\
-		-Wfloat-equal 			\
-		-Wformat=2 				\
-		-Winit-self 			\
-		-fno-common 			\
-		-Wshadow 				\
-		-Wundef 				\
-		-Wunused-macros 		\
-		-Wwrite-strings 		\
-		-Wmissing-prototypes 	\
-		-Wmissing-declarations
+DEVEL_CFLAGS:=	-O3						\
+				-Wconversion 			\
+				-Wdouble-promotion		\
+				-Wfloat-equal 			\
+				-Wformat=2 				\
+				-Winit-self 			\
+				-fno-common 			\
+				-Wshadow 				\
+				-Wundef 				\
+				-Wunused-macros 		\
+				-Wwrite-strings 		\
+				-Wmissing-prototypes 	\
+				-Wmissing-declarations	\
+				-g3
 
 #			-Wpedantic \
 # 			-pedantic-errors
@@ -139,7 +140,7 @@ SRCS_FILES:=	builtins/cd_get_curpath			\
 
 LAST_ARG= ${lastword ${MAKECMDGOALS}}
 
-ifeq ($(filter $(LAST_ARG),devel debug),$(LAST_ARG))
+ifeq (devel,$(LAST_ARG))
 LAST_ARG= all
 endif
 
@@ -177,10 +178,9 @@ ${OBJS_DIR}/%.o: ${SRCS_DIR}/%${EXT}
 	mkdir -p ${dir ${@:${OBJS_DIR}/%.o=${DEPS_DIR}/%.d}}
 	${CC} ${CPPFLAGS} ${CFLAGS} -c $< -o $@
 
-debug: ADDITIONAL_LDFLAGS+= ${DEBUG}
-debug: ${LAST_ARG}
 
-devel: CFLAGS+= ${DEVEL}
+devel: ADDITIONAL_LDFLAGS+= ${DEVEL_ADDITIONAL_LDFLAGS}
+devel: CFLAGS+= ${DEVEL_CFLAGS}
 devel: ${LAST_ARG}
 
 clean:
