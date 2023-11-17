@@ -27,11 +27,12 @@ void	ft_run(t_msh *msh)
 		if (*line != '\0')
 		{
 			add_history(line);
-			// line to free in ft_parse
 			msh->exit_status = (uint8_t)ft_parse(&s_pipeline, line);
+			free(line);
 			if (msh->exit_status == PARSE_SUCCESS)
 				msh->exit_status = ft_exec_line(msh, &s_pipeline);
 		}
-		free(line);
+		else
+			free(line);
 	}
 }
