@@ -138,11 +138,13 @@ SRCS_FILES:=	builtins/cd_get_curpath			\
 #                                 SRC's FORMATING                              #
 ################################################################################
 
-LAST_ARG= ${lastword ${MAKECMDGOALS}}
+# LAST_ARG= ${lastword ${MAKECMDGOALS}}
 
-ifeq (devel,$(LAST_ARG))
-LAST_ARG= all
-endif
+# ifeq (devel,$(LAST_ARG))
+# LAST_ARG= all
+# endif
+
+MAKEFILE_NAME:= ${lastword ${MAKEFILE_LIST}}
 
 SRCS:=	${addprefix ${SRCS_DIR}/,${addsuffix ${EXT},${MAIN} ${SRCS_FILES}}}
 
@@ -173,15 +175,14 @@ ${NAME}: ${OBJS}
 	${CC} ${LDFLAGS} ${OBJS} ${LDLIBS} -o $@
 	echo "${COLOR_GREEN}Compilation completed.${COLOR_RESET}"
 
-${OBJS_DIR}/%.o: ${SRCS_DIR}/%${EXT}
+${OBJS_DIR}/%.o: ${SRCS_DIR}/%${EXT} ${MAKEFILE_NAME}
 	mkdir -p ${dir $@}
 	mkdir -p ${dir ${@:${OBJS_DIR}/%.o=${DEPS_DIR}/%.d}}
 	${CC} ${CPPFLAGS} ${CFLAGS} -c $< -o $@
 
-
-devel: ADDITIONAL_LDFLAGS+= ${DEVEL_ADDITIONAL_LDFLAGS}
-devel: CFLAGS+= ${DEVEL_CFLAGS}
-devel: ${LAST_ARG}
+# devel: ADDITIONAL_LDFLAGS+= ${DEVEL_ADDITIONAL_LDFLAGS}
+# devel: CFLAGS+= ${DEVEL_CFLAGS}
+# devel: ${LAST_ARG}
 
 clean:
 	${RM} ${BUILD_DIR}
