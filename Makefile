@@ -18,32 +18,20 @@ CC:=	clang
 
 CFLAGS=	-Wall -Wextra -Werror
 
-CFLAGS+=
-
-ADDITIONAL_CPPFLAGS=
-ADDITIONAL_LDFLAGS=
-
-ifeq (${shell uname}, Darwin)
-        LIB_DIRS+= $$HOMEBREW_PREFIX/opt/readline/lib
-        INC_DIRS+= $$HOMEBREW_PREFIX/opt/readline/include
-endif
-
-DEVEL_ADDITIONAL_LDFLAGS:=	-fsanitize=address
-
-DEVEL_CFLAGS:=	-O3						\
-				-Wconversion 			\
-				-Wdouble-promotion		\
-				-Wfloat-equal 			\
-				-Wformat=2 				\
-				-Winit-self 			\
-				-fno-common 			\
-				-Wshadow 				\
-				-Wundef 				\
-				-Wunused-macros 		\
-				-Wwrite-strings 		\
-				-Wmissing-prototypes 	\
-				-Wmissing-declarations	\
-				-g3
+CFLAGS+=	-O3						\
+			-Wconversion 			\
+			-Wdouble-promotion		\
+			-Wfloat-equal 			\
+			-Wformat=2 				\
+			-Winit-self 			\
+			-fno-common 			\
+			-Wshadow 				\
+			-Wundef 				\
+			-Wunused-macros 		\
+			-Wwrite-strings 		\
+			-Wmissing-prototypes 	\
+			-Wmissing-declarations	\
+			-g3
 
 #			-Wpedantic \
 # 			-pedantic-errors
@@ -59,6 +47,14 @@ DEVEL_CFLAGS:=	-O3						\
 #			-Wduplicated-cond \
 #			-Wduplicated-branches \
 #			-Walloc-zero
+
+ADDITIONAL_CPPFLAGS=
+ADDITIONAL_LDFLAGS= -fsanitize=address
+
+ifeq (${shell uname}, Darwin)
+        LIB_DIRS+= $$HOMEBREW_PREFIX/opt/readline/lib
+        INC_DIRS+= $$HOMEBREW_PREFIX/opt/readline/include
+endif
 
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
@@ -89,6 +85,7 @@ SRCS_FILES:=	builtins/cd_get_curpath			\
 				exec/in_shell					\
 				exec/in_subshell				\
 				exec/run						\
+				exec/wait						\
 				heredoc/heredoc					\
 				heredoc/retrieve_hd_content		\
 				init_and_destroy/struct_destroy	\
@@ -135,14 +132,10 @@ SRCS_FILES:=	builtins/cd_get_curpath			\
 				utils/ft_lst/ft_lstsize
 
 ################################################################################
-#                                 SRC's FORMATING                              #
+#                                 VAR FORMATING                                #
 ################################################################################
 
-LAST_ARG= ${lastword ${MAKECMDGOALS}}
-
-ifeq (devel,$(LAST_ARG))
-LAST_ARG= all
-endif
+MAKEFILE_NAME:= ${lastword ${MAKEFILE_LIST}}
 
 SRCS:=	${addprefix ${SRCS_DIR}/,${addsuffix ${EXT},${MAIN} ${SRCS_FILES}}}
 
@@ -164,7 +157,7 @@ COLOR_GREEN := \033[32m
 COLOR_RESET := \033[0m
 
 ################################################################################
-#                                 Makefile rules                               #
+#                                 MAKEFILE RULES                               #
 ################################################################################
 
 all: ${NAME}
@@ -173,15 +166,10 @@ ${NAME}: ${OBJS}
 	${CC} ${LDFLAGS} ${OBJS} ${LDLIBS} -o $@
 	echo "${COLOR_GREEN}Compilation completed.${COLOR_RESET}"
 
-${OBJS_DIR}/%.o: ${SRCS_DIR}/%${EXT}
+${OBJS_DIR}/%.o: ${SRCS_DIR}/%${EXT} ${MAKEFILE_NAME}
 	mkdir -p ${dir $@}
 	mkdir -p ${dir ${@:${OBJS_DIR}/%.o=${DEPS_DIR}/%.d}}
 	${CC} ${CPPFLAGS} ${CFLAGS} -c $< -o $@
-
-
-devel: ADDITIONAL_LDFLAGS+= ${DEVEL_ADDITIONAL_LDFLAGS}
-devel: CFLAGS+= ${DEVEL_CFLAGS}
-devel: ${LAST_ARG}
 
 clean:
 	${RM} ${BUILD_DIR}

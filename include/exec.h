@@ -63,5 +63,7 @@ int		ft_in_shell(t_in_shell_pmt *pmt, t_cmd *cmd, t_built_f built_f);
 int		ft_in_subshell(t_msh *msh, t_exl *exl, t_pl *pl);
 /*	RUN	*/
 void	ft_run(t_msh *msh);
+/*	WAIT	*/
+int		ft_wait(pid_t last_pid);
 
 #endif

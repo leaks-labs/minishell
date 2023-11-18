@@ -8,14 +8,12 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/wait.h>
 #include <unistd.h>
 
 int				ft_in_subshell(t_msh *msh, t_exl *exl, t_pl *pl);
 static pid_t	ft_child_proc(t_msh *msh, t_exl *exl, t_pl *pl, t_cmd *cmd);
 static int		ft_launch_extern_cmd(t_exl *exl, char **args);
 static int		ft_get_err_code(const char *cmd);
-static int		ft_wait(pid_t last_pid);
 
 int	ft_in_subshell(t_msh *msh, t_exl *exl, t_pl *pl)
 {
@@ -109,31 +107,4 @@ static int	ft_get_err_code(const char *cmd)
 	else
 		return (EXIT_FAILURE);
 	// need to print error (perror()) for other error types?
-}
-
-static int	ft_wait(pid_t last_pid)
-{
-	int	wstatus;
-	int	exit_status;
-
-	if (last_pid != -1)
-	{
-		waitpid(last_pid, &wstatus, 0);
-		if (WIFSIGNALED(wstatus))
-		{
-			exit_status = 128 + WTERMSIG(wstatus);
-			if (exit_status == 128 + SIGQUIT)
-				printf("Quit: %d", SIGQUIT);
-			printf("\n");
-		}
-		else if (WIFEXITED(wstatus))
-			exit_status = WEXITSTATUS(wstatus);
-		else
-			exit_status = 1;
-	}
-	else
-		exit_status = 1;
-	while (wait(NULL) != -1 || errno != ECHILD)
-		;
-	return (exit_status);
 }

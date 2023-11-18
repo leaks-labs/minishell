@@ -16,7 +16,7 @@ void	ft_sighandler_heredoc(int sig)
 
 	g_signal_value = sig;
 	tcgetattr(STDIN_FILENO, &orig_termios);
-	new_termios = orig_termios;
+	tcgetattr(STDIN_FILENO, &new_termios);
 	new_termios.c_lflag &= (tcflag_t)(~(ICANON | ECHO));
 	tcsetattr(STDIN_FILENO, TCSANOW, &new_termios);
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
