@@ -10,14 +10,14 @@ typedef int			(*t_built_f)(t_msh *, t_pl *, char **);
 
 typedef enum builtins_list
 {
-	CD,
-	ECHO,
-	ENV,
-	EXIT,
-	EXPORT,
-	PWD,
-	UNSET,
-	N_BUILTINS
+	B_CD,
+	B_ECHO,
+	B_ENV,
+	B_EXIT,
+	B_EXPORT,
+	B_PWD,
+	B_UNSET,
+	B_N_BUILTINS
 }			t_builtins_list;
 
 typedef struct builtins_entry

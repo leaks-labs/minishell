@@ -25,7 +25,7 @@ static int	ft_search_for_hd(t_cmd *cmd, unsigned int *line_num)
 	while (i < cmd->n_redirect)
 	{
 		current_redir = cmd->redirect_arr + i++;
-		if (current_redir->e_iotype == HEREDOC \
+		if (current_redir->e_iotype == IO_HEREDOC \
 			&& ft_update_redirect(current_redir, line_num) == -1)
 		{
 			// perror()

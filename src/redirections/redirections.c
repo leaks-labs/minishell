@@ -29,10 +29,10 @@ int	ft_set_redirections(t_exl *exl, t_cmd *cmd)
 	t_redirect	*current_redirect;
 	size_t		i;
 
-	(f)[INPUT] = &ft_set_input;
-	(f)[HEREDOC] = &ft_set_heredoc;
-	(f)[OUTPUT] = &ft_set_output;
-	(f)[APPEND] = &ft_set_append;
+	(f)[IO_INPUT] = &ft_set_input;
+	(f)[IO_HEREDOC] = &ft_set_heredoc;
+	(f)[IO_OUTPUT] = &ft_set_output;
+	(f)[IO_APPEND] = &ft_set_append;
 	i = 0;
 	current_redirect = cmd->redirect_arr;
 	while (i++ < cmd->n_redirect)

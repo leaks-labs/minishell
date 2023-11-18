@@ -11,10 +11,10 @@ typedef enum parse_return
 
 typedef enum io_type
 {
-	INPUT,
-	HEREDOC,
-	OUTPUT,
-	APPEND
+	IO_INPUT,
+	IO_HEREDOC,
+	IO_OUTPUT,
+	IO_APPEND
 }			t_io_type;
 
 typedef struct redirect
