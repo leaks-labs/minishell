@@ -2,12 +2,10 @@
 # define PARSE_H
 
 # include <sys/types.h>
+# include <stdint.h>
+# include "lexer.h"
 
-typedef enum parse_return
-{
-	PARSE_ERROR = -1,
-	PARSE_SUCCESS = 0
-}			t_parse_return;
+typedef struct list t_list;
 
 typedef enum io_type
 {
@@ -36,6 +34,8 @@ typedef struct pipeline
 	size_t	n_cmd;
 }				t_pl;
 
-t_parse_return	ft_parse(t_pl *pipeline, char *line);
+uint8_t	ft_parse(t_list *env, t_pl *pipeline, char *line);
+uint8_t ft_check_expansion(t_list *env, t_token_container *token_container);
+
 
 #endif

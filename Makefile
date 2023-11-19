@@ -90,7 +90,11 @@ SRCS_FILES:=	builtins/cd_get_curpath			\
 				heredoc/retrieve_hd_content		\
 				init_and_destroy/struct_destroy	\
 				init_and_destroy/struct_init	\
+				parsing/expansion				\
+				parsing/lexer_utils				\
+				parsing/lexer					\
 				parsing/parse					\
+				parsing/token_list				\
 				path/get_cmd_path				\
 				path/get_path					\
 				redirections/adapt_redirections	\
