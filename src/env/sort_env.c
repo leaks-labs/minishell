@@ -23,10 +23,8 @@ void	ft_update_env_index(t_list *env, t_var *var, t_idx_act e_idx_act)
 				++env_var->index;
 		}
 		else if (e_idx_act == REMOVE)
-		{
 			if (ft_strcmp(env_var->name, var->name) > 0)
 				--env_var->index;
-		}
 		node = node->next;
 	}
 }

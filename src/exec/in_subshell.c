@@ -26,7 +26,6 @@ int	ft_in_subshell(t_msh *msh, t_exl *exl, t_pl *pl)
 	{
 		last_pid = -1;
 		current_cmd = pl->cmd_list + exl->cmd_idx;
-		// ft_default_redirections(exl) ????
 		if (ft_default_redirections(exl) == 0)
 			last_pid = ft_child_proc(msh, exl, pl, current_cmd);
 		ft_close_used_pipes(&exl->s_fd_io);
@@ -41,8 +40,6 @@ static pid_t	ft_child_proc(t_msh *msh, t_exl *exl, t_pl *pl, t_cmd *cmd)
 	t_built_f	built_f;
 	int			err_code;
 
-	// if (pid == -1)
-	// 	perror("fork error");
 	if (pid != 0)
 		return (pid);
 	err_code = 0;
@@ -73,9 +70,9 @@ static int	ft_launch_extern_cmd(t_exl *exl, char **args)
 	if (cmd_path != NULL)
 	{
 		ft_mod_env2(exl->env, "_", cmd_path, ENV_EXP);
-		// catch ft_modenv2 errors ?
 		export_env = ft_lst_to_env(exl->env);
 		ft_set_signals(MSH_SIG_EXT_CMD);
+		// test if export_env == NULL
 		execve(cmd_path, args, export_env);
 		ft_set_signals(MSH_SIG_IGN);
 		free(export_env);
@@ -106,5 +103,4 @@ static int	ft_get_err_code(const char *cmd)
 	}
 	else
 		return (EXIT_FAILURE);
-	// need to print error (perror()) for other error types?
 }

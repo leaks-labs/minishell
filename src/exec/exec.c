@@ -11,28 +11,10 @@ static int			ft_exec_cmd(t_msh *msh, t_exl *exl, t_pl *pl);
 static void			ft_update_last_arg(t_list *env, t_pl *pl);
 static const char	*ft_get_last_arg(const char **args);
 
-// #include "utils.h"
-// #include <unistd.h>
 uint8_t	ft_exec_line(t_msh *msh, t_pl *pl)
 {
 	t_exl	s_exl;
 	int		exit_code;
-
-	// pl->cmd_list = ft_calloc(3, sizeof(t_cmd));
-	// pl->n_cmd = 3;
-	// pl->cmd_list->n_redirect = 1;
-	// pl->cmd_list->args = ft_split("cat", ' ');
-	// pl->cmd_list->redirect_arr = ft_calloc(1, sizeof(t_redirect));
-	// pl->cmd_list->redirect_arr->file = ft_strdup("EOF");
-	// pl->cmd_list->redirect_arr->e_iotype = HEREDOC;
-	// pl->cmd_list[1].n_redirect = 0;
-	// pl->cmd_list[1].args = ft_split("uniq", ' ');
-	// pl->cmd_list[1].redirect_arr = NULL;
-	// pl->cmd_list[2].n_redirect = 1;
-	// pl->cmd_list[2].args = ft_split("sort", ' ');
-	// pl->cmd_list[2].redirect_arr = ft_calloc(1, sizeof(t_redirect));
-	// pl->cmd_list[2].redirect_arr->file = ft_strdup("testfile");
-	// pl->cmd_list[2].redirect_arr->e_iotype = OUTPUT;
 
 	if (ft_init_exl(&s_exl, msh, pl) == -1)
 	{
@@ -83,7 +65,6 @@ static void	ft_update_last_arg(t_list *env, t_pl *pl)
 		return ;
 	last_arg = ft_get_last_arg((const char **)pl->cmd_list->args);
 	ft_mod_env2(env, "_", last_arg, ENV_ASSIGN | ENV_NOEXP);
-	// check error mod_env2 or not?
 }
 
 static const char	*ft_get_last_arg(const char **args)

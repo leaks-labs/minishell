@@ -14,7 +14,6 @@ bool	ft_absolute_path_is_valid(const char *curpath, const char *initial_arg)
 
 	if (stat(curpath, &curpath_stat) == -1)
 	{
-		// check if it's the right exit message
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
 		perror(initial_arg);
 		return (false);

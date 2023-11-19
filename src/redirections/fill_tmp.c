@@ -55,4 +55,5 @@ static char	*ft_get_tmp_filename(void)
 
 	ft_uimaxtostr(ext_buf, MAX_LEN_NUM + 1, ext++);
 	return (ft_join(2, TMP_FILE_BASE_NAME, ext_buf));
+	// test if we have rights at 19 for /tmp
 }

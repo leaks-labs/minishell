@@ -1,5 +1,4 @@
 #include "utils.h"
-#include <stdint.h>
 
 void			ft_uimaxtostr(char *str, size_t len, uintmax_t n);
 static size_t	ft_count_digit(uintmax_t n);

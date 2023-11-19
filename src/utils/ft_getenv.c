@@ -1,9 +1,9 @@
 #include "utils.h"
 #include "env.h"
 
-char	*ft_getenv(const char *name, t_list *env);
+char	*ft_getenv(const char *name, const t_list *env);
 
-char	*ft_getenv(const char *name, t_list *env)
+char	*ft_getenv(const char *name, const t_list *env)
 {
 	t_list_node	*node;
 

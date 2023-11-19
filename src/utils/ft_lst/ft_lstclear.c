@@ -1,5 +1,4 @@
 #include "list.h"
-#include <stddef.h>
 
 void	ft_lstclear(t_list_node **list_node, del_func *del_func);
 

@@ -19,9 +19,7 @@ char	*ft_cat_pwd_and_curpath(char *pwd, char *curpath)
 		curpath = ft_join(3, pwd, "/", curpath);
 	free(tmp);
 	// if (curpath == NULL)
-	// {
-	// 	perror();
-	// }
+	// 		perror();
 	return (curpath);
 }
 

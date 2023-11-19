@@ -1,6 +1,5 @@
 #include "msh_signal.h"
 #include <sys/ioctl.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <termios.h>
 #include <unistd.h>

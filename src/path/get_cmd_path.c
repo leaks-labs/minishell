@@ -3,12 +3,12 @@
 #include <errno.h>
 #include <sys/stat.h>
 
-char		*ft_get_cmd_path(char **path, char *cmd);
+char		*ft_get_cmd_path(char **path, const char *cmd);
 bool		ft_isapath(const char *str);
-static char	*ft_check_one_path(char *cmd);
-static char	*ft_search_in_path(char **path, char *cmd);
+static char	*ft_check_one_path(const char *cmd);
+static char	*ft_search_in_path(char **path, const char *cmd);
 
-char	*ft_get_cmd_path(char **path, char *cmd)
+char	*ft_get_cmd_path(char **path, const char *cmd)
 {
 	if (ft_isapath(cmd) == true)
 		return (ft_check_one_path(cmd));
@@ -23,7 +23,7 @@ bool	ft_isapath(const char *str)
 	return (*str == '/');
 }
 
-static char	*ft_check_one_path(char *cmd)
+static char	*ft_check_one_path(const char *cmd)
 {
 	char		*cmd_path;
 	struct stat	buf;
@@ -39,7 +39,7 @@ static char	*ft_check_one_path(char *cmd)
 	return (cmd_path);
 }
 
-static char	*ft_search_in_path(char **path, char *cmd)
+static char	*ft_search_in_path(char **path, const char *cmd)
 {
 	char		*cmd_path;
 	struct stat	buf;

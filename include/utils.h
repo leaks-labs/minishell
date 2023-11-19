@@ -3,11 +3,11 @@
 
 # include "exec.h"
 
-char		*ft_getenv(const char *name, t_list *env);
 void		*ft_calloc(size_t count, size_t size);
 char		**ft_dptrcpy(const char **dptr);
 size_t		ft_dptrlen(const char **dptr);
 void		*ft_freef(const char *formats, ...);
+char		*ft_getenv(const char *name, const t_list *env);
 int			ft_isalnum(int c);
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);

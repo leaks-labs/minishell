@@ -1,4 +1,3 @@
-// #include "heredoc.h"
 #include "redirections.h"
 #include <unistd.h>
 
@@ -59,10 +58,7 @@ int	ft_apply_redirections(t_exl *exl)
 	if (ft_islastcmd(exl) == false)
 		close(exl->pipe[0]);
 	if (res[0] == -1 || (ft_islastcmd(exl) == false && res[1] == -1))
-	{
-		// perror() ??
 		return (-1);
-	}
 	return (0);
 }
 

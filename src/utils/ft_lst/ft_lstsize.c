@@ -1,5 +1,4 @@
 #include "list.h"
-#include <stddef.h>
 
 size_t	ft_lstsize(t_list_node *list_node);
 

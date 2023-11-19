@@ -17,7 +17,6 @@ int	ft_set_append(t_exl *exl, const char *file);
 
 int	ft_set_input(t_exl *exl, const char *file)
 {
-	(void)exl;
 	if (exl->s_fd_io.fd_to_read != STDIN_FILENO)
 		close(exl->s_fd_io.fd_to_read);
 	exl->s_fd_io.fd_to_read = open(file, O_RDONLY);
@@ -42,10 +41,8 @@ int	ft_set_heredoc(t_exl *exl, const char *file)
 
 int	ft_set_output(t_exl *exl, const char *file)
 {
-	(void)exl;
 	if (exl->s_fd_io.fd_to_write != STDOUT_FILENO)
 		close(exl->s_fd_io.fd_to_write);
-	// verfy the 0644, to be the good rights
 	exl->s_fd_io.fd_to_write = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (exl->s_fd_io.fd_to_write == -1)
 	{
@@ -57,10 +54,8 @@ int	ft_set_output(t_exl *exl, const char *file)
 
 int	ft_set_append(t_exl *exl, const char *file)
 {
-	(void)exl;
 	if (exl->s_fd_io.fd_to_write != STDOUT_FILENO)
 		close(exl->s_fd_io.fd_to_write);
-	// verfy the 0644, to be the good rights
 	exl->s_fd_io.fd_to_write = open(file, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (exl->s_fd_io.fd_to_write == -1)
 	{

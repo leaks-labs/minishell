@@ -10,27 +10,30 @@ char	**ft_get_path(t_list *env)
 	char	**path;
 
 	path = ft_split(ft_getenv("PATH", env), ':');
-	if (path == NULL)
-		return (NULL);
-	return (ft_set_slash(path));
+	if (path != NULL)
+		path = ft_set_slash(path);
+	return (path);
 }
 
 static char	**ft_set_slash(char **path)
 {
 	char	*temp;
-	int		i;
+	size_t	len;
+	size_t	i;
 
 	i = 0;
 	while (path != NULL && path[i] != NULL)
 	{
-		temp = ft_join(2, path[i], "/");
-		if (temp == NULL)
+		len = ft_strlen(path[i]);
+		if (len > 0 && path[i][len - 1] != '/')
 		{
-			// perror("ft_strjoin");
-			return (ft_freef("%P", path));
+			temp = ft_join(2, path[i], "/");
+			if (temp == NULL)
+				return (ft_freef("%P", path));
+			free(path[i]);
+			path[i] = temp;
 		}
-		free(path[i]);
-		path[i++] = temp;
+		++i;
 	}
 	return (path);
 }

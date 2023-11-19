@@ -1,5 +1,4 @@
 #include "utils.h"
-#include <stdio.h>
 
 intmax_t	ft_strtoimax(const char *str, bool *error);
 
@@ -16,7 +15,7 @@ intmax_t	ft_strtoimax(const char *str, bool *error)
 	if (*str == '+' || *str == '-')
 		if (*str++ == '-')
 			sign = -1;
-	*error = (ft_isdigit(*str) == false);
+	*error = (ft_isdigit(*str) != 1);
 	while (*error == false && ft_isdigit(*str) != 0)
 	{
 		n = n * 10 + (uintmax_t)(*str++) - '0';

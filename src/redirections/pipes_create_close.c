@@ -8,7 +8,6 @@ int	ft_createpipe(int *pp)
 {
 	if (pipe(pp) == -1)
 	{
-		// perror("pipe creation");
 		pp[0] = -1;
 		pp[1] = -1;
 		return (-1);

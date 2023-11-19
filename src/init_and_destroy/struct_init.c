@@ -22,6 +22,11 @@ t_msh	*ft_struct_init(char **envp)
 	if (ft_env_to_list(&msh->env, envp) == -1)
 		return (ft_freef("%p", msh));
 	msh->cwd = ft_get_first_cwd(&msh->env);
+	if (msh->cwd == NULL)
+	{
+		ft_lstclear(&msh->env.list_node, &ft_free_content);
+		return (ft_freef("%p", msh));
+	}
 	ft_set_shlvl(&msh->env);
 	return (msh);
 }
@@ -32,7 +37,6 @@ static char	*ft_get_first_cwd(t_list *env)
 	char		*pwd_from_env;
 
 	path = getcwd(NULL, 0);
-	//perror?
 	if (path == NULL)
 		return (NULL);
 	pwd_from_env = ft_getenv("PWD", env);
@@ -85,5 +89,4 @@ static void	ft_set_shlvl(t_list *env)
 	}
 	ft_uimaxtostr(new_lvl, MAX_SHLVL_NUM_LEN + 1, (uintmax_t)lvl);
 	ft_mod_env2(env, "SHLVL", new_lvl, ENV_EXP);
-	// what to do if ft_mod_env2 fails ?
 }

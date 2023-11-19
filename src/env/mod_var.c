@@ -22,7 +22,6 @@ int	ft_mod_env2(t_list *env, const char *name, const char *val, int f)
 		assignation = ft_join(3, name, "=", val);
 	if (assignation == NULL)
 		return (-1);
-		// perror?
 	err_code = ft_mod_env1(env, assignation, f);
 	free(assignation);
 	return (err_code);
@@ -64,10 +63,7 @@ static int	ft_assign_value(t_var *var, const char *arg)
 
 	value = ft_strdup(arg + ft_get_name_len(arg) + 1);
 	if (value == NULL)
-	{
-		// perror?
 		return (-1);
-	}
 	free(var->value);
 	var->value = value;
 	return (0);
