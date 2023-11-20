@@ -3,49 +3,35 @@
 #include "exec.h"
 #include "utils.h"
 #include "stdlib.h"
-#include <stdio.h>
+#include <stdio.h> //check
 
-uint8_t ft_check_expansion(t_msh *msh, t_token_container *token_container);
 char    *ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote);
-char    *ft_get_expansion_list(char *src);
-char    *ft_tokenise_expansion(t_list_node **node, t_index *index, char *src);
-
-
-uint8_t ft_check_expansion(t_msh *msh, t_token_container *token_container)
-{
-	t_token_list *token_node;
-
-	token_node = token_container->sentinel_node->next;
-	while (token_node->node_type != SENTINEL_NODE)
-	{
-        if (token_node->struct_token->operator_type == NO_OPERATOR 
-        && (token_node->prev->struct_token == NULL || token_node->prev->struct_token->operator_type != HERE_DOC)
-        && ft_strchr(token_node->struct_token->token, '$'))
-                    if (ft_expansion_monitor(msh, token_node->struct_token->token, true) == NULL)
-                        return (1);
-
-	    token_node = token_node->next;
-	}
-    return (0);
-}
+uint8_t ft_get_expansion_list(t_list_node **expansion_list, char *src);
 
 char    *ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote)
 {
+    (void)msh;
+    (void)handle_quote;
     t_list_node *expansion_list;
     char        *dst = NULL;
 
-    expansion_list = ft_lstnew(NULL);
-    if (ft_get_expansion_list(src) == false)
+    expansion_list = NULL;
+    if (ft_get_expansion_list(&expansion_list, src) == 1)
     {
         ft_lstclear(&expansion_list, NULL);
         return (NULL);
     }
+    while (expansion_list != NULL)
+    {
+         printf("exp:%s.\n", (char *)expansion_list->content);
+        expansion_list = expansion_list->next;
+    }
+    ft_lstclear(&expansion_list, NULL); //leastclear pares avoir fait dst
     return (dst);
 }
 
-char *ft_get_expansion_list(char *src)
+uint8_t ft_get_expansion_list(t_list_node **expansion_list, char *src)
 {
-    t_list_node *node;
     t_index     index;
 
     index.current = 0;
@@ -54,43 +40,24 @@ char *ft_get_expansion_list(char *src)
     {
         if (src[index.current] == '$' && index.current != index.previous)
         {
-            char *str = ft_substr(src, (unsigned int)index.previous, index.current - index.previous);
-            printf("before:%s.\n", str);
+            if (ft_tokenise_expansion(expansion_list, &index, src) == 1)
+                return (1);
             index.previous = index.current;
-            //tokenise before dols
         }
-        if (src[index.current] == '$' && (src[index.current + 1] == '_' || ft_isalpha(src[index.current + 1]) == true))
+        if (src[index.current] == '$' && (src[index.current + 1] == '_'
+        || src[index.current + 1] == '?' || ft_isalpha(src[index.current + 1])))
         {
-            index.current++;
-            while(src[index.current] == '_' || ft_isalpha(src[index.current]) == true) //ou '?'
-                index.current++;
-            char *str = ft_substr(src, (unsigned int)index.previous, index.current - index.previous);
-            printf("exp:%s.\n", str);
-            index.previous = index.current;
-            //tokenise after dols
+            if (ft_get_expansion_var(expansion_list, &index, src) == 1)
+                return (1);
         }
         if (src[index.current] != '\0')
+        {
+            printf("char:%c.\n", src[index.current]);
             index.current++;
+        }
     }
     if (index.previous != index.current)
-    {
-        if (ft_tokenise_expansion(&node, &index, src) == NULL)
-            ft_lstclear(&node, NULL);
-    }
-    return (node);
-}
-
-char *ft_tokenise_expansion(t_list_node **node, t_index *index, char *src)
-{
-    t_list_node *new_node;
-
-    char *str = ft_substr(src, (unsigned int)index->previous, index->current - index->previous);
-    new_node = ft_lstnew(str);
-    if (new_node == NULL || str == NULL)
-    {
-        free(str);
-    }
-    ft_lstadd_back(node, new_node);
-    
-
+        if (ft_tokenise_expansion(expansion_list, &index, src) == 1)
+            return (1);
+    return (0);
 }

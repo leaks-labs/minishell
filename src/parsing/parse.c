@@ -3,15 +3,14 @@
 #include "exec.h"
 #include <stddef.h>
 
-#include <stdio.h>
+#include <stdio.h> //attention
 
 uint8_t	ft_parse(t_msh *msh, t_pl *pipeline, char *line);
 
 uint8_t	ft_parse(t_msh *msh, t_pl *pipeline, char *line)
 {
-	(void)msh;
-	t_token_container *token_container;
 	(void)pipeline;
+	t_token_container *token_container;
 	token_container = ft_lexer_monitor(line);
 	if (token_container == NULL)
 		return (1);
@@ -26,5 +25,6 @@ uint8_t	ft_parse(t_msh *msh, t_pl *pipeline, char *line)
 		ft_delete_list(token_container);
 		return (1);
 	}
+	printf("here\n");
 	return (0);
 }

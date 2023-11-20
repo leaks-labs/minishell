@@ -3,10 +3,12 @@
 
 # include <sys/types.h>
 # include <stdint.h>
-//# include "lexer.h"
+# include <stdbool.h>
+# include "lexer.h"
 
-typedef struct msh	t_msh;
-typedef struct token_container t_token_container;
+typedef struct msh t_msh;
+typedef struct list_node t_list_node;
+
 
 typedef enum io_type
 {
@@ -37,6 +39,11 @@ typedef struct pipeline
 
 uint8_t	ft_parse(t_msh *msh, t_pl *pipeline, char *line);
 uint8_t ft_check_expansion(t_msh *msh, t_token_container *token_container);
+char    *ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote);
+uint8_t ft_get_expansion_list(t_list_node **expansion_list, char *src);
+uint8_t ft_get_expansion_var(t_list_node **expansion_list, t_index *index, char *src);
+uint8_t ft_tokenise_expansion(t_list_node **node, t_index *index, char *src);
+
 
 
 #endif
