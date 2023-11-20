@@ -50,11 +50,8 @@ uint8_t ft_get_expansion_list(t_list_node **expansion_list, char *src)
             if (ft_get_expansion_var(expansion_list, &index, src) == 1)
                 return (1);
         }
-        if (src[index.current] != '\0')
-        {
-            printf("char:%c.\n", src[index.current]);
+        else if (src[index.current] != '\0')
             index.current++;
-        }
     }
     if (index.previous != index.current)
         if (ft_tokenise_expansion(expansion_list, &index, src) == 1)
