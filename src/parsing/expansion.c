@@ -5,7 +5,9 @@
 #include <stdio.h>
 
 uint8_t ft_check_expansion(t_list *env, t_token_container *token_container);
-char    *ft_get_expansion(t_list *env, char *src, bool handle_quote);
+char    *ft_expansion_monitor(t_list *env, char *src, bool handle_quote);
+char    *ft_expansion_quoting(t_list *env, char *src);
+//char    *ft_get_expansion(t_list *env, char *src, bool handle_quote);
 
 
 uint8_t ft_check_expansion(t_list *env, t_token_container *token_container)
@@ -29,11 +31,11 @@ uint8_t ft_check_expansion(t_list *env, t_token_container *token_container)
 char    *ft_expansion_monitor(t_list *env, char *src, bool handle_quote)
 {
     char    *dst;
-
-    if (handle_quote == true)
+    (void)handle_quote;
+    //if (handle_quote == true)
         dst = ft_expansion_quoting(env, src);
-    else
-        dst = ft_expansion(env, src);
+    // else
+    //     dst = ft_expansion(env, src);
     return (dst);
 }
 
@@ -42,7 +44,7 @@ char *ft_expansion_quoting(t_list *env, char *src)
     char    *dst;
     char    *tmp;
     t_index index;
-
+    (void)env;
     dst = ft_strdup(src);
     index.current = 0;
     index.previous = index.current;
@@ -50,9 +52,17 @@ char *ft_expansion_quoting(t_list *env, char *src)
     {
         if (dst[index.current] == '$')  //dols endl
         {
-            if (dst[index.current + 1] == '_' || ft_isalpha(dst[index.current + 1]) == true)
+            index.current++;
+            if (dst[index.current] == '_' || ft_isalpha(dst[index.current]) == true)
             {
-                tmp = ft_substr(dst, (unsigned int)index.previous, index.current - 1);
+                tmp = ft_substr(dst, (unsigned int)index.previous, index.current - index.previous);
+                if (tmp == NULL)
+                    return (NULL);
+                printf(":%s.\n\n", tmp);
+                exit(1);
+                // index.previous = index.current - 1;
+                // while (src[index.current] == '_' || ft_isalnum(src[i + j]))
+                //     ++j;
             }
         }
     }
@@ -81,4 +91,4 @@ char *ft_expansion_quoting(t_list *env, char *src)
     //     printf(":%s.", dst);
     //     ++i;
     // }
-    return (dst);
+    //return (dst);
