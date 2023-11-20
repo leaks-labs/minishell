@@ -3,9 +3,10 @@
 
 # include <sys/types.h>
 # include <stdint.h>
-# include "lexer.h"
+//# include "lexer.h"
 
-typedef struct list t_list;
+typedef struct msh	t_msh;
+typedef struct token_container t_token_container;
 
 typedef enum io_type
 {
@@ -34,8 +35,8 @@ typedef struct pipeline
 	size_t	n_cmd;
 }				t_pl;
 
-uint8_t	ft_parse(t_list *env, t_pl *pipeline, char *line);
-uint8_t ft_check_expansion(t_list *env, t_token_container *token_container);
+uint8_t	ft_parse(t_msh *msh, t_pl *pipeline, char *line);
+uint8_t ft_check_expansion(t_msh *msh, t_token_container *token_container);
 
 
 #endif

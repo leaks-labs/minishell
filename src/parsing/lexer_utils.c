@@ -10,7 +10,7 @@ t_lexer ft_get_token(t_token_container *token_container, char *line, t_lexer_ope
     t_token *token;
 
     token = ft_tokenise(operator, line, index);
-    if (token == NULL || ft_append(token_container, token) == NULL)
+    if (token == NULL || ft_append(token_container, token) == NULL) //free token
         return (NOT_LEXED);
     while (ft_isspace(line[index->current]) == true)
         index->current++;

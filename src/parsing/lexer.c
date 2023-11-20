@@ -39,7 +39,7 @@ static t_lexer ft_lexer_read(t_token_container *token_container, char *line)
 	if (index.previous != index.current)
 	{
 		token = ft_tokenise(dictionary.operator_type, line, &index);
-		if (token == NULL || ft_append(token_container, token) == NULL)
+		if (token == NULL || ft_append(token_container, token) == NULL) //free token
 			return (NOT_LEXED);
 	}
     return (LEXED);

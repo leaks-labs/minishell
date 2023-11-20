@@ -61,7 +61,7 @@ t_token	*ft_tokenise(t_lexer_operator operator_type, char *line, t_index *index)
 	return (struct_token);
 }
 
-t_token_list	*ft_append(t_token_container *token_container, t_token *struct_token) //put container
+t_token_list	*ft_append(t_token_container *token_container, t_token *struct_token)
 {
 	t_token_list	*token_sentinel;
 	t_token_list	*prev_token;
