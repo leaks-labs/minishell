@@ -10,11 +10,13 @@ uint8_t ft_check_expansion(t_msh *msh, t_token_container *token_container);
 uint8_t ft_get_expansion_var(t_list_node **expansion_list, t_index *index, char *src);
 uint8_t ft_tokenise_expansion(t_list_node **node, t_index *index, char *src);
 void ft_get_flag(char *src, char *flag);
-void ft_expand(t_msh *msh, char **src);
+char *ft_expand(t_msh *msh, char *src);
 
 uint8_t ft_check_expansion(t_msh *msh, t_token_container *token_container)
 {
 	t_token_list *token_node;
+    char *tmp;
+    char *dst;
 
 	token_node = token_container->sentinel_node->next;
 	while (token_node->node_type != SENTINEL_NODE)
@@ -23,9 +25,14 @@ uint8_t ft_check_expansion(t_msh *msh, t_token_container *token_container)
         && (token_node->prev->struct_token == NULL 
         || token_node->prev->struct_token->operator_type != HERE_DOC)
         && ft_strchr(token_node->struct_token->token, '$'))
-                    if (ft_expansion_monitor(msh,
-                    token_node->struct_token->token, true) == NULL) //get monitor ptr back
-                        return (1);
+        {
+            dst = ft_expansion_monitor(msh, token_node->struct_token->token, true);
+            if (dst == NULL)
+                return (1);
+            tmp = token_node->struct_token->token;
+            token_node->struct_token->token = dst;
+            free(tmp);
+        }
 	    token_node = token_node->next;
 	}
     return (0);
@@ -86,20 +93,23 @@ void ft_get_flag(char *src, char *flag)
     }
 }
 
-void ft_expand(t_msh *msh, char **src)
+char  *ft_expand(t_msh *msh, char *src)
 {
+    char *dst;
+
     char buf[4];
-    if (src[0][1] == '?')
+    if (src[1] == '?')
     {
         ft_uimaxtostr(buf, 4, msh->exit_status);
-        *src = ft_strdup(buf);
+        dst = ft_strdup(buf);
     }
     else
     {
-        *src = ft_getenv(&src[0][1], &msh->env);
-        if (*src != NULL)
-            *src = ft_strdup(*src);
+        dst = ft_getenv(&src[1], &msh->env);
+        if (dst != NULL)
+            dst = ft_strdup(dst);
         else
-            *src = ft_strdup("");
+            dst = ft_strdup("");
     }
+    return (dst);
 }

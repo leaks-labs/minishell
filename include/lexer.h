@@ -73,6 +73,7 @@ void ft_get_next_index(char *line, t_index *index);
 
 t_token_container	*ft_create_list(void);
 void				ft_delete_list(t_token_container	*token_container);
+void	ft_delete_node(t_token_container *token_container, t_token_list *node_to_del);
 t_token				*ft_tokenise(t_lexer_operator operator_type, char *line, t_index *index);
 t_token_list	*ft_append(t_token_container *token_container, t_token *struct_token);
 
