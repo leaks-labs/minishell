@@ -2,18 +2,24 @@
 #include "utils.h"
 #include <errno.h>
 #include <sys/stat.h>
+#include <unistd.h>
 
-char		*ft_get_cmd_path(char **path, const char *cmd);
+char		*ft_get_cmd_path(t_list_node *path, const char *cmd);
 bool		ft_isapath(const char *str);
 static char	*ft_check_one_path(const char *cmd);
-static char	*ft_search_in_path(char **path, const char *cmd);
+static char	*ft_search_in_path(t_list_node *path, const char *cmd);
 
-char	*ft_get_cmd_path(char **path, const char *cmd)
+char	*ft_get_cmd_path(t_list_node *path, const char *cmd)
 {
+	char	*cmd_path;
+
 	if (ft_isapath(cmd) == true)
-		return (ft_check_one_path(cmd));
+		cmd_path = ft_check_one_path(cmd);
+	else if (path != NULL)
+		cmd_path = ft_search_in_path(path, cmd);
 	else
-		return (ft_search_in_path(path, cmd));
+		cmd_path = ft_strdup(cmd);
+	return (cmd_path);
 }
 
 bool	ft_isapath(const char *str)
@@ -39,15 +45,17 @@ static char	*ft_check_one_path(const char *cmd)
 	return (cmd_path);
 }
 
-static char	*ft_search_in_path(char **path, const char *cmd)
+static char	*ft_search_in_path(t_list_node *path, const char *cmd)
 {
 	char		*cmd_path;
 	struct stat	buf;
+	t_list_node	*node;
 
 	cmd_path = NULL;
-	while (path != NULL && *path != NULL)
+	node = path;
+	while (node != NULL)
 	{
-		cmd_path = ft_join(2, *path, cmd);
+		cmd_path = ft_join(2, (char *)node->content, cmd);
 		if (cmd_path == NULL)
 			return (NULL);
 		if (stat(cmd_path, &buf) == 0)
@@ -60,7 +68,9 @@ static char	*ft_search_in_path(char **path, const char *cmd)
 			break ;
 		}
 		cmd_path = ft_freef("%p", cmd_path);
-		++path;
+		node = node->next;
 	}
+	// if (cmd_path == NULL)
+	// 	errno = ENOENT;
 	return (cmd_path);
 }

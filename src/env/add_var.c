@@ -11,11 +11,12 @@ int	ft_add_var(t_list *env, const char *arg, int flags)
 	t_var		*new_var;
 
 	new_var = ft_create_var(arg, flags);
+	if (new_var == NULL)
+		return (-1);
 	node = ft_lstnew(new_var);
-	if (node == NULL || new_var == NULL)
+	if (node == NULL)
 	{
 		ft_free_content(new_var);
-		free(node);
 		return (-1);
 	}
 	ft_update_env_index(env, new_var, ADD);
