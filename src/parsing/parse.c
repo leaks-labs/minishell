@@ -19,7 +19,7 @@ uint8_t	ft_parse(t_msh *msh, t_pl *pipeline, char *line)
 	t_token_container *token_container;
 	token_container = ft_lexer_monitor(line);
 	if (token_container == NULL)
-		return (1);
+		return (1); //PARSE ERROR
 	t_token_list *node = token_container->sentinel_node->next;
 	while (node->node_type != SENTINEL_NODE)
 	{
@@ -83,6 +83,7 @@ uint8_t ft_check_gramar(t_token_container *token_container)
 
 uint8_t ft_build_tree(t_pl *pipeline, t_token_container *token_container)
 {
-	
+	(void)pipeline;
+	(void)token_container;
 	return (0);
 }

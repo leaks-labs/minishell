@@ -8,6 +8,9 @@
 char            *ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote);
 static uint8_t  ft_get_expansion_list(t_list_node **expansion_list, char *src);
 static char     *ft_list_to_var(t_msh *msh, t_list_node *expansion_list, bool handle_quote);
+static char     *ft_command_expand(t_msh *msh, t_list_node *expansion_list);
+static char     *ft_heredoc_expand(t_msh *msh, t_list_node *expansion_list);
+
 
 char    *ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote)
 {
@@ -56,36 +59,87 @@ static uint8_t ft_get_expansion_list(t_list_node **expansion_list, char *src)
 
 static char *ft_list_to_var(t_msh *msh, t_list_node *expansion_list, bool handle_quote)
 {
-    (void)handle_quote;
-    char *dst = ft_strdup("");
-    char *tmp;
-    size_t i;
-    char buf[3];
-    i = 0;
+    char *dst;
+
+    if (handle_quote == true)
+        dst = ft_command_expand(msh, expansion_list);
+    else
+        dst = ft_heredoc_expand(msh, expansion_list);
+    return (dst);
+}
+
+char *ft_command_expand(t_msh *msh, t_list_node *expansion_list)
+{
+    (void)msh;
+    char *src;
+    char *dst = NULL;
+
     while (expansion_list != NULL)
     {
-        tmp = (char *)expansion_list->content;
-        if (tmp[i] == '$' && (tmp[i + 1] == '_'
-        || tmp[i + 1] == '?' || ft_isalpha(tmp[i + 1]))) //quoting or not
-        {
-            if (tmp[i + 1] == '?')
-            {
-                ft_uimaxtostr(buf, 3, msh->exit_status);
-                printf("%s\n", buf);
-                tmp = buf;
-            }
-            else
-            {
-                tmp = ft_getenv(&tmp[i + 1], &msh->env); //dup to avoid memory corruption
-                if (tmp != NULL)
-                    tmp = ft_strdup(tmp);
-                else
-                    tmp = ft_strdup("");
-            }
-        }
-        dst = ft_join(2, dst, tmp);
-        printf("dst:%s.\n", dst);
-        expansion_list = expansion_list->next;
+        src = (char *)expansion_list->content;
+        printf("[%s]\n", src);
+    //     if (tmp[i] == '$' && (tmp[i + 1] == '_'
+    //     || tmp[i + 1] == '?' || ft_isalpha(tmp[i + 1]))) //quoting or not
+    //     {
+    //         if (tmp[i + 1] == '?')
+    //         {
+    //             ft_uimaxtostr(buf, 3, msh->exit_status);
+    //             printf("%s\n", buf);
+    //             tmp = buf;
+    //         }
+    //         else
+    //         {
+    //             tmp = ft_getenv(&tmp[i + 1], &msh->env); //dup to avoid memory corruption
+    //             if (tmp != NULL)
+    //                 tmp = ft_strdup(tmp);
+    //             else
+    //                 tmp = ft_strdup("");
+    //         }
+    //     }
+    //     dst = ft_join(2, dst, tmp);
+    //     printf("dst:%s.\n", dst);
+         expansion_list = expansion_list->next;
     }
-    return(dst);
+    return (dst);
 }
+
+static char     *ft_heredoc_expand(t_msh *msh, t_list_node *expansion_list)
+{
+    (void)msh;
+    (void)expansion_list;
+    char *dst = NULL;
+    return (dst);
+}
+
+    // (void)handle_quote;
+    // char *dst = ft_strdup("");
+    // char *tmp;
+    // size_t i;
+    // char buf[3];
+    // i = 0;
+    // while (expansion_list != NULL)
+    // {
+    //     tmp = (char *)expansion_list->content;
+    //     if (tmp[i] == '$' && (tmp[i + 1] == '_'
+    //     || tmp[i + 1] == '?' || ft_isalpha(tmp[i + 1]))) //quoting or not
+    //     {
+    //         if (tmp[i + 1] == '?')
+    //         {
+    //             ft_uimaxtostr(buf, 3, msh->exit_status);
+    //             printf("%s\n", buf);
+    //             tmp = buf;
+    //         }
+    //         else
+    //         {
+    //             tmp = ft_getenv(&tmp[i + 1], &msh->env); //dup to avoid memory corruption
+    //             if (tmp != NULL)
+    //                 tmp = ft_strdup(tmp);
+    //             else
+    //                 tmp = ft_strdup("");
+    //         }
+    //     }
+    //     dst = ft_join(2, dst, tmp);
+    //     printf("dst:%s.\n", dst);
+    //     expansion_list = expansion_list->next;
+    // }
+    // return(dst);
