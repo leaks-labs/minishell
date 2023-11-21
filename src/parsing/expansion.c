@@ -70,44 +70,46 @@ static char *ft_list_to_var(t_msh *msh, t_list_node *expansion_list, bool handle
 
 char *ft_command_expand(t_msh *msh, t_list_node *expansion_list)
 {
-    (void)msh;
     char *src;
-    char *dst = NULL;
-
-    while (expansion_list != NULL)
+    char *dst;
+    char *tmp;
+    char flag;
+    flag = '\0';
+    dst = ft_strdup("");
+    while (dst != NULL && expansion_list != NULL)
     {
         src = (char *)expansion_list->content;
-        printf("[%s]\n", src);
-    //     if (tmp[i] == '$' && (tmp[i + 1] == '_'
-    //     || tmp[i + 1] == '?' || ft_isalpha(tmp[i + 1]))) //quoting or not
-    //     {
-    //         if (tmp[i + 1] == '?')
-    //         {
-    //             ft_uimaxtostr(buf, 3, msh->exit_status);
-    //             printf("%s\n", buf);
-    //             tmp = buf;
-    //         }
-    //         else
-    //         {
-    //             tmp = ft_getenv(&tmp[i + 1], &msh->env); //dup to avoid memory corruption
-    //             if (tmp != NULL)
-    //                 tmp = ft_strdup(tmp);
-    //             else
-    //                 tmp = ft_strdup("");
-    //         }
-    //     }
-    //     dst = ft_join(2, dst, tmp);
-    //     printf("dst:%s.\n", dst);
-         expansion_list = expansion_list->next;
+        ft_get_flag(src, &flag);
+        if ((flag == '\0' || flag == '"') && (src[0] == '$' 
+        && (ft_strchr("_?", src[1]) || ft_isalpha(src[1]))))
+        {
+            ft_expand(msh, &src);
+        }
+        tmp = dst;
+        dst = ft_join(2, dst, src);
+        ft_freef("%p", tmp);
+        expansion_list = expansion_list->next;
     }
+    printf("s[%s]\n", dst);
     return (dst);
 }
 
 static char     *ft_heredoc_expand(t_msh *msh, t_list_node *expansion_list)
 {
-    (void)msh;
-    (void)expansion_list;
-    char *dst = NULL;
+    char *src;
+    char *dst;
+    char *tmp;
+    dst = ft_strdup("");
+    while (dst != NULL && expansion_list != NULL)
+    {
+        src = (char *)expansion_list->content;
+        ft_expand(msh, &src); //if here to check src == NULL
+        tmp = dst;
+        dst = ft_join(2, dst, src);
+        ft_freef("%p", tmp);
+        expansion_list = expansion_list->next;
+    }
+    printf("s[%s]\n", dst);
     return (dst);
 }
 

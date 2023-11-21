@@ -15,7 +15,6 @@ uint8_t ft_build_tree(t_pl *pipeline, t_token_container *token_container);
 
 uint8_t	ft_parse(t_msh *msh, t_pl *pipeline, char *line)
 {
-	(void)pipeline;
 	t_token_container *token_container;
 	token_container = ft_lexer_monitor(line);
 	if (token_container == NULL)
@@ -23,7 +22,7 @@ uint8_t	ft_parse(t_msh *msh, t_pl *pipeline, char *line)
 	t_token_list *node = token_container->sentinel_node->next;
 	while (node->node_type != SENTINEL_NODE)
 	{
-		printf("%s\n\n", node->struct_token->token);
+		printf("->%s\n\n", node->struct_token->token);
 		node = node->next;
 	}
 	if (ft_check_expansion(msh, token_container) == 1

@@ -43,6 +43,8 @@ uint8_t ft_check_expansion(t_msh *msh, t_token_container *token_container);
 char    *ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote);
 uint8_t ft_get_expansion_var(t_list_node **expansion_list, t_index *index, char *src);
 uint8_t ft_tokenise_expansion(t_list_node **node, t_index *index, char *src);
+void ft_get_flag(char *src, char *flag);
+void ft_expand(t_msh *msh, char **src);
 
 
 

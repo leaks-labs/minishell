@@ -1,10 +1,11 @@
 #include "lexer.h"
 #include "utils.h"
 #include <stddef.h>
+#include <stdio.h>
 
 t_token_container	*ft_lexer_monitor(char *line);
 static t_lexer 		ft_lexer_read(t_token_container *token_container, char *line);
-t_dictionary		ft_serach_operator(char *line);
+t_dictionary		ft_serach_operator(char *line); //search
 static t_lexer		ft_line_lexer(t_token_container *token_container, char *line, t_dictionary *dictionary, t_index *index);
 
 t_token_container	*ft_lexer_monitor(char *line)
@@ -78,7 +79,7 @@ static t_lexer	ft_line_lexer(t_token_container *token_container, char *line, t_d
 		if (ft_get_token(token_container, line, dictionary->operator_type, index) == NOT_LEXED)
 			return (NOT_LEXED);
 	}
-	else if (line[index->current] == '"' || line[index->current] == '\'')
+	else if (line[index->current] == '"' || line[index->current] == '\'') //strchr
 	{
 		if (ft_skip_quotes(line, index) == NOT_LEXED)
 			return (NOT_LEXED);
