@@ -22,7 +22,7 @@ uint8_t ft_check_expansion(t_msh *msh, t_token_container *token_container)
         || token_node->prev->struct_token->operator_type != HERE_DOC)
         && ft_strchr(token_node->struct_token->token, '$'))
                     if (ft_expansion_monitor(msh,
-                    token_node->struct_token->token, true) == NULL)
+                    token_node->struct_token->token, true) == NULL) //get monitor ptr back
                         return (1);
 	    token_node = token_node->next;
 	}
@@ -55,8 +55,8 @@ uint8_t ft_tokenise_expansion(t_list_node **node, t_index *index, char *src)
 {
     t_list_node *new_node;
 
-    char *str = ft_substr(src, (unsigned int)index->previous, index->current - index->previous);
-    printf(":%s.\n", str);
+    char *str = ft_substr(src, (unsigned int)index->previous,
+    index->current - index->previous);
     if (str == NULL)
         return (1);
     new_node = ft_lstnew(str);
