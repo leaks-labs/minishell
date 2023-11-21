@@ -18,6 +18,12 @@ typedef enum io_type
 	IO_APPEND
 }			t_io_type;
 
+typedef struct operator_book
+{
+	size_t n_pipe;
+	size_t n
+}
+
 typedef struct redirect
 {
 	char		*file;
