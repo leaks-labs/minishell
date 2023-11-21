@@ -47,9 +47,5 @@ void ft_get_next_index(char *line, t_index *index)
     printf("->%c\n", line[index->current]);
     dictionary = ft_serach_operator(&line[index->current]);
     if (dictionary.operator_type == NO_OPERATOR && line[index->current] != '\0')
-    {
-
-        printf("-->%c\n", line[index->current]);
         index->current++;
-    }
 }
