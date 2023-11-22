@@ -78,7 +78,9 @@ char *ft_command_expand(t_msh *msh, t_list_node *expansion_list, bool handle_quo
         }
         tmp = dst;
         dst = ft_join(2, dst, src);
-        ft_freef("%p, %p", tmp, src);
+        ft_freef("%p", tmp);
+        if (src != expansion_list->content)
+            free(src);
         expansion_list = expansion_list->next;
     }
     return (dst);
