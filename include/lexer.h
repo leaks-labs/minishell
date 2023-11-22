@@ -65,7 +65,7 @@ typedef struct token_container
 
 t_token_container   *ft_lexer_monitor(char *line);
 
-t_dictionary ft_serach_operator(char *line);
+t_dictionary ft_search_operator(char *line);
 
 t_lexer ft_get_token(t_token_container *token_container, char *line, t_lexer_operator operator, t_index *index);
 t_lexer ft_skip_quotes(char *line, t_index *index);
