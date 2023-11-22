@@ -1,7 +1,6 @@
 #include "lexer.h"
 #include "utils.h"
-
-#include <stdio.h>
+#include <stdlib.h>
 
 t_lexer ft_get_token(t_token_container *token_container, char *line, t_lexer_operator operator, t_index *index);
 t_lexer ft_skip_quotes(char *line, t_index *index);
@@ -12,8 +11,11 @@ t_lexer ft_get_token(t_token_container *token_container, char *line, t_lexer_ope
     t_token *token;
 
     token = ft_tokenise(operator, line, index);
-    if (token == NULL || ft_append(token_container, token) == NULL) //free token
+    if (token == NULL || ft_append(token_container, token) == NULL)
+	{
+		free(token);
         return (NOT_LEXED);
+	}
     while (ft_isspace(line[index->current]) == true)
         index->current++;
     index->previous = index->current;
@@ -44,8 +46,7 @@ void ft_get_next_index(char *line, t_index *index)
             index->current++;
         index->previous = index->current;
     }
-    printf("->%c\n", line[index->current]);
-    dictionary = ft_serach_operator(&line[index->current]);
+    dictionary = ft_search_operator(&line[index->current]);
     if (dictionary.operator_type == NO_OPERATOR && line[index->current] != '\0')
         index->current++;
 }

@@ -1,7 +1,6 @@
 #include "lexer.h"
 #include "utils.h"
-#include <stddef.h>
-#include <stdio.h>
+#include <stdlib.h>
 
 t_token_container	*ft_lexer_monitor(char *line);
 static t_lexer		ft_lexer_read(t_token_container *token_container, \
@@ -36,7 +35,7 @@ static t_lexer	ft_lexer_read(t_token_container *token_container, char *line)
 	index.previous = index.current;
 	while (line[index.current] != '\0')
 	{
-		dictionary = ft_serach_operator(&line[index.current]);
+		dictionary = ft_search_operator(&line[index.current]);
 		if (ft_line_lexer(token_container, line, \
 			&dictionary, &index) == NOT_LEXED)
 			return (NOT_LEXED);
