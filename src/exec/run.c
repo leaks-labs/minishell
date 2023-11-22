@@ -12,9 +12,9 @@ volatile sig_atomic_t	g_signal_value;
 
 void	ft_run(t_msh *msh)
 {
-	t_pl			s_pipeline;
-	char			*line;
-	t_parse_return	e_parse_return;
+	t_pl	s_pipeline;
+	char	*line;
+	t_parse	e_parse_return;
 
 	g_signal_value = 0;
 	while (true)
@@ -26,7 +26,7 @@ void	ft_run(t_msh *msh)
 		if (*line != '\0')
 		{
 			add_history(line);
-			e_parse_return = ft_parse(&s_pipeline, line);
+			e_parse_return = ft_parse(msh, &s_pipeline, line);
 			free(line);
 			if (e_parse_return == PARSE_SUCCESS)
 				msh->exit_status = ft_exec_line(msh, &s_pipeline);

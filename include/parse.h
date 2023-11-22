@@ -3,11 +3,14 @@
 
 # include <sys/types.h>
 
-typedef enum parse_return
+typedef struct msh	t_msh;
+
+typedef enum parse
 {
 	PARSE_ERROR = -1,
-	PARSE_SUCCESS = 0
-}			t_parse_return;
+	PARSE_SUCCESS = 0,
+	NOTHING_TO_PARSE = 1
+}			t_parse;
 
 typedef enum io_type
 {
@@ -36,6 +39,6 @@ typedef struct pipeline
 	size_t	n_cmd;
 }				t_pl;
 
-t_parse_return	ft_parse(t_pl *pipeline, char *line);
+t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line);
 
 #endif
