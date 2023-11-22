@@ -9,6 +9,12 @@
 typedef struct msh t_msh;
 typedef struct list_node t_list_node;
 
+typedef enum parse
+{
+	PARSE_ERROR = -1,
+	PARSE_SUCCESS = 0,
+	NOTHING_TO_PARSE = 1
+}			t_parse;
 
 typedef enum io_type
 {
@@ -37,7 +43,7 @@ typedef struct pipeline
 	size_t	n_cmd;
 }				t_pl;
 
-uint8_t	ft_parse(t_msh *msh, t_pl *pipeline, char *line);
+t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line);
 
 uint8_t ft_check_expansion(t_msh *msh, t_token_container *token_container);
 char    *ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote);

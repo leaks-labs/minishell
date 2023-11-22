@@ -6,38 +6,58 @@
 
 #include <stdio.h> //attention
 
-uint8_t	ft_parse(t_msh *msh, t_pl *pipeline, char *line);
+t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line);
 
-uint8_t ft_quoting(t_token_container *token_container);
+void ft_quoting(t_token_container *token_container);
 uint8_t ft_check_gramar(t_token_container *token_container);
 uint8_t ft_build_tree(t_pl *pipeline, t_token_container *token_container);
 
 
-uint8_t	ft_parse(t_msh *msh, t_pl *pipeline, char *line)
+t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line)
 {
 	t_token_container *token_container;
+	uint8_t exit_status;
+
 	token_container = ft_lexer_monitor(line);
 	if (token_container == NULL)
-		return (1); //PARSE ERROR
-	if (ft_check_expansion(msh, token_container) == 1 || ft_quoting(token_container) == 1
-	|| ft_check_gramar(token_container) == 1
-	|| ft_build_tree(pipeline, token_container) == 1)
+		return (PARSE_ERROR); //set msh
+	if (token_container->list_size == 0)
 	{
 		ft_delete_list(token_container);
-		return (1);
+		return (NOTHING_TO_PARSE);
 	}
-	t_token_list *node = token_container->sentinel_node->next;
-	while (node->node_type != SENTINEL_NODE)
+	if (ft_check_expansion(msh, token_container) == 1)
 	{
-		printf("->%s\n\n", node->struct_token->token);
-		node = node->next;
+		ft_delete_list(token_container);
+		return (PARSE_ERROR); //set msh
 	}
+	ft_quoting(token_container);
+	exit_status = ft_check_gramar(token_container);
+	if (exit_status > 0)
+	{
+		msh->exit_status = exit_status;
+		ft_delete_list(token_container);
+		return (PARSE_ERROR);
+	}
+	exit_status = ft_build_tree(pipeline, token_container);
+	if (exit_status > 0)
+	{
+		msh->exit_status = exit_status;
+		ft_delete_list(token_container);
+		return (PARSE_ERROR);
+	}
+	// t_token_list *node = token_container->sentinel_node->next;
+	// while (node->node_type != SENTINEL_NODE)
+	// {
+	// 	printf("[%s]\n", node->struct_token->token);
+	// 	node = node->next;
+	// }
 	ft_delete_list(token_container);
-	printf("here\n");
-	return (0);
+	//printf("here\n");
+	return (PARSE_SUCCESS);
 }
 
-uint8_t ft_quoting(t_token_container *token_container)
+void ft_quoting(t_token_container *token_container)
 {
 	t_token_list *token_node;
 	t_token_list *tmp_node;
@@ -46,21 +66,23 @@ uint8_t ft_quoting(t_token_container *token_container)
 	while (token_node->node_type != SENTINEL_NODE)
 	{
 		if (token_node->struct_token->operator_type == NO_OPERATOR
-		&& *token_node->struct_token->token == '\0')
+			&& *token_node->struct_token->token == '\0')
 		{
 			tmp_node = token_node->next;
 			ft_delete_node(token_container, token_node);
 			token_node = tmp_node;
 		}
-		if (token_node->node_type != SENTINEL_NODE && token_node->struct_token->operator_type == NO_OPERATOR
-		&& (ft_strchr(token_node->struct_token->token, '"')
-		|| ft_strchr(token_node->struct_token->token, '\'')))
+		else if (token_node->node_type != SENTINEL_NODE 
+				&& token_node->struct_token->operator_type == NO_OPERATOR
+				&& (ft_strchr(token_node->struct_token->token, '"')
+				|| ft_strchr(token_node->struct_token->token, '\'')))
 		{
 			ft_rm_quotes(token_node->struct_token->token);
+			token_node = token_node->next;
 		}
-		token_node = token_node->next;
+		else
+			token_node = token_node->next;
 	}
-	return (0);
 }
 
 uint8_t ft_check_gramar(t_token_container *token_container)
@@ -70,21 +92,23 @@ uint8_t ft_check_gramar(t_token_container *token_container)
 	token_node = token_container->sentinel_node->next;
 	while (token_node->node_type != SENTINEL_NODE)
 	{
-		if (token_node->prev->struct_token != NULL 
-		&& token_node->prev->struct_token->operator_type != NO_OPERATOR
-		&& token_node->struct_token->operator_type != NO_OPERATOR)
+		if (token_node->struct_token->operator_type != NO_OPERATOR)
 		{
-			printf("parse error\n");
-			return(1);
-		}
+			if (token_node->struct_token->operator_type == PIPE)
+			{
+				if (token_node->prev->struct_token == NULL || token_node->struct_token->operator_type != NO_OPERATOR)
+				{
+					//printf
+				}
+			}
+			else
+			{
+
+			}
+
+		} 
 		token_node = token_node->next;
 	}
-	// if (token_node->prev->struct_token->operator_type != NO_OPERATOR)
-	// {
-	// 	printf("unexpected token after nl\n");
-	// 	return (1);
-	// }
-
 	return (0);
 }
 
