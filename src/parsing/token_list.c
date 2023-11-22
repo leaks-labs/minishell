@@ -1,21 +1,20 @@
 #include "lexer.h"
 #include "utils.h"
 #include <stdlib.h>
-#include <stddef.h>
-
-#include <stdio.h>
-
 
 t_token_container	*ft_create_list(void);
 void				ft_delete_list(t_token_container *token_container);
-void				ft_delete_node(t_token_container *token_container, t_token_list *node_to_del);
-t_token				*ft_tokenise(t_lexer_operator operator_type, char *line, t_index *index);
-t_token_list		*ft_append(t_token_container *token_container, t_token *struct_token);
+void				ft_delete_node(t_token_container *token_container, \
+t_token_list *node_to_del);
+t_token				*ft_tokenise(t_lexer_operator operator_type, char *line, \
+t_index *index);
+t_token_list		*ft_append(t_token_container *token_container, \
+t_token *struct_token);
 
 t_token_container	*ft_create_list(void)
 {
-    t_token_container	*token_container;
-    t_token_list		*token_sentinel;
+	t_token_container	*token_container;
+	t_token_list		*token_sentinel;
 
 	token_container = ft_calloc(1, sizeof(t_token_container));
 	if (token_container == NULL)
@@ -29,31 +28,34 @@ t_token_container	*ft_create_list(void)
 	token_sentinel->prev = token_sentinel;
 	token_sentinel->node_type = SENTINEL_NODE;
 	token_sentinel->struct_token = NULL;
-    return (token_container);
+	return (token_container);
 }
 
 void	ft_delete_list(t_token_container	*token_container)
 {
-	t_token_list *token_node;
-	t_token_list *token_tmp;
+	t_token_list	*token_node;
+	t_token_list	*token_tmp;
 
 	token_node = token_container->sentinel_node->next;
 	while (token_node->node_type != SENTINEL_NODE)
 	{
 		token_tmp = token_node;
 		token_node = token_node->next;
-		ft_freef("%p, %p, %p", token_tmp->struct_token->token, token_tmp->struct_token, token_tmp);
+		ft_freef("%p, %p, %p", token_tmp->struct_token->token, \
+		token_tmp->struct_token, token_tmp);
 	}
 	ft_freef("%p, %p", token_node, token_container);
 }
 
-void	ft_delete_node(t_token_container *token_container, t_token_list *node_to_del)
+void	ft_delete_node(t_token_container *token_container, \
+t_token_list *node_to_del)
 {
 	if (node_to_del == token_container->sentinel_node)
 		return ;
 	node_to_del->next->prev = node_to_del->prev;
 	node_to_del->prev->next = node_to_del->next;
-	ft_freef("%p, %p, %p", node_to_del->struct_token->token, node_to_del->struct_token, node_to_del);
+	ft_freef("%p, %p, %p", node_to_del->struct_token->token, \
+	node_to_del->struct_token, node_to_del);
 	token_container->list_size--;
 }
 
@@ -65,7 +67,8 @@ t_token	*ft_tokenise(t_lexer_operator operator_type, char *line, t_index *index)
 	if (struct_token == NULL)
 		return (NULL);
 	struct_token->operator_type = operator_type;
-	struct_token->token = ft_substr(line, (unsigned int)index->previous, index->current - index->previous);
+	struct_token->token = ft_substr(line, (unsigned int)index->previous, \
+	index->current - index->previous);
 	if (struct_token->token == NULL)
 	{
 		free(struct_token);
@@ -74,7 +77,8 @@ t_token	*ft_tokenise(t_lexer_operator operator_type, char *line, t_index *index)
 	return (struct_token);
 }
 
-t_token_list	*ft_append(t_token_container *token_container, t_token *struct_token)
+t_token_list	*ft_append(t_token_container *token_container, \
+t_token *struct_token)
 {
 	t_token_list	*token_sentinel;
 	t_token_list	*prev_token;
