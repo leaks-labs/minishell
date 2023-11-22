@@ -1,8 +1,6 @@
 #include "parse.h"
-#include "lexer.h"
-#include "exec.h"
 #include "utils.h"
-#include "stdlib.h"
+#include <stdlib.h>
 
 uint8_t	ft_check_expansion(t_msh *msh, t_token_container *token_container);
 uint8_t	ft_get_expansion_var(t_list_node **expansion_list, t_index *index, \

@@ -27,22 +27,22 @@ t_token_container	*ft_lexer_monitor(char *line)
 static t_lexer	ft_lexer_read(t_token_container *token_container, char *line)
 {
 	t_token			*token;
-	t_index			index;
-	t_dictionary	dictionary;
+	t_index			s_index;
+	t_dictionary	s_dictionary;
 
 	token = NULL;
-	index.current = 0;
-	index.previous = index.current;
-	while (line[index.current] != '\0')
+	s_index.current = 0;
+	s_index.previous = s_index.current;
+	while (line[s_index.current] != '\0')
 	{
-		dictionary = ft_search_operator(&line[index.current]);
+		s_dictionary = ft_search_operator(&line[s_index.current]);
 		if (ft_line_lexer(token_container, line, \
-			&dictionary, &index) == NOT_LEXED)
+			&s_dictionary, &s_index) == NOT_LEXED)
 			return (NOT_LEXED);
 	}
-	if (index.previous != index.current)
+	if (s_index.previous != s_index.current)
 	{
-		token = ft_tokenise(dictionary.operator_type, line, &index);
+		token = ft_tokenise(s_dictionary.operator_type, line, &s_index);
 		if (token == NULL || ft_append(token_container, token) == NULL)
 		{
 			free(token);
@@ -54,7 +54,7 @@ static t_lexer	ft_lexer_read(t_token_container *token_container, char *line)
 
 t_dictionary	ft_search_operator(char *line)
 {
-	const t_dictionary	dictionary[DICTIONARY_SIZE] = {
+	const t_dictionary	s_dictionary[DICTIONARY_SIZE] = {
 	{HERE_DOC, 2, "<<"}, {APPEND, 2, ">>"},
 	{INPUT, 1, "<"}, {OUTPUT, 1, ">"},
 	{PIPE, 1, "|"}, {NO_OPERATOR, 0, {0}}};
@@ -63,12 +63,12 @@ t_dictionary	ft_search_operator(char *line)
 	i = 0;
 	while (i < DICTIONARY_SIZE - 1)
 	{
-		if (ft_strncmp(line, dictionary[i].operator,
-				dictionary[i].len) == OPERATOR)
-			return (dictionary[i]);
+		if (ft_strncmp(line, s_dictionary[i].operator,
+				s_dictionary[i].len) == OPERATOR)
+			return (s_dictionary[i]);
 		i++;
 	}
-	return (dictionary[NO_OPERATOR]);
+	return (s_dictionary[NO_OPERATOR]);
 }
 
 static t_lexer	ft_line_lexer(t_token_container *token_container, char *line, \

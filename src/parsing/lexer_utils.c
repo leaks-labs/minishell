@@ -41,7 +41,7 @@ t_lexer	ft_skip_quotes(char *line, t_index *index)
 
 void	ft_get_next_index(char *line, t_index *index)
 {
-	t_dictionary	dictionary;
+	t_dictionary	s_dictionary;
 
 	if (index->current == 0)
 	{
@@ -49,7 +49,8 @@ void	ft_get_next_index(char *line, t_index *index)
 			index->current++;
 		index->previous = index->current;
 	}
-	dictionary = ft_search_operator(&line[index->current]);
-	if (dictionary.operator_type == NO_OPERATOR && line[index->current] != '\0')
+	s_dictionary = ft_search_operator(&line[index->current]);
+	if (s_dictionary.operator_type == NO_OPERATOR \
+		&& line[index->current] != '\0')
 		index->current++;
 }

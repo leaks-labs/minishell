@@ -61,7 +61,7 @@ t_token_list *node_to_del)
 
 t_token	*ft_tokenise(t_lexer_operator operator_type, char *line, t_index *index)
 {
-	t_token			*struct_token;
+	t_token	*struct_token;
 
 	struct_token = ft_calloc(1, sizeof(t_token));
 	if (struct_token == NULL)
