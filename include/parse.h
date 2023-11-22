@@ -43,6 +43,13 @@ typedef struct pipeline
 	size_t	n_cmd;
 }				t_pl;
 
+typedef struct join
+{
+	char	*src;
+	char	*dst;
+	char	*tmp;
+}				t_join;
+
 t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line);
 
 uint8_t ft_check_expansion(t_msh *msh, t_token_container *token_container);
