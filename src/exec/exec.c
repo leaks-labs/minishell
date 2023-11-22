@@ -16,6 +16,8 @@ uint8_t	ft_exec_line(t_msh *msh, t_pl *pl)
 	t_exl	s_exl;
 	int		exit_code;
 
+	if (pl->n_cmd == 0)
+		return (0);
 	if (ft_init_exl(&s_exl, msh, pl) == -1)
 	{
 		if (g_signal_value > 0)
@@ -31,7 +33,6 @@ uint8_t	ft_exec_line(t_msh *msh, t_pl *pl)
 static int	ft_init_exl(t_exl *exl, t_msh *msh, t_pl *pl)
 {
 	exl->env = &msh->env;
-	exl->path = msh->path;
 	exl->line_num = &msh->line_num;
 	exl->cmd_idx = 0;
 	exl->n_cmd = pl->n_cmd;

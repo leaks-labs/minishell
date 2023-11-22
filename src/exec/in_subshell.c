@@ -13,15 +13,13 @@
 int				ft_in_subshell(t_msh *msh, t_exl *exl, t_pl *pl);
 static pid_t	ft_child_proc(t_msh *msh, t_exl *exl, t_pl *pl, t_cmd *cmd);
 static int		ft_launch_extern_cmd(t_exl *exl, char **args);
-static int		ft_get_err_code(const char *cmd);
+static int		ft_get_err_code(const char *cmd, t_list_node *path);
 
 int	ft_in_subshell(t_msh *msh, t_exl *exl, t_pl *pl)
 {
 	t_cmd	*current_cmd;
 	pid_t	last_pid;
 
-	if (exl->path == NULL)
-		exl->path = ft_get_path(exl->env);
 	while (exl->cmd_idx < exl->n_cmd)
 	{
 		last_pid = -1;
@@ -63,10 +61,13 @@ static pid_t	ft_child_proc(t_msh *msh, t_exl *exl, t_pl *pl, t_cmd *cmd)
 
 static int	ft_launch_extern_cmd(t_exl *exl, char **args)
 {
-	char	*cmd_path;
-	char	**export_env;
+	t_list_node	*path;
+	char		*cmd_path;
+	char		**export_env;
+	int			err_code;
 
-	cmd_path = ft_get_cmd_path(exl->path, args[0]);
+	path = ft_get_path(exl->env);
+	cmd_path = ft_get_cmd_path(path, args[0]);
 	if (cmd_path != NULL)
 	{
 		ft_mod_env2(exl->env, "_", cmd_path, ENV_EXP);
@@ -77,18 +78,20 @@ static int	ft_launch_extern_cmd(t_exl *exl, char **args)
 		ft_set_signals(MSH_SIG_IGN);
 		free(export_env);
 	}
+	err_code = ft_get_err_code(args[0], path);
+	ft_lstclear(&path, NULL);
 	free(cmd_path);
-	return (ft_get_err_code(args[0]));
+	return (err_code);
 }
 
-static int	ft_get_err_code(const char *cmd)
+static int	ft_get_err_code(const char *cmd, t_list_node *path)
 {
 	if (errno == ENOENT || errno == ENAMETOOLONG)
 	{
 		ft_putstr_fd(MSH_ERROR_PROMPT, STDERR_FILENO);
-		if (ft_isapath(cmd) == true)
+		if (ft_isapath(cmd) == true || path == NULL)
 			perror(cmd);
-		else
+		else if (errno == ENOENT)
 		{
 			ft_putstr_fd(cmd, STDERR_FILENO);
 			ft_putendl_fd(": command not found", STDERR_FILENO);
