@@ -3,7 +3,7 @@
 #include "exec.h"
 #include "utils.h"
 #include <stddef.h>
-
+#include <stdlib.h>
 #include <stdio.h> //attention
 
 t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line);
@@ -88,6 +88,7 @@ void ft_quoting(t_token_container *token_container)
 uint8_t ft_check_gramar(t_token_container *token_container)
 {
 	t_token_list *token_node;
+	char *dst;
 
 	token_node = token_container->sentinel_node->next;
 	while (token_node->node_type != SENTINEL_NODE)
@@ -96,14 +97,23 @@ uint8_t ft_check_gramar(t_token_container *token_container)
 		{
 			if (token_node->struct_token->operator_type == PIPE)
 			{
-				if (token_node->prev->struct_token == NULL || token_node->struct_token->operator_type != NO_OPERATOR)
+				if (token_node->prev->struct_token == NULL || token_node->prev->struct_token->operator_type != NO_OPERATOR || token_node->next->struct_token == NULL ) //not good
 				{
-					//printf
+					dst = ft_join(3, "minishell: syntax error near unexpected token << ",token_node->struct_token->token ," >>");
+					printf("%s\n", dst);
+					free(dst);
+					return (2);
 				}
 			}
 			else
 			{
-
+				if (token_node->next->struct_token == NULL || token_node->struct_token->operator_type != NO_OPERATOR) //not good
+				{
+					dst = ft_join(3, "minishell: syntax error near unexpected token << ", token_node->struct_token->token ," >>");
+					printf("%s\n", dst);
+					free(dst);
+					return (2);
+				}
 			}
 
 		} 
