@@ -129,7 +129,78 @@ uint8_t ft_check_gramar(t_token_container *token_container)
 
 uint8_t ft_build_tree(t_pl *pipeline, t_token_container *token_container)
 {
-	(void)pipeline;
-	(void)token_container;
+	t_token_list	*token_node;
+	size_t			i;
+	size_t			j;
+	size_t			n_args;
+	size_t			n_redirect;
+
+	i = 0;
+	j = 0;
+	n_args = 0;
+	n_redirect = 0;
+	pipeline->n_cmd = 1;
+	token_node = token_container->sentinel_node->next;
+	while (token_node->node_type != SENTINEL_NODE) //find n_cmd
+	{
+		if (token_node->struct_token->operator_type != NO_OPERATOR
+			&& token_node->struct_token->operator_type == PIPE)
+				++pipeline->n_cmd;
+
+		token_node = token_node->next;
+	}
+	pipeline->cmd_list = ft_calloc(pipeline->n_cmd, sizeof(t_cmd));
+	printf("balise\n");
+	printf("n_cmd %zu\n", pipeline->n_cmd);
+	while (i < pipeline->n_cmd)
+	{
+		token_node = token_container->sentinel_node->next;
+		while (token_node->struct_token->operator_type != PIPE) //find n_args
+		{
+			if (token_node->struct_token->operator_type == HERE_DOC
+				|| token_node->struct_token->operator_type == APPEND
+				|| token_node->struct_token->operator_type == INPUT
+				|| token_node->struct_token->operator_type == OUTPUT)
+				++n_redirect;
+			else
+				++n_args;
+			token_node = token_node->next;
+		}
+		pipeline->cmd_list[i].args = ft_calloc(n_args + 1, sizeof(char *));
+		if (n_redirect > 0)
+		{
+			pipeline->cmd_list->n_redirect = n_redirect;
+			pipeline->cmd_list[i].redirect_arr = ft_calloc(n_redirect + 1, sizeof(t_redirect));
+		}
+		++i;
+	}
+	i = 0;
+	j = 0;
+	while (i < pipeline->n_cmd) //fill array
+	{
+		token_node = token_container->sentinel_node->next;
+		while (token_node->struct_token->operator_type != PIPE)
+		{
+			if (token_node->struct_token->operator_type == HERE_DOC
+				|| token_node->struct_token->operator_type == APPEND
+				|| token_node->struct_token->operator_type == INPUT
+				|| token_node->struct_token->operator_type == OUTPUT)
+			{
+				//pipeline->cmd_list[i].redirect_arr[j].file = ft_strdup//(token_node->next->struct_token->token);
+				//if ()
+			
+			}
+			else
+			{
+				pipeline->cmd_list[i].args[j] = ft_strdup(token_node->struct_token->token);
+				if (pipeline->cmd_list[i].args[j] == NULL)
+					return (2); //2?
+			}
+			token_node = token_node->next;
+			j++;
+		}
+		++i;
+	}
+	printf("test\n");
 	return (0);
 }
