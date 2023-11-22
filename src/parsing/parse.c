@@ -104,23 +104,21 @@ uint8_t ft_check_gramar(t_token_container *token_container)
 					return (2);
 				}
 			}
-			else
+			else if (token_node->next->struct_token == NULL)
 			{
-				if (token_node->next->struct_token == NULL)
-				{
-					ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
-					ft_putstr_fd("newline", 2);
-					ft_putendl_fd("'", 2);
-					return (2);
-				}
-				else
-				{
-					ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
-					ft_putstr_fd(token_node->next->struct_token->token, 2);
-					ft_putendl_fd("'", 2);
-					return (2);
-				}
+				ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
+				ft_putstr_fd("newline", 2);
+				ft_putendl_fd("'", 2);
+				return (2);
 			}
+			else if (token_node->next->struct_token->operator_type != NO_OPERATOR)
+			{
+				ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
+				ft_putstr_fd(token_node->next->struct_token->token, 2);
+				ft_putendl_fd("'", 2);
+				return (2);
+			}
+			
 
 
 		} 
