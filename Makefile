@@ -18,20 +18,20 @@ CC:=	clang
 
 CFLAGS=	-Wall -Wextra -Werror
 
-CFLAGS+=	-g3#-O3						\
-			# -Wconversion 			\
-			# -Wdouble-promotion		\
-			# -Wfloat-equal 			\
-			# -Wformat=2 				\
-			# -Winit-self 			\
-			# -fno-common 			\
-			# -Wshadow 				\
-			# -Wundef 				\
-			# -Wunused-macros 		\
-			# -Wwrite-strings 		\
-			# -Wmissing-prototypes 	\
-			# -Wmissing-declarations	\
-			 -g3
+CFLAGS+=	-O3						\
+			-Wconversion 			\
+			-Wdouble-promotion		\
+			-Wfloat-equal 			\
+			-Wformat=2 				\
+			-Winit-self 			\
+			-fno-common 			\
+			-Wshadow 				\
+			-Wundef 				\
+			-Wunused-macros 		\
+			-Wwrite-strings 		\
+			-Wmissing-prototypes 	\
+			-Wmissing-declarations	\
+			-g3
 
 #			-Wpedantic \
 # 			-pedantic-errors
@@ -49,7 +49,7 @@ CFLAGS+=	-g3#-O3						\
 #			-Walloc-zero
 
 ADDITIONAL_CPPFLAGS=
-ADDITIONAL_LDFLAGS= -fsanitize=address,undefined,leak -fno-omit-frame-pointer 
+ADDITIONAL_LDFLAGS=
 
 ifeq (${shell uname}, Darwin)
         LIB_DIRS+= $$HOMEBREW_PREFIX/opt/readline/lib
