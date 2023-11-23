@@ -7,9 +7,9 @@ static uint8_t	ft_pipe_rule(t_token_list *token);
 static void		ft_empty_redir(void);
 static void		ft_unexpected_redir(char *token);
 
-uint8_t ft_check_grammar(t_token_container *token_container)
+uint8_t	ft_check_grammar(t_token_container *token_container)
 {
-	t_token_list *token_node;
+	t_token_list	*token_node;
 
 	token_node = token_container->sentinel_node->next;
 	while (token_node->node_type != SENTINEL_NODE)
@@ -24,7 +24,7 @@ uint8_t ft_check_grammar(t_token_container *token_container)
 	return (0);
 }
 
-static uint8_t ft_monitor_grammar(t_token_list *token_node)
+static uint8_t	ft_monitor_grammar(t_token_list *token_node)
 {
 	if (token_node->struct_token->operator_type == PIPE)
 	{
