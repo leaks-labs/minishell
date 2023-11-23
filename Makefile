@@ -49,7 +49,7 @@ CFLAGS+=	-O3						\
 #			-Walloc-zero
 
 ADDITIONAL_CPPFLAGS=
-ADDITIONAL_LDFLAGS= -fsanitize=address
+ADDITIONAL_LDFLAGS= -fsanitize=address,undefined,leak -fno-omit-frame-pointer 
 
 ifeq (${shell uname}, Darwin)
         LIB_DIRS+= $$HOMEBREW_PREFIX/opt/readline/lib
@@ -90,6 +90,7 @@ SRCS_FILES:=	builtins/cd_get_curpath			\
 				heredoc/retrieve_hd_content		\
 				init_and_destroy/struct_destroy	\
 				init_and_destroy/struct_init	\
+				parsing/build_tree_utils		\
 				parsing/build_tree				\
 				parsing/expansion_utils			\
 				parsing/expansion				\
