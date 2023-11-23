@@ -6,8 +6,8 @@
 # include <stdbool.h>
 # include "lexer.h"
 
-typedef struct msh t_msh;
-typedef struct list_node t_list_node;
+typedef struct msh			t_msh;
+typedef struct list_node	t_list_node;
 
 typedef enum parse
 {
@@ -50,15 +50,24 @@ typedef struct join
 	char	*tmp;
 }				t_join;
 
+typedef struct pl_args
+{
+	size_t	n_args;
+	size_t	n_redirect;
+}				t_pl_args;
+
 t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line);
 
-uint8_t ft_check_expansion(t_msh *msh, t_token_container *token_container);
-char    *ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote);
-uint8_t ft_get_expansion_var(t_list_node **expansion_list, t_index *index, char *src);
-uint8_t ft_tokenise_expansion(t_list_node **node, t_index *index, char *src);
-void ft_get_flag(char *src, char *flag);
-char *ft_expand(t_msh *msh, char *src);
+uint8_t ft_build_tree(t_pl *pipeline, t_token_container *token_container);
 
+uint8_t ft_check_grammar(t_token_container *token_container);
 
+uint8_t	ft_check_expansion(t_msh *msh, t_token_container *token_container);
+char	*ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote);
+uint8_t	ft_get_expansion_var(t_list_node **expansion_list, t_index *index, \
+char *src);
+uint8_t	ft_tokenise_expansion(t_list_node **node, t_index *index, char *src);
+void	ft_get_flag(char *src, char *flag);
+char	*ft_expand(t_msh *msh, char *src);
 
 #endif
