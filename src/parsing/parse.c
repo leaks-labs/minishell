@@ -10,8 +10,8 @@ t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line);
 
 t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line)
 {
-	t_token_container *token_container;
-	uint8_t exit_status;
+	t_token_container	*token_container;
+	uint8_t				exit_status;
 
 	token_container = ft_lexer_monitor(line);
 	if (token_container == NULL)
@@ -32,7 +32,7 @@ t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line)
 		ft_delete_list(token_container);
 		return (NOTHING_TO_PARSE);
 	}
-	exit_status = ft_check_grammar(token_container);  //end of list
+	exit_status = ft_check_grammar(token_container);//end of list
 	if (exit_status > 0)
 	{
 		msh->exit_status = exit_status;

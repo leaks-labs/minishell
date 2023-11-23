@@ -1,16 +1,17 @@
 #include "heredoc.h"
 #include "msh_signal.h"
+#include "parse.h"
 #include "utils.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <readline/readline.h>
 
-char		*ft_get_hd_content(char *del, unsigned int *line_num);
-static char	*ft_retrieve_one_line(const bool to_expand);
+char		*ft_get_hd_content(t_msh *msh, char *del, unsigned int *line_num);
+static char	*ft_retrieve_one_line(t_msh *msh, const bool to_expand);
 static bool	ft_end_of_hd(char *current_line, char *del, unsigned int line_num);
 static char	*ft_update_hd_content(char *hd_content, char *current_line);
 
-char	*ft_get_hd_content(char *del, unsigned int *line_num)
+char	*ft_get_hd_content(t_msh *msh, char *del, unsigned int *line_num)
 {
 	const bool			to_expand = (ft_strchr(del, '\"') == NULL \
 									&& ft_strchr(del, '\'') == NULL);
@@ -23,7 +24,7 @@ char	*ft_get_hd_content(char *del, unsigned int *line_num)
 	hd_content = ft_calloc(1, sizeof(char));
 	if (hd_content == NULL)
 		return (NULL);
-	current_line = ft_retrieve_one_line(to_expand);
+	current_line = ft_retrieve_one_line(msh, to_expand);
 	if (g_signal_value > 0)
 		return (ft_freef("%p", hd_content));
 	while (ft_end_of_hd(current_line, del, first_line_num) == false)
@@ -32,24 +33,24 @@ char	*ft_get_hd_content(char *del, unsigned int *line_num)
 		if (hd_content == NULL)
 			break ;
 		(*line_num)++;
-		current_line = ft_retrieve_one_line(to_expand);
+		current_line = ft_retrieve_one_line(msh, to_expand);
 		if (g_signal_value > 0)
 			return (ft_freef("%p", hd_content));
 	}
 	return (hd_content);
 }
 
-static char	*ft_retrieve_one_line(const bool to_expand)
+static char	*ft_retrieve_one_line(t_msh *msh, const bool to_expand)
 {
 	char	*current_line;
 
-	(void)to_expand;
 	ft_set_signals(MSH_SIG_HEREDOC);
 	current_line = readline(HD_PROMPT);
 	ft_set_signals(MSH_SIG_IGN);
 	if (g_signal_value > 0 && current_line != NULL)
 		current_line = ft_freef("%p", current_line);
-	// add expander
+	if (current_line != NULL && to_expand == true)
+		current_line = ft_expansion_monitor(msh, current_line, false);
 	return (current_line);
 }
 

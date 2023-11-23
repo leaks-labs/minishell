@@ -63,24 +63,24 @@ typedef struct get
 	size_t	k;
 }				t_get;
 
-t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line);
+t_parse		ft_parse(t_msh *msh, t_pl *pipeline, char *line);
 
-void ft_quoting(t_token_container *token_container);
-uint8_t ft_check_grammar(t_token_container *token_container);
-uint8_t ft_build_tree(t_pl *pipeline, t_token_container *token_container);
+void		ft_quoting(t_token_container *token_container);
+uint8_t		ft_check_grammar(t_token_container *token_container);
+uint8_t		ft_build_tree(t_pl *pipeline, t_token_container *token_container);
 
-uint8_t	ft_alloc_pipeline(t_pl *pipeline, t_token_container *token_container);
+uint8_t		ft_alloc_pipeline(t_pl *pipeline, t_token_container *token_container);
 
-size_t ft_pipeline_len(t_token_container *token_container);
-bool ft_is_redirection(t_lexer_operator e_operator_type);
-t_io_type ft_enum_swap(t_lexer_operator e_lexer_operator);
+size_t		ft_pipeline_len(t_token_container *token_container);
+bool		ft_is_redirection(t_lexer_operator e_operator_type);
+t_io_type	ft_enum_swap(t_lexer_operator e_lexer_operator);
 
-uint8_t	ft_check_expansion(t_msh *msh, t_token_container *token_container);
-char	*ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote);
-uint8_t	ft_get_expansion_var(t_list_node **expansion_list, t_index *index, \
+uint8_t		ft_check_expansion(t_msh *msh, t_token_container *token_container);
+char		*ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote);
+uint8_t		ft_get_expansion_var(t_list_node **expansion_list, t_index *index, \
 char *src);
-uint8_t	ft_tokenise_expansion(t_list_node **node, t_index *index, char *src);
-void	ft_get_flag(char *src, char *flag);
-char	*ft_expand(t_msh *msh, char *src);
+uint8_t		ft_tokenise_expansion(t_list_node **node, t_index *index, char *src);
+void		ft_get_flag(char *src, char *flag);
+char		*ft_expand(t_msh *msh, char *src);
 
 #endif

@@ -5,7 +5,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-void	ft_run(t_msh *msh);
+void		ft_run(t_msh *msh);
 static char	*ft_prompt(t_msh *msh);
 
 volatile sig_atomic_t	g_signal_value;

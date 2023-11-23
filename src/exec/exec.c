@@ -36,7 +36,7 @@ static int	ft_init_exl(t_exl *exl, t_msh *msh, t_pl *pl)
 	exl->line_num = &msh->line_num;
 	exl->cmd_idx = 0;
 	exl->n_cmd = pl->n_cmd;
-	return (ft_heredoc(pl->cmd_list, exl));
+	return (ft_heredoc(msh, pl->cmd_list, exl));
 }
 
 static int	ft_exec_cmd(t_msh *msh, t_exl *exl, t_pl *pl)
