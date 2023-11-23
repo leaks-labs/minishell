@@ -2,10 +2,12 @@
 #include "utils.h"
 #include "init.h"
 
-uint8_t	ft_build_tree(t_pl *pipeline, t_token_container *token_container);
-static uint8_t	ft_fill_pipeline(t_pl *pipeline, t_token_container *token_container);
-static uint8_t	ft_fill_agrs(t_pl *pipeline, t_token_list *token_node, t_get *get);
-
+uint8_t			ft_build_tree(t_pl *pipeline, \
+t_token_container *token_container);
+static uint8_t	ft_fill_pipeline(t_pl *pipeline, \
+t_token_container *token_container);
+static uint8_t	ft_fill_agrs(t_pl *pipeline, t_token_list *token_node, \
+t_get *get);
 
 uint8_t	ft_build_tree(t_pl *pipeline, t_token_container *token_container)
 {
@@ -22,7 +24,8 @@ uint8_t	ft_build_tree(t_pl *pipeline, t_token_container *token_container)
 	return (0);
 }
 
-static uint8_t	ft_fill_pipeline(t_pl *pipeline, t_token_container *token_container)
+static uint8_t	ft_fill_pipeline(t_pl *pipeline, \
+t_token_container *token_container)
 {
 	t_token_list	*token_node;
 	t_get			get;
@@ -46,7 +49,8 @@ static uint8_t	ft_fill_pipeline(t_pl *pipeline, t_token_container *token_contain
 	return (0);
 }
 
-static uint8_t	ft_fill_agrs(t_pl *pipeline, t_token_list *token_node, t_get *get)
+static uint8_t	ft_fill_agrs(t_pl *pipeline, t_token_list *token_node, \
+t_get *get)
 {
 	if (ft_is_redirection(token_node->struct_token->operator_type) == true)
 	{
