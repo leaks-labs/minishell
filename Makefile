@@ -90,6 +90,7 @@ SRCS_FILES:=	builtins/cd_get_curpath			\
 				heredoc/retrieve_hd_content		\
 				init_and_destroy/struct_destroy	\
 				init_and_destroy/struct_init	\
+				parsing/alloc_tree				\
 				parsing/build_tree_utils		\
 				parsing/build_tree				\
 				parsing/expansion_utils			\

@@ -29,11 +29,11 @@ void	ft_free_cmd_list(t_pl *pipeline)
 
 	cmd = pipeline->cmd_list;
 	i = 0;
-	while (i < pipeline->n_cmd)
+	while (i < pipeline->n_cmd && cmd != NULL)
 	{
 		ft_freef("%P", cmd[i].args);
 		j = 0;
-		while (j < cmd[i].n_redirect)
+		while (j < cmd[i].n_redirect && cmd[i].redirect_arr != NULL)
 			free(cmd[i].redirect_arr[j++].file);
 		free(cmd[i].redirect_arr);
 		++i;

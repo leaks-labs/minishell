@@ -89,7 +89,7 @@ t_dictionary	*dictionary, t_index *index)
 				index) == NOT_LEXED)
 			return (NOT_LEXED);
 	}
-	else if (ft_strchr("\"'", line[index->current]))
+	else if (line[index->current] == '"' || line[index->current] == '\'')
 	{
 		if (ft_skip_quotes(line, index) == NOT_LEXED)
 			return (NOT_LEXED);
