@@ -6,6 +6,7 @@
 # define ENV_NOEXP 4
 
 # include "exec.h"
+# include <stdbool.h>
 
 typedef enum idx_act
 {

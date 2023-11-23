@@ -18,20 +18,20 @@ CC:=	clang
 
 CFLAGS=	-Wall -Wextra -Werror
 
-CFLAGS+=	-O3						\
-			-Wconversion 			\
-			-Wdouble-promotion		\
-			-Wfloat-equal 			\
-			-Wformat=2 				\
-			-Winit-self 			\
-			-fno-common 			\
-			-Wshadow 				\
-			-Wundef 				\
-			-Wunused-macros 		\
-			-Wwrite-strings 		\
-			-Wmissing-prototypes 	\
-			-Wmissing-declarations	\
-			-g3
+CFLAGS+=	-g3#-O3						\
+			# -Wconversion 			\
+			# -Wdouble-promotion		\
+			# -Wfloat-equal 			\
+			# -Wformat=2 				\
+			# -Winit-self 			\
+			# -fno-common 			\
+			# -Wshadow 				\
+			# -Wundef 				\
+			# -Wunused-macros 		\
+			# -Wwrite-strings 		\
+			# -Wmissing-prototypes 	\
+			# -Wmissing-declarations	\
+			 -g3
 
 #			-Wpedantic \
 # 			-pedantic-errors
@@ -49,7 +49,7 @@ CFLAGS+=	-O3						\
 #			-Walloc-zero
 
 ADDITIONAL_CPPFLAGS=
-ADDITIONAL_LDFLAGS= -fsanitize=address
+ADDITIONAL_LDFLAGS= -fsanitize=address,undefined,leak -fno-omit-frame-pointer 
 
 ifeq (${shell uname}, Darwin)
         LIB_DIRS+= $$HOMEBREW_PREFIX/opt/readline/lib
@@ -90,7 +90,16 @@ SRCS_FILES:=	builtins/cd_get_curpath			\
 				heredoc/retrieve_hd_content		\
 				init_and_destroy/struct_destroy	\
 				init_and_destroy/struct_init	\
+				parsing/build_tree_utils		\
+				parsing/build_tree				\
+				parsing/expansion_utils			\
+				parsing/expansion				\
+				parsing/grammar					\
+				parsing/lexer_utils				\
+				parsing/lexer					\
 				parsing/parse					\
+				parsing/quoting					\
+				parsing/token_list				\
 				path/get_cmd_path				\
 				path/get_path					\
 				redirections/adapt_redirections	\
