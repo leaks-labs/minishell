@@ -5,9 +5,9 @@
 uint8_t	ft_build_tree(t_pl *pipeline, t_token_container *token_container);
 size_t	ft_pipeline_len(t_token_container *token_container);
 uint8_t	ft_alloc_pipeline(t_pl *pipeline, t_token_container *token_container);
-void	ft_args_len(t_token_container *token_container, t_pl_args *pl_args);
+void	ft_args_len(t_token_list *token_node, t_pl_args *pl_args);
 uint8_t ft_fill_pipeline(t_pl *pipeline, t_token_container *token_container);
-
+//cat dossier
 
 bool	ft_is_redirection(t_lexer_operator e_operator_type);
 
@@ -46,15 +46,18 @@ size_t ft_pipeline_len(t_token_container *token_container)
 
 uint8_t ft_alloc_pipeline(t_pl *pipeline, t_token_container *token_container)
 {
-	size_t 			i;
+	t_token_list *token_node;
 	t_pl_args		pl_args;
+	size_t 			i;
 
 	i = 0;
+	token_node = token_container->sentinel_node->next; //always the same pipe
 	while (i < pipeline->n_cmd)
 	{
 		pl_args.n_args = 0;
 		pl_args.n_redirect = 0;
-		ft_args_len(token_container, &pl_args);
+		ft_args_len(token_node, &pl_args);
+		token_node = token_container->sentinel_node->next; //always the same pipe
 		printf("n_args :%zu\n",pl_args.n_args);
 		pipeline->cmd_list[i].args = ft_calloc(pl_args.n_args + 1, sizeof(char *));
 		if (pl_args.n_redirect > 0)
@@ -72,13 +75,10 @@ uint8_t ft_alloc_pipeline(t_pl *pipeline, t_token_container *token_container)
 	return (0);
 }
 
-void	ft_args_len(t_token_container *token_container, t_pl_args *pl_args) //cat dossier
+void	ft_args_len(t_token_list *token_node, t_pl_args *pl_args) //cat dossier
 {
-	t_token_list *token_node;
-
-	token_node = token_container->sentinel_node->next; //always the same pipe
 	while (token_node->node_type != SENTINEL_NODE \
-			&& token_node->struct_token->operator_type != PIPE)
+		&& token_node->struct_token->operator_type != PIPE)
 	{
 		if (ft_is_redirection(token_node->struct_token->operator_type) == true)
 			pl_args->n_redirect++;
@@ -96,10 +96,10 @@ uint8_t ft_fill_pipeline(t_pl *pipeline, t_token_container *token_container)
 
 	i = 0;
 	j = 0;
+	token_node = token_container->sentinel_node->next;
 	while (i < pipeline->n_cmd) //fill array
 	{
 		j = 0;
-		token_node = token_container->sentinel_node->next;
 		while (token_node->node_type != SENTINEL_NODE \
 			&& token_node->struct_token->operator_type != PIPE) //update adr so it's not always the same node
 		{
@@ -118,6 +118,7 @@ uint8_t ft_fill_pipeline(t_pl *pipeline, t_token_container *token_container)
 			token_node = token_node->next;
 			++j;
 		}
+		token_node = token_node->next;
 		++i;
 	}
 	return (0);

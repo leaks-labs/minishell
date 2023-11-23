@@ -97,6 +97,7 @@ SRCS_FILES:=	builtins/cd_get_curpath			\
 				parsing/lexer_utils				\
 				parsing/lexer					\
 				parsing/parse					\
+				parsing/quoting					\
 				parsing/token_list				\
 				path/get_cmd_path				\
 				path/get_path					\
