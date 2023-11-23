@@ -48,11 +48,15 @@ void ft_set_args(t_token_list *token_node, t_pl_args *pl_args)
 
 uint8_t ft_alloc_args(t_pl *pipeline, t_pl_args *pl_args, size_t i)
 {
-	pipeline->cmd_list[i].args = ft_calloc(pl_args->n_args + 1, sizeof(char *)); //protect that alloc ?
+	pipeline->cmd_list[i].args = ft_calloc(pl_args->n_args + 1, sizeof(char *));
+	if (pipeline->cmd_list[i].args == NULL)
+		return (1);
 	if (pl_args->n_redirect > 0)
 	{
 		pipeline->cmd_list[i].n_redirect = pl_args->n_redirect;
 		pipeline->cmd_list[i].redirect_arr = ft_calloc(pl_args->n_redirect, sizeof(t_redirect));
+		if (pipeline->cmd_list[i].redirect_arr == NULL)
+			return (1);
 	}
 	else
 	{
