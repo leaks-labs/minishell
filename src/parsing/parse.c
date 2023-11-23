@@ -1,9 +1,5 @@
 #include "parse.h"
-#include "lexer.h"
-#include "exec.h"
 #include "utils.h"
-#include <stddef.h>
-#include <stdlib.h>
 
 t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line);
 

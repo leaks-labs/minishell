@@ -1,6 +1,5 @@
 #include "parse.h"
 #include "utils.h"
-#include <stddef.h>
 
 uint8_t			ft_alloc_pipeline(t_pl *pipeline, \
 t_token_container *token_container);
