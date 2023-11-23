@@ -67,6 +67,7 @@ bool ft_is_redirection(t_lexer_operator e_operator_type);
 void ft_reset_args(t_pl_args *pl_args);
 void ft_set_args(t_token_list *token_node, t_pl_args *pl_args);
 uint8_t ft_alloc_args(t_pl *pipeline, t_pl_args *pl_args, size_t i);
+t_io_type ft_enum_swap(t_lexer_operator e_lexer_operator);
 
 uint8_t	ft_check_expansion(t_msh *msh, t_token_container *token_container);
 char	*ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote);

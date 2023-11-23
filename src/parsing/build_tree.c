@@ -43,7 +43,7 @@ uint8_t ft_alloc_pipeline(t_pl *pipeline, t_token_container *token_container)
 		}
 		token_node = token_node->next;
 		ft_alloc_args(pipeline, &pl_args, i); //if == 2 protect ?
-		printf("n_args :%zu\n",pl_args.n_args);
+		printf("n_args :%zu n_redir :%zu\n",pl_args.n_args, pl_args.n_redirect);
 		++i;
 	}
 	return (0);
@@ -59,23 +59,28 @@ uint8_t ft_fill_pipeline(t_pl *pipeline, t_token_container *token_container)
 	i = 0;
 	j = 0;
 	token_node = token_container->sentinel_node->next;
-	while (i < pipeline->n_cmd) //fill array
+	while (i < pipeline->n_cmd)
 	{
 		j = 0;
 		while (token_node->node_type != SENTINEL_NODE \
-			&& token_node->struct_token->operator_type != PIPE) //update adr so it's not always the same node
+			&& token_node->struct_token->operator_type != PIPE)
 		{
 			if (ft_is_redirection(token_node->struct_token->operator_type) == true)
 			{
-				//pipeline->cmd_list[i].redirect_arr[j].file = ft_strdup//(token_node->next->struct_token->token);
-				//if ()
-			
+				pipeline->cmd_list[i].redirect_arr[j].file = ft_strdup(token_node->next->struct_token->token);
+				printf("file :%s\n",pipeline->cmd_list[i].redirect_arr[j].file);
+				if (pipeline->cmd_list[i].redirect_arr[j].file == NULL)
+					return (2); //2?
+				pipeline->cmd_list[i].redirect_arr[j].e_iotype = ft_enum_swap(token_node->struct_token->operator_type);
+				token_node = token_node->next;
+
 			}
 			else
 			{
 				pipeline->cmd_list[i].args[j] = ft_strdup(token_node->struct_token->token);
+				printf("arg :%s\n", pipeline->cmd_list[i].args[j]);
 				if (pipeline->cmd_list[i].args[j] == NULL)
-					return (2); //2?
+					return (2); //2? //free dptr ?
 			}
 			token_node = token_node->next;
 			++j;

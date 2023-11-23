@@ -18,20 +18,20 @@ CC:=	clang
 
 CFLAGS=	-Wall -Wextra -Werror
 
-CFLAGS+=	-O3						\
-			-Wconversion 			\
-			-Wdouble-promotion		\
-			-Wfloat-equal 			\
-			-Wformat=2 				\
-			-Winit-self 			\
-			-fno-common 			\
-			-Wshadow 				\
-			-Wundef 				\
-			-Wunused-macros 		\
-			-Wwrite-strings 		\
-			-Wmissing-prototypes 	\
-			-Wmissing-declarations	\
-			-g3
+CFLAGS+=	-g3#-O3						\
+			# -Wconversion 			\
+			# -Wdouble-promotion		\
+			# -Wfloat-equal 			\
+			# -Wformat=2 				\
+			# -Winit-self 			\
+			# -fno-common 			\
+			# -Wshadow 				\
+			# -Wundef 				\
+			# -Wunused-macros 		\
+			# -Wwrite-strings 		\
+			# -Wmissing-prototypes 	\
+			# -Wmissing-declarations	\
+			 -g3
 
 #			-Wpedantic \
 # 			-pedantic-errors
