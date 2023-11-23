@@ -65,7 +65,7 @@ bool handle_quote)
 		ft_get_flag(s_join.src, &flag);
 		if ((handle_quote == false || flag != '\'') \
 		&& (s_join.src[0] == '$' \
-		&& (ft_strchr("_?", s_join.src[1]) || ft_isalpha(s_join.src[1]))))
+		&& (s_join.src[1] == '_' || s_join.src[1] == '?' || ft_isalpha(s_join.src[1]))))
 		{
 			s_join.src = ft_expand(msh, s_join.src);
 			if (s_join.src == NULL)
