@@ -28,23 +28,26 @@ static uint8_t	ft_fill_pipeline(t_pl *pipeline, \
 t_token_container *token_container)
 {
 	t_token_list	*token_node;
-	t_get			get;
+	t_get			s_get;
 
-	get.i = 0;
+	s_get.i = 0;
 	token_node = token_container->sentinel_node->next;
-	while (get.i < pipeline->n_cmd)
+	while (s_get.i < pipeline->n_cmd)
 	{
-		get.j = 0;
-		get.k = 0;
+		s_get.j = 0;
+		s_get.k = 0;
 		while (token_node->node_type != SENTINEL_NODE \
-			&& token_node->struct_token->operator_type != PIPE)
+				&& token_node->struct_token->operator_type != PIPE)
 		{
-			if (ft_fill_agrs(pipeline, token_node, &get) == 1)
+			if (ft_fill_agrs(pipeline, token_node, &s_get) == 1)
 				return (1);
 			token_node = token_node->next;
+			if (token_node->prev->node_type != SENTINEL_NODE \
+				&& ft_is_redirection(token_node->prev->struct_token->operator_type) == true)
+				token_node = token_node->next;
 		}
 		token_node = token_node->next;
-		++get.i;
+		++s_get.i;
 	}
 	return (0);
 }
@@ -59,8 +62,7 @@ t_get *get)
 		if (pipeline->cmd_list[get->i].redirect_arr[get->j].file == NULL)
 			return (1);
 		pipeline->cmd_list[get->i].redirect_arr[get->j].e_iotype \
-		= ft_enum_swap(token_node->struct_token->operator_type);
-		token_node = token_node->next;
+			= ft_enum_swap(token_node->struct_token->operator_type);
 		++get->j;
 	}
 	else

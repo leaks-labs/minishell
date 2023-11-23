@@ -18,8 +18,7 @@ CC:=	clang
 
 CFLAGS=	-Wall -Wextra -Werror
 
-CFLAGS+=	-O3						\
-			-Wconversion 			\
+CFLAGS+=	-Wconversion 			\
 			-Wdouble-promotion		\
 			-Wfloat-equal 			\
 			-Wformat=2 				\
@@ -49,7 +48,7 @@ CFLAGS+=	-O3						\
 #			-Walloc-zero
 
 ADDITIONAL_CPPFLAGS=
-ADDITIONAL_LDFLAGS=
+ADDITIONAL_LDFLAGS=	-fsanitize=address
 
 ifeq (${shell uname}, Darwin)
         LIB_DIRS+= $$HOMEBREW_PREFIX/opt/readline/lib
