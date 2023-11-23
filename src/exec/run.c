@@ -16,12 +16,14 @@ void	ft_run(t_msh *msh)
 	char	*line;
 	t_parse	e_parse_return;
 
+	s_pipeline.cmd_list = NULL;
+	s_pipeline.n_cmd = 0;
 	g_signal_value = 0;
 	while (true)
 	{
 		line = ft_prompt(msh);
 		if (line == NULL)
-			return ;
+			ft_exit(msh, &s_pipeline, NULL);
 		g_signal_value = 0;
 		if (*line != '\0')
 		{

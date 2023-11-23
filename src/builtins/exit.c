@@ -14,7 +14,7 @@ int	ft_exit(t_msh *msh, t_pl *pl, char **args)
 	ft_putendl_fd("exit", STDERR_FILENO);
 	exit_code = msh->exit_status;
 	error = false;
-	if (args[0] != NULL)
+	if (args != NULL && args[0] != NULL)
 	{
 		exit_code = (uint8_t)ft_strtoimax(*args, &error);
 		if (error == true)
