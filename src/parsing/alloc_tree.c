@@ -2,9 +2,10 @@
 #include "utils.h"
 #include <stddef.h>
 
-uint8_t	ft_alloc_pipeline(t_pl *pipeline, t_token_container *token_container);
-static void	ft_reset_args(t_pl_args *pl_args);
-static void	ft_set_args(t_token_list *token_node, t_pl_args *pl_args);
+uint8_t			ft_alloc_pipeline(t_pl *pipeline, \
+t_token_container *token_container);
+static void		ft_reset_args(t_pl_args *pl_args);
+static void		ft_set_args(t_token_list *token_node, t_pl_args *pl_args);
 static uint8_t	ft_alloc_args(t_pl *pipeline, t_pl_args *pl_args, size_t i);
 
 uint8_t	ft_alloc_pipeline(t_pl *pipeline, t_token_container *token_container)
