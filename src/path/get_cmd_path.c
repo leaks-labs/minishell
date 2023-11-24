@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 14:56:22 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 15:00:23 by Leex-Labs        ###   ########.fr       */
+/*   Created: 2023/11/24 22:29:55 by Leex-Labs         #+#    #+#             */
+/*   Updated: 2023/11/24 22:29:56 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ static char	*ft_search_in_path(t_list_node *path, const char *cmd)
 	struct stat	buf;
 	t_list_node	*node;
 
+	if (*cmd == '\0')
+	{
+		errno = ENOENT;
+		return (NULL);
+	}
 	cmd_path = NULL;
 	node = path;
 	while (node != NULL)
