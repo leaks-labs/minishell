@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 22:29:55 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 22:29:56 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/24 22:37:38 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ char	*ft_get_cmd_path(t_list_node *path, const char *cmd)
 {
 	char	*cmd_path;
 
+	if (*cmd == '\0')
+	{
+		errno = ENOENT;
+		return (NULL);
+	}
 	if (ft_isapath(cmd) == true)
 		cmd_path = ft_check_one_path(cmd);
 	else if (path != NULL)
@@ -63,11 +68,6 @@ static char	*ft_search_in_path(t_list_node *path, const char *cmd)
 	struct stat	buf;
 	t_list_node	*node;
 
-	if (*cmd == '\0')
-	{
-		errno = ENOENT;
-		return (NULL);
-	}
 	cmd_path = NULL;
 	node = path;
 	while (node != NULL)
