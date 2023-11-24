@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 14:56:22 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 15:00:23 by Leex-Labs        ###   ########.fr       */
+/*   Created: 2023/11/24 22:29:55 by Leex-Labs         #+#    #+#             */
+/*   Updated: 2023/11/24 22:37:38 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ char	*ft_get_cmd_path(t_list_node *path, const char *cmd)
 {
 	char	*cmd_path;
 
+	if (*cmd == '\0')
+	{
+		errno = ENOENT;
+		return (NULL);
+	}
 	if (ft_isapath(cmd) == true)
 		cmd_path = ft_check_one_path(cmd);
 	else if (path != NULL)
