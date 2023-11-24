@@ -14,8 +14,6 @@
 #include "utils.h"
 #include <stdlib.h>
 
-#include <stdio.h>
-
 char			*ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote);
 static uint8_t	ft_get_expansion_list(t_list_node **expansion_list, char *src);
 static char		*ft_command_expand(t_msh *msh, t_list_node *expansion_list, \
