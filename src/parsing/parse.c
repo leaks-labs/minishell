@@ -10,7 +10,11 @@ t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line)
 
 	token_container = ft_lexer_monitor(line);
 	if (token_container == NULL)
-		return (PARSE_ERROR); //set msh
+	{
+		msh->exit_status = 1;
+		ft_putendl_fd("minishell: parse error", 2);
+		return (PARSE_ERROR);
+	}
 	if (token_container->list_size == 0)
 	{
 		ft_delete_list(token_container);
@@ -18,8 +22,9 @@ t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line)
 	}
 	if (ft_check_expansion(msh, token_container) == 1)
 	{
+		msh->exit_status = 1;
 		ft_delete_list(token_container);
-		return (PARSE_ERROR); //set msh
+		return (PARSE_ERROR);
 	}
 	ft_quoting(token_container);
 	if (token_container->list_size == 0)
@@ -27,7 +32,7 @@ t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line)
 		ft_delete_list(token_container);
 		return (NOTHING_TO_PARSE);
 	}
-	exit_status = ft_check_grammar(token_container);//end of list
+	exit_status = ft_check_grammar(token_container);
 	if (exit_status > 0)
 	{
 		msh->exit_status = exit_status;
