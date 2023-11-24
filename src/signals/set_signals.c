@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:56:45 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 14:56:46 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/24 16:04:04 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	ft_set_sighandler_ign(void)
 	struct sigaction	sa;
 
 	sa.sa_handler = SIG_IGN;
+	sa.sa_flags = 0;
 	sigemptyset(&sa.sa_mask);
 	sigaddset(&sa.sa_mask, SIGINT);
 	sigaddset(&sa.sa_mask, SIGQUIT);
@@ -48,6 +49,7 @@ static void	ft_set_sighandler_heredoc(void)
 	struct sigaction	sa;
 
 	sa.sa_handler = &ft_sighandler_heredoc;
+	sa.sa_flags = 0;
 	sigemptyset(&sa.sa_mask);
 	sigaddset(&sa.sa_mask, SIGINT);
 	sigaddset(&sa.sa_mask, SIGQUIT);
@@ -61,6 +63,7 @@ static void	ft_set_sighandler_ext_cmd(void)
 	struct sigaction	sa;
 
 	sa.sa_handler = SIG_DFL;
+	sa.sa_flags = 0;
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
@@ -71,6 +74,7 @@ static void	ft_set_sighandler_reprompt(void)
 	struct sigaction	sa;
 
 	sa.sa_handler = &ft_sighandler_reprompt;
+	sa.sa_flags = 0;
 	sigemptyset(&sa.sa_mask);
 	sigaddset(&sa.sa_mask, SIGINT);
 	sigaddset(&sa.sa_mask, SIGQUIT);
