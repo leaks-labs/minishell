@@ -1,7 +1,7 @@
 #include "parse.h"
 
 size_t		ft_pipeline_len(t_token_container *token_container);
-bool		ft_is_redirection(t_lexer_operator e_operator_type);
+bool		ft_is_redir(t_lexer_operator e_operator_type);
 t_io_type	ft_enum_swap(t_lexer_operator e_lexer_operator);
 
 size_t	ft_pipeline_len(t_token_container *token_container)
@@ -21,7 +21,7 @@ size_t	ft_pipeline_len(t_token_container *token_container)
 	return (n_cmd);
 }
 
-bool	ft_is_redirection(t_lexer_operator e_operator_type)
+bool	ft_is_redir(t_lexer_operator e_operator_type)
 {
 	return (e_operator_type == HERE_DOC || e_operator_type == APPEND \
 			|| e_operator_type == INPUT || e_operator_type == OUTPUT);

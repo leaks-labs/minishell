@@ -2,12 +2,30 @@
 #include "utils.h"
 
 t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line);
+t_parse	ft_lex_line(t_msh *msh, t_token_container *token_container, char *line);
+t_parse	ft_q_and_expd(t_msh *msh, t_token_container *token_container);
+t_parse	ft_tree(t_msh *msh, t_pl *pipeline, t_token_container *token_container);
 
 t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line)
 {
 	t_token_container	*token_container;
-	uint8_t				exit_status;
+	t_parse				e_parse_ret;
 
+	e_parse_ret = ft_lex_line(&msh->exit_status, token_container, line);
+	if (e_parse_ret == PARSE_ERROR)
+		return (PARSE_ERROR);
+	else
+		return (NOTHING_TO_PARSE);
+	e_parse_ret = ft_q_and_expd(&msh->exit_status, token_container);
+	if (e_parse_ret == PARSE_ERROR)
+		return (PARSE_ERROR);
+	else
+		return (NOTHING_TO_PARSE);
+	return (ft_tree(msh, pipeline, token_container));
+}
+
+t_parse	ft_lex_line(t_msh *msh, t_token_container *token_container, char *line)
+{
 	token_container = ft_lexer_monitor(line);
 	if (token_container == NULL)
 	{
@@ -20,6 +38,10 @@ t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line)
 		ft_delete_list(token_container);
 		return (NOTHING_TO_PARSE);
 	}
+}
+
+t_parse	ft_q_and_expd(t_msh *msh, t_token_container *token_container)
+{
 	if (ft_check_expansion(msh, token_container) == 1)
 	{
 		msh->exit_status = 1;
@@ -32,6 +54,12 @@ t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line)
 		ft_delete_list(token_container);
 		return (NOTHING_TO_PARSE);
 	}
+}
+
+t_parse	ft_tree(t_msh *msh, t_pl *pipeline, t_token_container *token_container)
+{
+	uint8_t	exit_status;
+
 	exit_status = ft_check_grammar(token_container);
 	if (exit_status > 0)
 	{

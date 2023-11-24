@@ -24,7 +24,7 @@ uint8_t	ft_alloc_pipeline(t_pl *pipeline, t_token_container *token_container)
 			ft_set_args(token_node, &s_pl_args);
 			token_node = token_node->next;
 			if (token_node->prev->node_type != SENTINEL_NODE \
-				&& ft_is_redirection(token_node->prev->struct_token->operator_type) == true)
+				&& ft_is_redir(token_node->prev->struct_token->operator_type))
 				token_node = token_node->next;
 		}
 		token_node = token_node->next;
@@ -43,7 +43,7 @@ static void	ft_reset_args(t_pl_args *pl_args)
 
 static void	ft_set_args(t_token_list *token_node, t_pl_args *pl_args)
 {
-	if (ft_is_redirection(token_node->struct_token->operator_type) == true)
+	if (ft_is_redir(token_node->struct_token->operator_type) == true)
 		pl_args->n_redirect++;
 	else
 		pl_args->n_args++;
@@ -53,7 +53,8 @@ static uint8_t	ft_alloc_args(t_pl *pipeline, t_pl_args *pl_args, size_t i)
 {
 	if (pl_args->n_args > 0)
 	{
-		pipeline->cmd_list[i].args = ft_calloc(pl_args->n_args + 1, sizeof(char *));
+		pipeline->cmd_list[i].args 
+			= ft_calloc(pl_args->n_args + 1, sizeof(char *));
 		if (pipeline->cmd_list[i].args == NULL)
 			return (1);
 	}

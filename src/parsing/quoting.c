@@ -16,12 +16,7 @@ void	ft_quoting(t_token_container *token_container)
 			ft_delete_node(token_container, token_node);
 			token_node = tmp_node;
 		}
-		else if (token_node->node_type != SENTINEL_NODE \
-			&& token_node->struct_token->operator_type == NO_OPERATOR \
-			&& (token_node->prev->node_type == SENTINEL_NODE \
-			|| token_node->prev->struct_token->operator_type != HERE_DOC) \
-			&& (ft_strchr(token_node->struct_token->token, '"') \
-			|| ft_strchr(token_node->struct_token->token, '\'')))
+		else if (ft_is_removable(token_node) == true)
 		{
 			ft_rm_quotes(token_node->struct_token->token);
 			token_node = token_node->next;
@@ -29,4 +24,14 @@ void	ft_quoting(t_token_container *token_container)
 		else
 			token_node = token_node->next;
 	}
+}
+
+static bool	ft_is_removable(t_token_list *token_node)
+{
+	return (token_node->node_type != SENTINEL_NODE \
+			&& token_node->struct_token->operator_type == NO_OPERATOR \
+			&& (token_node->prev->node_type == SENTINEL_NODE \
+			|| token_node->prev->struct_token->operator_type != HERE_DOC) \
+			&& (ft_strchr(token_node->struct_token->token, '"') \
+			|| ft_strchr(token_node->struct_token->token, '\'')));
 }

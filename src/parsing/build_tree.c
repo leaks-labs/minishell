@@ -43,7 +43,7 @@ t_token_container *token_container)
 				return (1);
 			token_node = token_node->next;
 			if (token_node->prev->node_type != SENTINEL_NODE \
-				&& ft_is_redirection(token_node->prev->struct_token->operator_type) == true)
+				&& ft_is_redir(token_node->prev->struct_token->operator_type))
 				token_node = token_node->next;
 		}
 		token_node = token_node->next;
@@ -55,7 +55,7 @@ t_token_container *token_container)
 static uint8_t	ft_fill_agrs(t_pl *pipeline, t_token_list *token_node, \
 t_get *get)
 {
-	if (ft_is_redirection(token_node->struct_token->operator_type) == true)
+	if (ft_is_redir(token_node->struct_token->operator_type) == true)
 	{
 		pipeline->cmd_list[get->i].redirect_arr[get->j].file \
 			= ft_strdup(token_node->next->struct_token->token);
