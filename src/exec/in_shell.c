@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:55:14 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 14:55:15 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/24 15:09:20 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	ft_in_shell(t_in_shell_pmt *pmt, t_cmd *cmd, t_built_f built_f)
 		err_code = built_f(pmt->msh, pmt->pl, cmd->args + 1);
 	dup2(s_origin_stdio_fd.fd_to_read, STDIN_FILENO);
 	dup2(s_origin_stdio_fd.fd_to_write, STDOUT_FILENO);
-	// ft_close_used_pipes(&exl->s_fd_io);
 	ft_close_used_pipes(&s_origin_stdio_fd);
 	return (err_code);
 }

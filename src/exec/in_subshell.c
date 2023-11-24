@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:55:22 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 15:06:34 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/24 15:09:29 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static pid_t	ft_child_proc(t_msh *msh, t_exl *exl, t_pl *pl, t_cmd *cmd)
 	}
 	close(exl->s_fd_io.fd_to_read);
 	close(exl->s_fd_io.fd_to_write);
-	// or ft_close_used_pipes(&exl->s_fd_io)?;
 	ft_free_cmd_list(pl);
 	msh->exit_status = (uint8_t)err_code;
 	exit(ft_quit(msh));
