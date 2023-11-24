@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:55:55 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 14:55:56 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/24 16:29:17 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char	*ft_expand(t_msh *msh, char *src);
 uint8_t	ft_check_expansion(t_msh *msh, t_token_container *token_container)
 {
 	t_token_list	*token_node;
-	char			*tmp;
 	char			*dst;
 
 	token_node = token_container->sentinel_node->next;
@@ -39,9 +38,8 @@ uint8_t	ft_check_expansion(t_msh *msh, t_token_container *token_container)
 			true);
 			if (dst == NULL)
 				return (1);
-			tmp = token_node->struct_token->token;
+			free(token_node->struct_token->token);
 			token_node->struct_token->token = dst;
-			free(tmp);
 		}
 		token_node = token_node->next;
 	}

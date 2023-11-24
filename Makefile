@@ -6,7 +6,7 @@
 #    By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 14:58:52 by Leex-Labs         #+#    #+#              #
-#    Updated: 2023/11/24 14:58:53 by Leex-Labs        ###   ########.fr        #
+#    Updated: 2023/11/24 16:19:34 by Leex-Labs        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ CFLAGS+=	-Wconversion 			\
 #			-Walloc-zero
 
 ADDITIONAL_CPPFLAGS=
-ADDITIONAL_LDFLAGS=	-fsanitize=address
+ADDITIONAL_LDFLAGS=
 
 ifeq (${shell uname}, Darwin)
         LIB_DIRS+= $$HOMEBREW_PREFIX/opt/readline/lib

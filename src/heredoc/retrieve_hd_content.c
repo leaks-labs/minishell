@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:55:36 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 14:55:37 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/24 16:27:20 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ char	*ft_get_hd_content(t_msh *msh, char *del, unsigned int *line_num)
 static char	*ft_retrieve_one_line(t_msh *msh, const bool to_expand)
 {
 	char	*current_line;
+	char	*tmp;
 
 	ft_set_signals(MSH_SIG_HEREDOC);
 	current_line = readline(HD_PROMPT);
@@ -62,7 +63,11 @@ static char	*ft_retrieve_one_line(t_msh *msh, const bool to_expand)
 	if (g_signal_value > 0 && current_line != NULL)
 		current_line = ft_freef("%p", current_line);
 	if (current_line != NULL && to_expand == true)
+	{
+		tmp = current_line;
 		current_line = ft_expansion_monitor(msh, current_line, false);
+		free(tmp);
+	}
 	return (current_line);
 }
 
