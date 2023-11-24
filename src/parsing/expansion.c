@@ -55,7 +55,10 @@ static uint8_t	ft_get_expansion_list(t_list_node **expansion_list, char *src)
 					|| ft_isalpha(src[s_index.current + 1]))) \
 			&& ft_get_expansion_var(expansion_list, &s_index, src) == 1)
 			return (1);
-		else if (src[s_index.current] != '\0' && src[s_index.current] != '$')
+		else if (src[s_index.current] != '\0' && (!(src[s_index.current] == '$' && (src[s_index.current + 1] == '_' \
+					|| src[s_index.current + 1] == '?' \
+					|| ft_isalpha(src[s_index.current + 1]))) \
+			&& ft_get_expansion_var(expansion_list, &s_index, src)))
 			s_index.current++;
 	}
 	if (s_index.previous != s_index.current \
