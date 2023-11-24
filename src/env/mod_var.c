@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:54:56 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 23:35:33 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/25 00:07:56 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,14 @@ int	ft_mod_env2(t_list *env, const char *name, const char *val, int f)
 
 	if (name == NULL)
 		return (0);
-	if (val == NULL && (f & ENV_ASSIGN) == ENV_ASSIGN)
+	if (val == NULL && (f & ENV_APPEND) == ENV_APPEND)
+		assignation = ft_join(2, name, "+=");
+	else if (val == NULL && (f & ENV_ASSIGN) == ENV_ASSIGN)
 		assignation = ft_join(2, name, "=");
 	else if (val == NULL)
 		assignation = ft_strdup(name);
+	else if ((f & ENV_APPEND) == ENV_APPEND)
+		assignation = ft_join(3, name, "+=", val);
 	else
 		assignation = ft_join(3, name, "=", val);
 	if (assignation == NULL)
