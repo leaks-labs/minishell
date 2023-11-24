@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   retrieve_hd_content.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
+/*   By: shinfray <shinfray@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:55:36 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 19:18:14 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/24 21:36:57shinfray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ char	*ft_get_hd_content(t_msh *msh, char *del, unsigned int *line_num)
 	while (ft_end_of_hd(current_line, del, first_line_num) == false)
 	{
 		current_line = ft_do_expansion(msh, current_line, to_expand);
-		// protect current_line;
 		hd_content = ft_update_hd_content(hd_content, current_line);
 		if (hd_content == NULL)
 			break ;
@@ -101,6 +100,8 @@ static char	*ft_update_hd_content(char *hd_content, char *current_line)
 {
 	char	*former_line;
 
+	if (current_line == NULL)
+		return (ft_freef("%p", hd_content));
 	former_line = hd_content;
 	hd_content = ft_join(3, former_line, current_line, "\n");
 	ft_freef("%p%p", former_line, current_line);
