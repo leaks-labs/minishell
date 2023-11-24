@@ -24,10 +24,7 @@ static int	ft_pwd_fallback(void)
 
 	path = getcwd(NULL, 0);
 	if (path == NULL)
-	{
-		// perror("pwd");
 		return (1);
-	}
 	printf("%s\n", path);
 	free(path);
 	return (0);

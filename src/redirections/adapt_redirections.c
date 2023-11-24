@@ -6,7 +6,7 @@
 
 #ifdef __linux__
 # define PIPE_SIZE 65536
-#elif defined __APPLE__
+#elif defined(__APPLE__)
 # include <sys/pipe.h>
 #endif
 

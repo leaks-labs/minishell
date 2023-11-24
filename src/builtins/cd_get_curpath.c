@@ -43,10 +43,7 @@ static char	*ft_init_curpath(const char **args, t_msh *msh, bool *print_m)
 	else if (*args == NULL || ft_strcmp(*args, "-") == 0)
 		curpath = ft_retrieve_from_env(&msh->env, *args, print_m);
 	else
-	{
 		curpath = ft_strdup(*args);
-		// throw error if strdup fails?
-	}
 	return (curpath);
 }
 
@@ -73,7 +70,6 @@ static char	*ft_retrieve_from_env(t_list *env, const char *arg, bool *print_m)
 	}
 	if (var != NULL)
 		curpath = ft_strdup(var->value);
-	// throw error if strdup fails?
 	return (curpath);
 }
 
@@ -86,7 +82,6 @@ static char	*ft_iterate_cdpath(t_list *env, char *curpath)
 	if (ft_begin_with_dots(curpath) == false)
 	{
 		cdpath = ft_split(ft_getenv("CDPATH", env), ':');
-		// print error?
 		if (cdpath == NULL)
 			return (curpath);
 		i = 0;
@@ -118,6 +113,5 @@ static char	*ft_form_cdpath(char *cdpath, char *curpath)
 		tmp = ft_join(3, cdpath, "/", curpath);
 	else
 		tmp = ft_join(2, "./", curpath);
-	// perror ?
 	return (tmp);
 }

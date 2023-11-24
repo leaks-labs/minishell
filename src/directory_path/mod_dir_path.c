@@ -18,8 +18,6 @@ char	*ft_cat_pwd_and_curpath(char *pwd, char *curpath)
 	else if (len > 0 && pwd[len - 1] != '/')
 		curpath = ft_join(3, pwd, "/", curpath);
 	free(tmp);
-	// if (curpath == NULL)
-	// 		perror();
 	return (curpath);
 }
 

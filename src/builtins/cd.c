@@ -41,5 +41,4 @@ static void	ft_update_pwd_vars(t_list *env, char *curpath)
 	if (pwd != NULL)
 		ft_mod_env2(env, "OLDPWD", pwd->value, 0);
 	ft_mod_env2(env, "PWD", curpath, 0);
-	// catch errors update_pwd_vars errors?
 }
