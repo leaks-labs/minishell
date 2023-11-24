@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:54:51 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 22:59:28 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/24 23:31:04 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	ft_isvalidname(const char *name)
 	++name;
 	while (*name != '\0' && (*name == '_' || ft_isalnum(*name) == true))
 		++name;
-	return (*name == '\0' || *name == '=' || ft_strncmp(name, "+=", 2) == true);
+	return (*name == '\0' || *name == '=' || ft_strncmp(name, "+=", 2) == 0);
 }
 
 bool	ft_isassignation(const char *str)
