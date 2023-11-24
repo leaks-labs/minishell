@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:54:56 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 23:10:00 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/24 23:35:33 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_mod_env1(t_list *env, const char *arg, int f)
 	t_var	*var;
 
 	if (ft_isappend(arg) == true)
-		f|= ENV_APPEND;
+		f |= ENV_APPEND;
 	else if (ft_isassignation(arg) == true)
 		f |= ENV_ASSIGN;
 	var = ft_get_var(env, arg);
