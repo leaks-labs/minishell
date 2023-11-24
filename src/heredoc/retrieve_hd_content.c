@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:55:36 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 19:02:44 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/24 19:18:14 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 char		*ft_get_hd_content(t_msh *msh, char *del, unsigned int *line_num);
 static char	*ft_retrieve_one_line(void);
 static bool	ft_end_of_hd(char *current_line, char *del, unsigned int line_num);
+static char	*ft_do_expansion(t_msh *msh, char *current_line, bool to_expand);
 static char	*ft_update_hd_content(char *hd_content, char *current_line);
 
 char	*ft_get_hd_content(t_msh *msh, char *del, unsigned int *line_num)
@@ -30,7 +31,6 @@ char	*ft_get_hd_content(t_msh *msh, char *del, unsigned int *line_num)
 	const unsigned int	first_line_num = *line_num;	
 	char				*hd_content;
 	char				*current_line;
-	char				*tmp;
 
 	if (to_expand == false)
 		ft_rm_quotes(del);
@@ -42,12 +42,8 @@ char	*ft_get_hd_content(t_msh *msh, char *del, unsigned int *line_num)
 		return (ft_freef("%p", hd_content));
 	while (ft_end_of_hd(current_line, del, first_line_num) == false)
 	{
-		if (current_line != NULL && to_expand == true)
-		{
-			tmp = current_line;
-			current_line = ft_expansion_monitor(msh, current_line, false);
-			free(tmp);
-		}
+		current_line = ft_do_expansion(msh, current_line, to_expand);
+		// protect current_line;
 		hd_content = ft_update_hd_content(hd_content, current_line);
 		if (hd_content == NULL)
 			break ;
@@ -86,6 +82,19 @@ static bool	ft_end_of_hd(char *current_line, char *del, unsigned int line_num)
 		return (true);
 	}
 	return (false);
+}
+
+static char	*ft_do_expansion(t_msh *msh, char *current_line, bool to_expand)
+{
+	char	*tmp;
+
+	if (current_line != NULL && to_expand == true)
+	{
+		tmp = current_line;
+		current_line = ft_expansion_monitor(msh, current_line, false);
+		free(tmp);
+	}
+	return (current_line);
 }
 
 static char	*ft_update_hd_content(char *hd_content, char *current_line)
