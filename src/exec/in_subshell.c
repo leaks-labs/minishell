@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   in_subshell.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/24 14:55:22 by Leex-Labs         #+#    #+#             */
+/*   Updated: 2023/11/24 15:06:34 by Leex-Labs        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "exec.h"
 #include "env.h"
 #include "init.h"
@@ -75,7 +87,6 @@ static int	ft_launch_extern_cmd(t_exl *exl, char **args)
 		ft_mod_env2(exl->env, "_", cmd_path, ENV_EXP);
 		export_env = ft_lst_to_env(exl->env);
 		ft_set_signals(MSH_SIG_EXT_CMD);
-		// test if export_env == NULL
 		execve(cmd_path, args, export_env);
 		ft_set_signals(MSH_SIG_IGN);
 		free(export_env);

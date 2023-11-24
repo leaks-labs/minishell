@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   alloc_tree.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/24 14:55:47 by Leex-Labs         #+#    #+#             */
+/*   Updated: 2023/11/24 14:59:39 by Leex-Labs        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parse.h"
 #include "utils.h"
 
@@ -53,7 +65,7 @@ static uint8_t	ft_alloc_args(t_pl *pipeline, t_pl_args *pl_args, size_t i)
 {
 	if (pl_args->n_args > 0)
 	{
-		pipeline->cmd_list[i].args 
+		pipeline->cmd_list[i].args
 			= ft_calloc(pl_args->n_args + 1, sizeof(char *));
 		if (pipeline->cmd_list[i].args == NULL)
 			return (1);

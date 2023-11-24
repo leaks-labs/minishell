@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_cmd_path.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/24 14:56:22 by Leex-Labs         #+#    #+#             */
+/*   Updated: 2023/11/24 15:00:23 by Leex-Labs        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "path.h"
 #include "utils.h"
 #include <errno.h>
@@ -13,7 +25,7 @@ char	*ft_get_cmd_path(t_list_node *path, const char *cmd)
 {
 	char	*cmd_path;
 
-	if (ft_isapath(cmd) == true)	
+	if (ft_isapath(cmd) == true)
 		cmd_path = ft_check_one_path(cmd);
 	else if (path != NULL)
 		cmd_path = ft_search_in_path(path, cmd);

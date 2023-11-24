@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fill_tmp.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/24 14:56:32 by Leex-Labs         #+#    #+#             */
+/*   Updated: 2023/11/24 15:05:53 by Leex-Labs        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "redirections.h"
 #include "utils.h"
 #include <fcntl.h>
@@ -55,5 +67,4 @@ static char	*ft_get_tmp_filename(void)
 
 	ft_uimaxtostr(ext_buf, MAX_LEN_NUM + 1, ext++);
 	return (ft_join(2, TMP_FILE_BASE_NAME, ext_buf));
-	// test if we have rights at 19 for /tmp
 }
