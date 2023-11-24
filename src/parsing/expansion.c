@@ -14,6 +14,8 @@
 #include "utils.h"
 #include <stdlib.h>
 
+#include <stdio.h>
+
 char			*ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote);
 static uint8_t	ft_get_expansion_list(t_list_node **expansion_list, char *src);
 static char		*ft_command_expand(t_msh *msh, t_list_node *expansion_list, \
@@ -55,7 +57,7 @@ static uint8_t	ft_get_expansion_list(t_list_node **expansion_list, char *src)
 					|| ft_isalpha(src[s_index.current + 1]))) \
 			&& ft_get_expansion_var(expansion_list, &s_index, src) == 1)
 			return (1);
-		else if (src[s_index.current] != '\0')
+		else if (src[s_index.current] != '\0' && src[s_index.current] != '$')
 			s_index.current++;
 	}
 	if (s_index.previous != s_index.current \
