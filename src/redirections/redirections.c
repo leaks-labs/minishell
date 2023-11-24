@@ -1,10 +1,10 @@
 #include "redirections.h"
 #include <unistd.h>
 
-int			ft_default_redirections(t_exl *exl);
-int			ft_set_redirections(t_exl *exl, t_cmd *cmd);
-int			ft_apply_redirections(t_exl *exl);
-static bool	ft_islastcmd(t_exl *exl);
+int		ft_default_redirections(t_exl *exl);
+int		ft_set_redirections(t_exl *exl, t_cmd *cmd);
+int		ft_apply_redirections(t_exl *exl);
+bool	ft_islastcmd(t_exl *exl);
 
 int	ft_default_redirections(t_exl *exl)
 {
@@ -55,14 +55,12 @@ int	ft_apply_redirections(t_exl *exl)
 	if (exl->s_fd_io.fd_to_write != STDOUT_FILENO)
 		close(exl->s_fd_io.fd_to_write);
 	exl->s_fd_io.fd_to_write = STDOUT_FILENO;
-	if (ft_islastcmd(exl) == false)
-		close(exl->pipe[0]);
 	if (res[0] == -1 || (ft_islastcmd(exl) == false && res[1] == -1))
 		return (-1);
 	return (0);
 }
 
-static bool	ft_islastcmd(t_exl *exl)
+bool	ft_islastcmd(t_exl *exl)
 {
 	return (exl->cmd_idx == exl->n_cmd - 1);
 }

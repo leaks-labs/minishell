@@ -43,6 +43,8 @@ static pid_t	ft_child_proc(t_msh *msh, t_exl *exl, t_pl *pl, t_cmd *cmd)
 	err_code = 0;
 	if (ft_set_redirections(exl, cmd) != 0 || ft_apply_redirections(exl) != 0)
 		err_code = 1;
+	if (ft_islastcmd(exl) == false && exl->pipe[0] != STDIN_FILENO)
+		close(exl->pipe[0]);
 	if (err_code == 0 && cmd->args != NULL)
 	{
 		built_f = ft_get_builtin(cmd->args[0]);

@@ -21,5 +21,6 @@ void	ft_close_used_pipes(t_fd_io *fd_io);
 int		ft_default_redirections(t_exl *exl);
 int		ft_set_redirections(t_exl *exl, t_cmd *cmd);
 int		ft_apply_redirections(t_exl *exl);
+bool	ft_islastcmd(t_exl *exl);
 
 #endif
