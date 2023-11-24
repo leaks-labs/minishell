@@ -1,8 +1,9 @@
 #include "parse.h"
 #include "utils.h"
+#include <stdio.h>
 
 t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line);
-t_parse	ft_lex_line(t_msh *msh, t_token_container *token_container, char *line);
+t_parse	ft_lex_line(t_msh *msh, t_token_container *token_container);
 t_parse	ft_q_and_expd(t_msh *msh, t_token_container *token_container);
 t_parse	ft_tree(t_msh *msh, t_pl *pipeline, t_token_container *token_container);
 
@@ -11,23 +12,22 @@ t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line)
 	t_token_container	*token_container;
 	t_parse				e_parse_ret;
 
-	token_container = NULL;
-	e_parse_ret = ft_lex_line(msh, token_container, line);
+	token_container = ft_lexer_monitor(line);
+	e_parse_ret = ft_lex_line(msh, token_container);
 	if (e_parse_ret == PARSE_ERROR)
 		return (PARSE_ERROR);
-	else
+	else if (e_parse_ret == NOTHING_TO_PARSE)
 		return (NOTHING_TO_PARSE);
 	e_parse_ret = ft_q_and_expd(msh, token_container);
 	if (e_parse_ret == PARSE_ERROR)
 		return (PARSE_ERROR);
-	else
+	else if (e_parse_ret == NOTHING_TO_PARSE)
 		return (NOTHING_TO_PARSE);
 	return (ft_tree(msh, pipeline, token_container));
 }
 
-t_parse	ft_lex_line(t_msh *msh, t_token_container *token_container, char *line)
+t_parse	ft_lex_line(t_msh *msh, t_token_container *token_container)
 {
-	token_container = ft_lexer_monitor(line);
 	if (token_container == NULL)
 	{
 		msh->exit_status = 1;
