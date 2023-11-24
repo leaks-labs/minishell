@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:54:56 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 14:54:57 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/24 23:10:00 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int			ft_mod_env2(t_list *env, const char *name, const char *val, int f);
 int			ft_mod_env1(t_list *env, const char *arg, int f);
 static int	ft_update_var(t_list *env, t_var *var, const char *arg, int f);
 static int	ft_assign_value(t_var *var, const char *arg);
+static int	ft_append_value(t_var *var, const char *arg);
 
 int	ft_mod_env2(t_list *env, const char *name, const char *val, int f)
 {
@@ -43,7 +44,9 @@ int	ft_mod_env1(t_list *env, const char *arg, int f)
 {
 	t_var	*var;
 
-	if (ft_isassignation(arg) == true)
+	if (ft_isappend(arg) == true)
+		f|= ENV_APPEND;
+	else if (ft_isassignation(arg) == true)
 		f |= ENV_ASSIGN;
 	var = ft_get_var(env, arg);
 	if (var != NULL)
@@ -54,7 +57,9 @@ int	ft_mod_env1(t_list *env, const char *arg, int f)
 
 static int	ft_update_var(t_list *env, t_var *var, const char *arg, int f)
 {
-	if ((f & ENV_ASSIGN) == ENV_ASSIGN && ft_assign_value(var, arg) == -1)
+	if ((f & ENV_APPEND) == ENV_APPEND && ft_append_value(var, arg) == -1)
+		return (-1);
+	else if ((f & ENV_ASSIGN) == ENV_ASSIGN && ft_assign_value(var, arg) == -1)
 		return (-1);
 	if ((f & ENV_EXP) == ENV_EXP)
 	{
@@ -78,5 +83,20 @@ static int	ft_assign_value(t_var *var, const char *arg)
 		return (-1);
 	free(var->value);
 	var->value = value;
+	return (0);
+}
+
+static int	ft_append_value(t_var *var, const char *arg)
+{
+	char	*new_value;
+
+	if (var->value == NULL)
+		new_value = ft_strdup(arg + ft_get_name_len(arg) + 2);
+	else
+		new_value = ft_join(2, var->value, arg + ft_get_name_len(arg) + 2);
+	if (new_value == NULL)
+		return (-1);
+	free(var->value);
+	var->value = new_value;
 	return (0);
 }

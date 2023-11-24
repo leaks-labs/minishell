@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:53:16 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 14:53:17 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/24 22:59:38 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # define ENV_EXP 1
 # define ENV_ASSIGN 2
-# define ENV_NOEXP 4
+# define ENV_APPEND 4
+# define ENV_NOEXP 8
 
 # include "exec.h"
 # include <stdbool.h>
@@ -39,6 +40,7 @@ int		ft_add_var(t_list *env, const char *arg, int flags);
 /*	CHECK_VAR	*/
 bool	ft_isvalidname(const char *name);
 bool	ft_isassignation(const char *str);
+bool	ft_isappend(const char *str);
 t_var	*ft_get_var(t_list *env, const char *name);
 size_t	ft_get_name_len(const char *var);
 /*	CONVERT_ENV	*/
