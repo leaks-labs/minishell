@@ -11,12 +11,13 @@ t_parse	ft_parse(t_msh *msh, t_pl *pipeline, char *line)
 	t_token_container	*token_container;
 	t_parse				e_parse_ret;
 
-	e_parse_ret = ft_lex_line(&msh->exit_status, token_container, line);
+	token_container = NULL;
+	e_parse_ret = ft_lex_line(msh, token_container, line);
 	if (e_parse_ret == PARSE_ERROR)
 		return (PARSE_ERROR);
 	else
 		return (NOTHING_TO_PARSE);
-	e_parse_ret = ft_q_and_expd(&msh->exit_status, token_container);
+	e_parse_ret = ft_q_and_expd(msh, token_container);
 	if (e_parse_ret == PARSE_ERROR)
 		return (PARSE_ERROR);
 	else
@@ -38,6 +39,7 @@ t_parse	ft_lex_line(t_msh *msh, t_token_container *token_container, char *line)
 		ft_delete_list(token_container);
 		return (NOTHING_TO_PARSE);
 	}
+	return (PARSE_SUCCESS);
 }
 
 t_parse	ft_q_and_expd(t_msh *msh, t_token_container *token_container)
@@ -54,6 +56,7 @@ t_parse	ft_q_and_expd(t_msh *msh, t_token_container *token_container)
 		ft_delete_list(token_container);
 		return (NOTHING_TO_PARSE);
 	}
+	return (PARSE_SUCCESS);
 }
 
 t_parse	ft_tree(t_msh *msh, t_pl *pipeline, t_token_container *token_container)

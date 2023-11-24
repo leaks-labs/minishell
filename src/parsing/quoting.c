@@ -1,6 +1,9 @@
 #include "parse.h"
 #include "utils.h"
 
+void		ft_quoting(t_token_container *token_container);
+static bool	ft_is_removable(t_token_list *token_node);
+
 void	ft_quoting(t_token_container *token_container)
 {
 	t_token_list	*token_node;
