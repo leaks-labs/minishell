@@ -13,7 +13,7 @@ char	*ft_get_cmd_path(t_list_node *path, const char *cmd)
 {
 	char	*cmd_path;
 
-	if (ft_isapath(cmd) == true)
+	if (ft_isapath(cmd) == true)	
 		cmd_path = ft_check_one_path(cmd);
 	else if (path != NULL)
 		cmd_path = ft_search_in_path(path, cmd);
@@ -70,7 +70,5 @@ static char	*ft_search_in_path(t_list_node *path, const char *cmd)
 		cmd_path = ft_freef("%p", cmd_path);
 		node = node->next;
 	}
-	// if (cmd_path == NULL)
-	// 	errno = ENOENT;
 	return (cmd_path);
 }

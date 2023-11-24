@@ -10,7 +10,7 @@ static t_list_node	*ft_append_token(t_list_node *path_token_list, char *value);
 
 t_list_node	*ft_get_path(t_list *env)
 {
-	char		*path_one_line;
+	char	*path_one_line;
 
 	path_one_line = ft_getenv("PATH", env);
 	if (path_one_line == NULL || path_one_line[0] == '\0')
@@ -43,7 +43,7 @@ static t_list_node	*ft_split_path(const char *str)
 
 static size_t	ft_path_token_len(const char *str)
 {
-	size_t		i;
+	size_t	i;
 
 	i = 0;
 	while (str[i] != '\0' && str[i] != ':')
@@ -59,6 +59,8 @@ static char	*ft_get_one_path_member(const char *str, size_t token_len)
 	if (token_len > 0)
 	{
 		value = ft_strndup(str, token_len);
+		if (value == NULL)
+			return (NULL);
 		if (value[token_len - 1] != '/')
 		{
 			tmp = value;
