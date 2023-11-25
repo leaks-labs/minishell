@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:55:59 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 16:27:29 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/25 12:01:37 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static uint8_t	ft_get_expansion_list(t_list_node **expansion_list, char *src)
 		if (ft_is_expandable(src) == true
 			&& ft_get_expansion_var(expansion_list, &s_index, src) == 1)
 			return (1);
-		else if (src[s_index.current] != '\0' && ft_is_expandable(src) == false)
+		else if (src[s_index.current] != '\0' && !ft_is_expandable(src))
 			s_index.current++;
 	}
 	if (s_index.previous != s_index.current \
@@ -74,7 +74,7 @@ bool handle_quote)
 	{
 		s_join.src = (char *)expansion_list->content;
 		ft_get_flag(s_join.src, &flag);
-		if ((handle_quote == false || flag != '\'') 
+		if ((handle_quote == false || flag != '\'')
 			&& ft_is_expandable(s_join.src) == true)
 		{
 			s_join.src = ft_expand(msh, s_join.src);
