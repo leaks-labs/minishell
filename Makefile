@@ -6,7 +6,7 @@
 #    By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 14:58:52 by Leex-Labs         #+#    #+#              #
-#    Updated: 2023/11/25 12:46:54 by Leex-Labs        ###   ########.fr        #
+#    Updated: 2023/11/25 16:44:23 by shinfray         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ INC_DIRS= include
 LDLIBS:= -lreadline
 LIB_DIRS=
 
-CFLAGS=	-Wall -Wextra -Werror
+CFLAGS=	-Wall -Wextra -Werror -g3
 
 ADDITIONAL_CPPFLAGS=
 ADDITIONAL_LDFLAGS=

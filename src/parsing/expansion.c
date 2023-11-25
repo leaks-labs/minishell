@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:55:59 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/25 16:34:48 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/25 16:51:49 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ char			*ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote);
 static uint8_t	ft_get_expansion_list(t_list_node **expansion_list, char *src);
 static char		*ft_command_expand(t_msh *msh, t_list_node *expansion_list, \
 bool handle_quote);
-static void		ft_handle_dollar_with_quotes(char *src, char flag);
+static void		ft_handle_dollar_with_quotes(char *src, char flag, \
+bool handle_quotes);
 static bool		ft_is_expandable(char *str);
 
 char	*ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote)
@@ -75,7 +76,7 @@ bool handle_quote)
 	while (s_join.dst != NULL && expansion_list != NULL)
 	{
 		s_join.src = (char *)expansion_list->content;
-		ft_handle_dollar_with_quotes(s_join.src, flag);
+		ft_handle_dollar_with_quotes(s_join.src, flag, handle_quote);
 		ft_get_flag(s_join.src, &flag);
 		if ((handle_quote == false || flag != '\'')
 			&& ft_is_expandable(s_join.src) == true)
@@ -94,9 +95,11 @@ bool handle_quote)
 	return (s_join.dst);
 }
 
-static void	ft_handle_dollar_with_quotes(char *src, char flag)
+static void	ft_handle_dollar_with_quotes(char *src, char flag, \
+bool handle_quotes)
 {
-	if (src[0] == '$' && (src[1] == '"' || src[1] == '\'') && flag == '\0')
+	if (handle_quotes == true && flag == '\0' && src[0] == '$' \
+		&& (src[1] == '"' || src[1] == '\''))
 		ft_memcpy(src, src + 1, ft_strlen(src + 1) + 1);
 }
 
