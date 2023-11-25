@@ -6,7 +6,7 @@
 #    By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 14:58:52 by Leex-Labs         #+#    #+#              #
-#    Updated: 2023/11/24 16:19:34 by Leex-Labs        ###   ########.fr        #
+#    Updated: 2023/11/25 01:35:12 by Leex-Labs        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,8 @@ EXT:=	.c
 
 MAIN:=	main
 
-SRCS_FILES:=	builtins/cd_get_curpath			\
+SRCS_FILES:=	builtins/cd_get_cdpath			\
+				builtins/cd_get_curpath			\
 				builtins/cd						\
 				builtins/echo					\
 				builtins/env					\

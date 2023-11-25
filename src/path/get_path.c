@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:56:25 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 14:56:26 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/25 01:46:54 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 #include <stdlib.h>
 
 t_list_node			*ft_get_path(t_list *env);
+size_t				ft_path_token_len(const char *str);
+t_list_node			*ft_append_token(t_list_node *path_token_list, char *value);
 static t_list_node	*ft_split_path(const char *str);
-static size_t		ft_path_token_len(const char *str);
 static char			*ft_get_one_path_member(const char *str, size_t token_len);
-static t_list_node	*ft_append_token(t_list_node *path_token_list, char *value);
 
 t_list_node	*ft_get_path(t_list *env)
 {
@@ -28,6 +28,36 @@ t_list_node	*ft_get_path(t_list *env)
 	if (path_one_line == NULL || path_one_line[0] == '\0')
 		return (NULL);
 	return (ft_split_path(path_one_line));
+}
+
+size_t	ft_path_token_len(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0' && str[i] != ':')
+		++i;
+	return (i);
+}
+
+t_list_node	*ft_append_token(t_list_node *path_token_list, char *value)
+{
+	t_list_node	*node;
+
+	if (value == NULL)
+	{
+		ft_lstclear(&path_token_list, NULL);
+		return (NULL);
+	}
+	node = ft_lstnew(value);
+	if (node == NULL)
+	{
+		free(value);
+		ft_lstclear(&path_token_list, NULL);
+		return (NULL);
+	}
+	ft_lstadd_back(&path_token_list, node);
+	return (path_token_list);
 }
 
 static t_list_node	*ft_split_path(const char *str)
@@ -53,16 +83,6 @@ static t_list_node	*ft_split_path(const char *str)
 	return (path_token_list);
 }
 
-static size_t	ft_path_token_len(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] != '\0' && str[i] != ':')
-		++i;
-	return (i);
-}
-
 static char	*ft_get_one_path_member(const char *str, size_t token_len)
 {
 	char	*value;
@@ -83,24 +103,4 @@ static char	*ft_get_one_path_member(const char *str, size_t token_len)
 	else
 		value = ft_strdup("./");
 	return (value);
-}
-
-static t_list_node	*ft_append_token(t_list_node *path_token_list, char *value)
-{
-	t_list_node	*node;
-
-	if (value == NULL)
-	{
-		ft_lstclear(&path_token_list, NULL);
-		return (NULL);
-	}
-	node = ft_lstnew(value);
-	if (node == NULL)
-	{
-		free(value);
-		ft_lstclear(&path_token_list, NULL);
-		return (NULL);
-	}
-	ft_lstadd_back(&path_token_list, node);
-	return (path_token_list);
 }
