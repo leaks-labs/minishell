@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:54:08 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 14:54:09 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/25 01:09:23 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 char		*ft_get_curpath(const char **args, t_msh *msh, bool *print_m);
 static char	*ft_init_curpath(const char **args, t_msh *msh, bool *print_m);
 static char	*ft_retrieve_from_env(t_list *env, const char *arg, bool *print_m);
-static char	*ft_iterate_cdpath(t_list *env, char *curpath);
+static char	*ft_iterate_cdpath(t_list *env, char *curpath, bool *print_m);
 static char	*ft_form_cdpath(char *cdpath, char *curpath);
 
 char	*ft_get_curpath(const char **args, t_msh *msh, bool *print_m)
@@ -32,7 +32,7 @@ char	*ft_get_curpath(const char **args, t_msh *msh, bool *print_m)
 	if (curpath == NULL)
 		return (NULL);
 	if (*curpath != '/')
-		curpath = ft_iterate_cdpath(&msh->env, curpath);
+		curpath = ft_iterate_cdpath(&msh->env, curpath, print_m);
 	if (*curpath != '/')
 	{
 		curpath = ft_cat_pwd_and_curpath(msh->cwd, curpath);
@@ -85,7 +85,7 @@ static char	*ft_retrieve_from_env(t_list *env, const char *arg, bool *print_m)
 	return (curpath);
 }
 
-static char	*ft_iterate_cdpath(t_list *env, char *curpath)
+static char	*ft_iterate_cdpath(t_list *env, char *curpath, bool *print_m)
 {
 	char	**cdpath;
 	char	*tmp;
@@ -102,6 +102,7 @@ static char	*ft_iterate_cdpath(t_list *env, char *curpath)
 			tmp = ft_form_cdpath(cdpath[i++], curpath);
 			if (tmp != NULL && ft_isadir(tmp) == true)
 			{
+				*print_m = true;
 				free(curpath);
 				curpath = tmp;
 				break ;
