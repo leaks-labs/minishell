@@ -18,7 +18,7 @@ char			*ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote);
 static uint8_t	ft_get_expansion_list(t_list_node **expansion_list, char *src);
 static char		*ft_command_expand(t_msh *msh, t_list_node *expansion_list, \
 bool handle_quote);
-static bool		ft_is_expandable(char *str, bool handle_quote, char flag);
+static bool		ft_is_expandable(char *str);
 
 char	*ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote)
 {
@@ -50,12 +50,10 @@ static uint8_t	ft_get_expansion_list(t_list_node **expansion_list, char *src)
 				return (1);
 			s_index.previous = s_index.current;
 		}
-		if ((src[s_index.current] == '$' && (src[s_index.current + 1] == '_' \
-					|| src[s_index.current + 1] == '?' \
-					|| ft_isalpha(src[s_index.current + 1]))) \
+		if (ft_is_expandable(src) == true
 			&& ft_get_expansion_var(expansion_list, &s_index, src) == 1)
 			return (1);
-		else if (src[s_index.current] != '\0')
+		else if (src[s_index.current] != '\0' && ft_is_expandable(src) == false)
 			s_index.current++;
 	}
 	if (s_index.previous != s_index.current \
@@ -76,7 +74,8 @@ bool handle_quote)
 	{
 		s_join.src = (char *)expansion_list->content;
 		ft_get_flag(s_join.src, &flag);
-		if (ft_is_expandable(s_join.src, handle_quote, flag) == true)
+		if ((handle_quote == false || flag != '\'') 
+			&& ft_is_expandable(s_join.src) == true)
 		{
 			s_join.src = ft_expand(msh, s_join.src);
 			if (s_join.src == NULL)
@@ -92,9 +91,8 @@ bool handle_quote)
 	return (s_join.dst);
 }
 
-static bool	ft_is_expandable(char *str, bool handle_quote, char flag)
+static bool	ft_is_expandable(char *str)
 {
-	return ((handle_quote == false || flag != '\'') \
-		&& (str[0] == '$' \
-		&& (str[1] == '_' || str[1] == '?' || ft_isalpha(str[1]))));
+	return (str[0] == '$' \
+	&& (str[1] == '_' || str[1] == '?' || ft_isalpha(str[1])));
 }
