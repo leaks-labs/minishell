@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:54:49 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 14:54:50 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/24 23:17:51 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,14 @@ static t_var	*ft_create_var(const char *str, int flags)
 		return (NULL);
 	name_len = ft_get_name_len(str);
 	new_var->name = ft_strndup(str, name_len);
-	if ((flags & ENV_ASSIGN) == ENV_ASSIGN)
+	if ((flags & ENV_APPEND) == ENV_APPEND)
+		new_var->value = ft_strdup(str + name_len + 2);
+	else if ((flags & ENV_ASSIGN) == ENV_ASSIGN)
 		new_var->value = ft_strdup(str + name_len + 1);
 	if (new_var->name == NULL \
-		|| ((flags & ENV_ASSIGN) == ENV_ASSIGN && new_var->value == NULL))
+		|| (((flags & ENV_ASSIGN) == ENV_ASSIGN \
+		|| (flags & ENV_APPEND) == ENV_APPEND) \
+		&& new_var->value == NULL))
 		return (ft_freef("%p%p%p", new_var->name, new_var->value, new_var));
 	if ((flags & ENV_EXP) == ENV_EXP)
 		new_var->exported = true;
