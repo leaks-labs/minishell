@@ -6,7 +6,7 @@
 #    By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 14:58:52 by Leex-Labs         #+#    #+#              #
-#    Updated: 2023/11/25 01:35:12 by Leex-Labs        ###   ########.fr        #
+#    Updated: 2023/11/25 12:10:02 by shinfray         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,38 +26,7 @@ INC_DIRS= include
 LDLIBS:= -lreadline
 LIB_DIRS=
 
-CC:=	clang
-
 CFLAGS=	-Wall -Wextra -Werror
-
-CFLAGS+=	-Wconversion 			\
-			-Wdouble-promotion		\
-			-Wfloat-equal 			\
-			-Wformat=2 				\
-			-Winit-self 			\
-			-fno-common 			\
-			-Wshadow 				\
-			-Wundef 				\
-			-Wunused-macros 		\
-			-Wwrite-strings 		\
-			-Wmissing-prototypes 	\
-			-Wmissing-declarations	\
-			-g3
-
-#			-Wpedantic \
-# 			-pedantic-errors
-#			-Wcast-qual
-#			-Wstrict-prototypes \
-#			-Wpadded \
-#
-#			gcc flags only
-#			-Wformat-overflow \
-#			-Wformat-truncation \
-#			-Wlogical-op \
-#			-Wformat-signedness \
-#			-Wduplicated-cond \
-#			-Wduplicated-branches \
-#			-Walloc-zero
 
 ADDITIONAL_CPPFLAGS=
 ADDITIONAL_LDFLAGS=
