@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:54:08 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 14:54:09 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/25 02:13:20 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 char		*ft_get_curpath(const char **args, t_msh *msh, bool *print_m);
 static char	*ft_init_curpath(const char **args, t_msh *msh, bool *print_m);
 static char	*ft_retrieve_from_env(t_list *env, const char *arg, bool *print_m);
-static char	*ft_iterate_cdpath(t_list *env, char *curpath);
+static char	*ft_iterate_cdpath(t_list *env, char *curpath, bool *print_m);
 static char	*ft_form_cdpath(char *cdpath, char *curpath);
 
 char	*ft_get_curpath(const char **args, t_msh *msh, bool *print_m)
@@ -32,7 +32,7 @@ char	*ft_get_curpath(const char **args, t_msh *msh, bool *print_m)
 	if (curpath == NULL)
 		return (NULL);
 	if (*curpath != '/')
-		curpath = ft_iterate_cdpath(&msh->env, curpath);
+		curpath = ft_iterate_cdpath(&msh->env, curpath, print_m);
 	if (*curpath != '/')
 	{
 		curpath = ft_cat_pwd_and_curpath(msh->cwd, curpath);
@@ -85,31 +85,32 @@ static char	*ft_retrieve_from_env(t_list *env, const char *arg, bool *print_m)
 	return (curpath);
 }
 
-static char	*ft_iterate_cdpath(t_list *env, char *curpath)
+static char	*ft_iterate_cdpath(t_list *env, char *curpath, bool *print_m)
 {
-	char	**cdpath;
-	char	*tmp;
-	size_t	i;
+	t_list_node	*cdpath;
+	t_list_node	*node;
+	char		*tmp;
 
-	if (ft_begin_with_dots(curpath) == false)
+	if (ft_begin_with_dots(curpath) == true)
+		return (curpath);
+	cdpath = ft_get_cdpath(env);
+	if (cdpath == NULL)
+		return (curpath);
+	node = cdpath;
+	while (node != NULL)
 	{
-		cdpath = ft_split(ft_getenv("CDPATH", env), ':');
-		if (cdpath == NULL)
-			return (curpath);
-		i = 0;
-		while (cdpath[i] != NULL)
+		tmp = ft_form_cdpath((char *)node->content, curpath);
+		if (tmp != NULL && ft_isadir(tmp) == true)
 		{
-			tmp = ft_form_cdpath(cdpath[i++], curpath);
-			if (tmp != NULL && ft_isadir(tmp) == true)
-			{
-				free(curpath);
-				curpath = tmp;
-				break ;
-			}
-			free(tmp);
+			*print_m = (*((char *)node->content) != '\0');
+			free(curpath);
+			curpath = tmp;
+			break ;
 		}
-		ft_freef("%P", cdpath);
+		free(tmp);
+		node = node->next;
 	}
+	ft_lstclear(&cdpath, NULL);
 	return (curpath);
 }
 

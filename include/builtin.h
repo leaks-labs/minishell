@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:53:01 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 14:53:02 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/25 01:50:00 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_built_f	ft_get_builtin(char *cmd);
 /*	CD	*/
 int			ft_cd(t_msh *msh, t_pl *pl, char **args);
 char		*ft_get_curpath(const char **args, t_msh *msh, bool *print_m);
+t_list_node	*ft_get_cdpath(t_list *env);
 /*	ECHO	*/
 int			ft_echo(t_msh *msh, t_pl *pl, char **args);
 /*	ENV	*/
