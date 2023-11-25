@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:55:22 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 15:09:29 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/25 10:25:09 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static int	ft_launch_extern_cmd(t_exl *exl, char **args)
 		ft_set_signals(MSH_SIG_EXT_CMD);
 		execve(cmd_path, args, export_env);
 		ft_set_signals(MSH_SIG_IGN);
-		free(export_env);
+		ft_freef("%P", export_env);
 	}
 	err_code = ft_get_err_code(args[0], path);
 	ft_lstclear(&path, NULL);
