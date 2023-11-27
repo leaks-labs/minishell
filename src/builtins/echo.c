@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:54:14 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/27 12:42:45 by shinfray         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:47:29 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ static bool	ft_check_n_flag(char *arg)
 	if (ft_strncmp(arg++, "-n", 2) != 0)
 		return (false);
 	while (*arg == 'n')
-		++arg;
+		arg += 2;
 	return (*arg == '\0');
 }
