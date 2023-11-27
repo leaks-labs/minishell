@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:55:55 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 16:29:17 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/25 15:49:24 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ char *src)
 		index->current++;
 		if (ft_tokenise_expansion(expansion_list, index, src) == 1)
 			return (1);
-		index->previous = index->current;
 	}
 	else
 	{
@@ -63,8 +62,8 @@ char *src)
 			index->current++;
 		if (ft_tokenise_expansion(expansion_list, index, src) == 1)
 			return (1);
-		index->previous = index->current;
 	}
+	index->previous = index->current;
 	return (0);
 }
 

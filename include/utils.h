@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:54:00 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 14:54:01 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/25 12:47:05 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		ft_putendl_fd(const char *s, int fd);
 void		ft_putstr_fd(const char *s, int fd);
 void		ft_rm_quotes(char *del);
-char		**ft_split(char const *s, char c);
 char		*ft_strchr(const char *s, int c);
 int			ft_strcmp(const char *s1, const char *s2);
 char		*ft_strdup(const char *s1);

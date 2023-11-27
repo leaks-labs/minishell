@@ -6,7 +6,7 @@
 #    By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 14:58:52 by Leex-Labs         #+#    #+#              #
-#    Updated: 2023/11/25 01:35:12 by Leex-Labs        ###   ########.fr        #
+#    Updated: 2023/11/27 12:29:00 by shinfray         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,7 +134,6 @@ SRCS_FILES:=	builtins/cd_get_cdpath			\
 				utils/ft_putendl_fd				\
 				utils/ft_putstr_fd				\
 				utils/ft_rm_quotes				\
-				utils/ft_split					\
 				utils/ft_strchr					\
 				utils/ft_strcmp					\
 				utils/ft_strdup					\
