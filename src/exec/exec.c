@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:55:05 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 14:55:06 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/25 17:00:29 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ uint8_t	ft_exec_line(t_msh *msh, t_pl *pl)
 		return (0);
 	if (ft_init_exl(&s_exl, msh, pl) == -1)
 	{
+		ft_free_cmd_list(pl);
 		if (g_signal_value > 0)
 			return ((uint8_t)(128 + g_signal_value));
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:55:59 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/25 12:01:37 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/27 12:20:03 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char			*ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote);
 static uint8_t	ft_get_expansion_list(t_list_node **expansion_list, char *src);
 static char		*ft_command_expand(t_msh *msh, t_list_node *expansion_list, \
 bool handle_quote);
+static void		ft_handle_dollar_with_quotes(char *src, char flag, \
+bool handle_quotes);
 static bool		ft_is_expandable(char *str);
 
 char	*ft_expansion_monitor(t_msh *msh, char *src, bool handle_quote)
@@ -53,8 +55,8 @@ static uint8_t	ft_get_expansion_list(t_list_node **expansion_list, char *src)
 		if (ft_is_expandable(&src[s_index.current]) == true
 			&& ft_get_expansion_var(expansion_list, &s_index, src) == 1)
 			return (1);
-		else if (src[s_index.current] != '\0' 
-			&& !ft_is_expandable(&src[s_index.current]))
+		else if (src[s_index.current] != '\0' \
+				&& ft_is_expandable(&src[s_index.current]) == false)
 			s_index.current++;
 	}
 	if (s_index.previous != s_index.current \
@@ -74,6 +76,7 @@ bool handle_quote)
 	while (s_join.dst != NULL && expansion_list != NULL)
 	{
 		s_join.src = (char *)expansion_list->content;
+		ft_handle_dollar_with_quotes(s_join.src, flag, handle_quote);
 		ft_get_flag(s_join.src, &flag);
 		if ((handle_quote == false || flag != '\'')
 			&& ft_is_expandable(s_join.src) == true)
@@ -90,6 +93,14 @@ bool handle_quote)
 		expansion_list = expansion_list->next;
 	}
 	return (s_join.dst);
+}
+
+static void	ft_handle_dollar_with_quotes(char *src, char flag, \
+bool handle_quotes)
+{
+	if (handle_quotes == true && flag == '\0' && src[0] == '$' \
+		&& (src[1] == '"' || src[1] == '\''))
+		ft_memcpy(src, src + 1, ft_strlen(src + 1) + 1);
 }
 
 static bool	ft_is_expandable(char *str)
