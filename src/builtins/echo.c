@@ -6,7 +6,7 @@
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:54:14 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/24 16:30:55 by Leex-Labs        ###   ########.fr       */
+/*   Updated: 2023/11/27 12:42:45 by shinfray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include "utils.h"
 #include <stdio.h>
 
-int	ft_echo(t_msh *msh, t_pl *pl, char **args);
+int			ft_echo(t_msh *msh, t_pl *pl, char **args);
+static bool	ft_check_n_flag(char *arg);
 
 int	ft_echo(t_msh *msh, t_pl *pl, char **args)
 {
@@ -25,7 +26,7 @@ int	ft_echo(t_msh *msh, t_pl *pl, char **args)
 	no_nl = false;
 	if (*args != NULL)
 	{
-		no_nl = (ft_strcmp(*args, "-n") == 0);
+		no_nl = ft_check_n_flag(*args);
 		if (no_nl == true)
 			++args;
 	}
@@ -38,4 +39,13 @@ int	ft_echo(t_msh *msh, t_pl *pl, char **args)
 	if (no_nl == false)
 		printf("\n");
 	return (0);
+}
+
+static bool	ft_check_n_flag(char *arg)
+{
+	if (ft_strncmp(arg++, "-n", 2) != 0)
+		return (false);
+	while (*arg == 'n')
+		++arg;
+	return (*arg == '\0');
 }
