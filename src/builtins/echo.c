@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: Leex-Labs <leex-labs@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 14:54:14 by Leex-Labs         #+#    #+#             */
-/*   Updated: 2023/11/27 12:50:04 by Leex-Labs        ###   ########.fr       */
+/*   Created: 2023/11/24 14:54:16 by Leex-Labs         #+#    #+#             */
+/*   Updated: 2023/11/24 14:54:17 by Leex-Labs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h>
 
 int			ft_echo(t_msh *msh, t_pl *pl, char **args);
-static bool	ft_check_n_flag(char *arg);
+static bool	ft_check_n_flag(char *arg, bool *flag);
 
 int	ft_echo(t_msh *msh, t_pl *pl, char **args)
 {
@@ -24,12 +24,8 @@ int	ft_echo(t_msh *msh, t_pl *pl, char **args)
 	(void)msh;
 	(void)pl;
 	no_nl = false;
-	if (*args != NULL)
-	{
-		no_nl = ft_check_n_flag(*args);
-		if (no_nl == true)
-			++args;
-	}
+	while (*args != NULL && ft_check_n_flag(*args, &no_nl) == true)
+		++args;
 	while (*args != NULL)
 	{
 		printf("%s", *args++);
@@ -41,12 +37,17 @@ int	ft_echo(t_msh *msh, t_pl *pl, char **args)
 	return (0);
 }
 
-static bool	ft_check_n_flag(char *arg)
+static bool	ft_check_n_flag(char *arg, bool *flag)
 {
 	if (ft_strncmp(arg, "-n", 2) != 0)
 		return (false);
 	arg += 2;
 	while (*arg == 'n')
 		++arg;
-	return (*arg == '\0');
+	if (*arg == '\0')
+	{
+		*flag = true;
+		return (true);
+	}
+	return (false);
 }
